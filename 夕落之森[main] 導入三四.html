@@ -1,0 +1,2937 @@
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta property="og:title" content="夕落之森[main] 導入三四">
+<meta property="og:description" content="">
+<title>夕落之森[main] 導入三四</title>
+<style>
+h1{ color:white; margin: 5px 0; }
+body{ background:#454752; }
+._subtitle { color:#ddd; margin:5px 0 20px 0; }
+._sectTitle { background:#ddd; margin-top:30px; padding:10px;font-weight:bold;font-size:1.3rem;text-align:center; }
+._hidden { display:none; }
+.center { display:flex; flex-direction:column; align-items:center; }
+#_main { display:flex; flex-direction:column; align-items:end; }
+._script {width: 100%;}
+
+
+._halt { padding:30px 0; }
+._talk { margin:5px 0; display:flex; border:1px solid black; background:#1e1e1e; color:#eee; width:100%; max-width:1080px; border-radius:5px; }
+._leftCol { width:122px; }
+._rightCol { width:calc(100% - 126px); }
+._actorName{ padding:5px 10px; height:20px; font-size:18px; }
+._actorImg { margin:6px; width:110px; height:110px; background-repeat:no-repeat; background-size:cover; background-color:#2a2a2a; }
+._actorWords { margin:5px; background:#2a2a2a; font-size:1.1rem; padding:10px; height:calc(100% - 60px); border-radius:5px; }
+._sectTitle { border-radius:5px; margin-bottom:5px; }
+
+@media only screen and (max-width: 400px) {
+._leftCol { width:100px; }
+._rightCol { width:calc(100% - 100px); }
+._actorImg { margin:35px 0 5px 10px; width: 85px; height: 85px; }
+}
+
+._talk.otherCh { width:calc(50%); text-align:right; margin-left:auto; }
+._talk.otherCh ._leftCol { display:none; }
+._talk.otherCh ._rightCol { width:100%; }
+._talk.otherCh ._actorWords { background:black;color:white; }
+
+._actor_0 ._actorName { color: #888888; }
+._actor_0 ._actorName::after { content:"GM"; }
+._actor_0 ._actorImg { background-image:url(); } 
+._actor_1 ._actorName { color: #00bcd4; }
+._actor_1 ._actorName::after { content:"諸誠 璃璃子"; }
+._actor_1 ._actorImg { background-image:url(https://images.plurk.com/2oPOKO5mtLVVKwjkCkhLcw.png ); } 
+._actor_2 ._actorName { color: #888888; }
+._actor_2 ._actorName::after { content:"約翰尼斯‧古騰堡"; }
+._actor_2 ._actorImg { background-image:url(https://images.plurk.com/wmPFfl33BWh4WKUW5Espi.png ); } 
+._actor_3 ._actorName { color: #888888; }
+._actor_3 ._actorName::after { content:"利奧‧科穆寧"; }
+._actor_3 ._actorImg { background-image:url(https://images.plurk.com/2PScuNskwfPtmSrcieiErv.png ); } 
+._actor_4 ._actorName { color: #b389ff; }
+._actor_4 ._actorName::after { content:"緋室星夜"; }
+._actor_4 ._actorImg { background-image:url(https://images.plurk.com/4IRQym4YyVvTeMQ2ZsUjPY.png ); } 
+._actor_5 ._actorName { color: #888888; }
+._actor_5 ._actorName::after { content:"日森夕映"; }
+._actor_5 ._actorImg { background-image:url(https://images.plurk.com/134d12u20HLnyItAq7Gmd8.png ); } 
+._actor_6 ._actorName { color: #fcc9b9; }
+._actor_6 ._actorName::after { content:"知代"; }
+._actor_6 ._actorImg { background-image:url(https://images.plurk.com/1I8gBOkXD1m2RddOw1dP5A.png); } 
+._actor_7 ._actorName { color: #e91e63; }
+._actor_7 ._actorName::after { content:"青井赤花"; }
+._actor_7 ._actorImg { background-image:url(https://images.plurk.com/137hp0YQkOW7B1Nv5e5Np2.png); } 
+._actor_8 ._actorName { color: #888888; }
+._actor_8 ._actorName::after { content:"的場正宏"; }
+._actor_8 ._actorImg { background-image:url(https://images.plurk.com/1JBDe9zEEZpfKJINt3FtFl.png); } 
+._actor_9 ._actorName { color: #888888; }
+._actor_9 ._actorName::after { content:"伊萊恩"; }
+._actor_9 ._actorImg { background-image:url(https://images.plurk.com/2JhTyPAwt45VJu4PqGyIZq.png); } 
+._actor_10 ._actorName { color: #888888; }
+._actor_10 ._actorName::after { content:"荒木龍之介"; }
+._actor_10 ._actorImg { background-image:url(https://images.plurk.com/4mQDyeh824icvx8VROkTX4.png); } 
+._actor_11 ._actorName { color: #888888; }
+._actor_11 ._actorName::after { content:"莫緹"; }
+._actor_11 ._actorImg { background-image:url(); } 
+._actor_12 ._actorName { color: #888888; }
+._actor_12 ._actorName::after { content:"豺狼座"; }
+._actor_12 ._actorImg { background-image:url(https://images.plurk.com/7cMfP9YqbM7PFp4WdnXfxP.png); } 
+</style>
+</head>
+<body class="center">
+<div class="_hidden">
+<version>hazmole_v1.0</version>
+</div>
+
+<h1>夕落之森[main] 導入三四</h1>
+<div class="_subtitle"></div>
+
+<div id="_main"><div class="_script" data-type="changeBg"><div class="_hidden">https://images.plurk.com/4Ws4eJXqIvcQheTKcdGQKb.jpg </div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">魔道書大戰-夕落之森</div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">導入階段 諸誠璃璃子的場合</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">魔道書大戰-夕落之森<br>導入階段  諸誠璃璃子的場合‧續</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">做為沒有參加任何機關的自由魔法使：諸誠璃璃子，平日裡對於魔法界的政治動向敏感度也比較低，但最近大法典的氣氛明顯比過去緊繃許多...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">這狀況或許跟妳的師傅以及她的遠房直系親戚在不久之前告訴妳的故事以及相關事件有關...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">即使她們倆也已察覺大法典裡的氛圍變化，但畢竟是緋室家的女人，一看就知道沒在怕的。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">因此，妳也在星夜的請託之下，試著用自己的人脈與資源打聽有關傳說中的兩本夢幻禁書《流轉的無盡雨色之音》、《輪迴的永恆黃昏之色》，以及大法典中的神秘人物：二葉葵的消息...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">沒想到，妳的交流圈中還真的有人給出回訊...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+對方是阿房宮的低調人士，平常是用暱稱與妳交流。
+今日也是以暱稱將妳約出來到某個小公園見面...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">交流的內容是有關於神秘人物：二葉葵的資訊...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+妳依照過往的習慣，在約定好的時間前的5分鐘到達公園中的噴水池小廣場等待對方出現...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">午後的公園意外地行人稀少...雖然是初春時節，卻還是有幾分寂寥之感。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">比約定的時間還要早約五分鐘，璃璃子就已經抵達公園了。
+今日天氣晴朗，是個適合寫生和談天的日子。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">璃璃子在公園的長椅上放下肩頭背著的大大的象牙色托特包，拿出素描本和墨筆隨性地畫著。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">事前已經告知對方自己會做如此打扮，應該很快就能認出來吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">約定的時間很快就到了，但妳只看到幾名帶著小孩的婦女從妳身前經過</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">抬眼看了下公園的時鐘，卻沒立刻見到約定的人影。不過，璃璃子倒也不急，繼續低頭畫著，讓有著兩撇白色長長瀏海，遠看像是鬍鬚的嬌小少女漸漸成形。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……下回連載的彩頁，該讓師丈穿什麼樣的服裝好呢？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">接著是一名看起來有些疲憊的老者漫步走來</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「請問是諸誠璃璃子小姐嗎？」
+身形有些微駝的老人來到妳面前，摘下帽子有禮地詢問。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">正銜著筆尾煩惱時，人就來了。璃璃子立刻端正坐姿，笑盈盈地回道：
+「是的，小女子諸誠璃璃子。您就是……？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「容我自我介紹，我是阿房宮所屬魔法使，約翰尼斯‧古騰堡。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「很抱歉，我那楞徒弟今日無法赴約...不是因為您的問題，而是他被獵鬼機關的人約談，近日恐怕無法脫身。為了避免讓您有所誤會，今日是由身為師傅的我來向您致歉。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哎呀……」
+獵鬼機關。聽見這詞讓璃璃子微微蹙眉，但又立刻恢復笑容。
+「至少人還平安就好……感謝古騰堡先生代為告知。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">璃璃子，妳與從未見面的網友相約交流神秘人物「二葉葵」的情報。<br>豈料來到現場的是網友的師傅：阿房宮的魔法使-古騰堡，更尷尬的是，理想鄉的書籍卿也隨之出現...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那麼，您想與我的徒弟商量什麼呢？如果是我能盡棉薄之力的地方，我也會盡力為之。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嗯……」
+迅速評估了一下能不能對此人透露訊息。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我跟利奧是認識許久的老朋友，他過去也是大法典的一員...原本是預計與您見完面再跟他敘敘舊，誰知道他竟然提早到了。」<br>古騰堡以有些尷尬的笑容做解釋。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就妳過去所聽聞的大法典八卦中，古騰堡算是形象良好的那邊。只要不論他率領的研究室有時會搞出有點難收拾的狀況之外......不過哪個阿房宮研究室不搞事呢？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">2d6&gt;=5 追憶 (2D6&gt;=5) ＞ 8[3,5] ＞ 8 ＞ 成功
+深思有沒有其他八卦</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">想著想著，妳倒是想起一些其它的小道消息，像是古騰堡曾強烈要求開放禁書庫讓魔法使自由研究，或是提取"佚散斷章"作為研究材料等等，讓他被圓桌的某些人當作背上刺...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">這或許是獵鬼機關沒事就找他的研究室的人約談的原因之一</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「您知曉『二葉葵』這位魔法使嗎？最近大法典和各界都有種山雨欲來的氣勢，而這位神秘人物，似乎正位於漩渦的中心。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">其實中心應該是星夜小姐啦，不過透露到這裡應該就可以了。嗯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「哎呀哎呀，您要問二葉葵啊...」
+伸手捻起自己下巴的鬍子</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「該怎麼說呢...我也許久沒見到她，想想大概快50年了。」老人家的遠目</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+「難不成……是會讓獵鬼機關關注的名字？」璃璃子半開玩笑地問道。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「近幾十年都是她的親信們代她行事...獵鬼機關確實是該關注她的名字...做為下屬的那種關注。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">嗯嗯嗯，下屬？
+也就是……獵鬼們的……上司？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「她可是日本魔法使在圓桌中的代表人物之一，地位大概就跟以前的選帝侯一樣吧。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「竟是這樣知名的人物，璃璃子未曾聽說，真是孤陋寡聞了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「她很少見人的...二葉葵是她的魔法名，一般的名字是叫什麼...」
+從捻鬍子換成搔頭髮</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+微笑著等待古騰堡想起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哎呀，你來的正好。紫衣貴族，二葉葵的愚者名是什麼？」
+向璃璃子背後揮手</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">古騰堡話才說完，一道影子就落在妳的頭上</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......雪子。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+像是從土地中突然浮現一般，出現在妳背後的低沉男聲說出非常具和風的名諱</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">
+直接抬頭後仰，想看清來者是誰。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一名看來也不像日本人的高大中年男性站在你背後，他跟古騰堡一前一後地將妳圍住。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「雪子‧賀茂。二葉葵的俗名。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「您好，我是諸誠璃璃子。這位魔法使先生也是來公園散步嗎？」微笑著詢問。
+……嗯，這是被埋伏了嗎？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哎呀...」聽到妳的問句，露出有些尷尬的笑容</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「理想鄉所屬，利奧‧科穆寧。幸會。」
+居高臨下地看著妳。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」低頭思考了一下。
+然後默默地從托特包中翻找出一枚杏桃乾放進嘴裡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……再次認識到星夜小姐的委託是多麼危險的一件事了，嗯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「『相逢即是有緣』……但這次的緣結，我想是科穆寧先生做出來的？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">若非巧合，那就是有事找她了。璃璃子品味著杏桃的甘甜，替高速運轉中的腦袋補給營養，等待對方出牌。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我跟利奧是認識許久的老朋友，他過去也是大法典的一員...原本是預計與您見完面再跟他敘敘舊，誰知道他竟然提早到了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">保持著有些尷尬的笑容做解釋。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">而名為利奧的書籍卿沉默了幾秒才開口</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我並不知道這位氣質高雅的女士與古騰堡有約在先，抱歉，打擾二位交流。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「『敘舊』是嗎？」璃璃子微微一笑。「且讓我猜猜……兩位想敘舊的，莫不是最近傳得沸沸揚揚地兩本禁書——《流轉的無盡雨色之音》以及《輪迴的永恆黃昏之色》？」//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這兩本禁書的新聞最近在檯面下的討論度可高了...諸誠小姐也對這八卦有興趣？」<br>開始以感興趣的眼光打量妳</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「視情況可能會動搖整個大法典的禁書，身為魔法使，對其中記載的魔法，不可能不在意。」<br>哎，雖然動搖大法典的可能不是禁書，而是……嗯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這裡還有空位，也許咱們別站著說話？或是可以請兩位移步至涼亭？」<br>璃璃子把包包移到膝蓋上，挪出空位。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「看起來諸誠小姐也是相當有求知慾的魔法使吶，不過這種八卦在這公開場合不方便討論...」<br>做勢看看四周</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「到處都有鬼啊。」十足地是在影射某個機關。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「若是被鬼抓住，古騰堡先生的弟子就有伴了呢。」璃璃子輕笑。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哎呀哎呀──諸誠小姐您真是，年紀輕輕這麼會說話──」<br>心情很好地笑了起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「如果您方便的話，我們可以到我的研究室好好聊聊...」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">古騰堡不知道是無心還是有意地提出無論是以凡人的角度還是以魔法使的角度都有點危險的提議...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那麼，科穆寧先生也一起？但他的身份……」璃璃子故做遲疑地詢問。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「利奧是成熟的魔法使了，懂得自己打點......喔，是呢，瞧瞧我這毛病，老是瞻前不顧後的...」<br>原本想簡單帶過的回答，在看到科穆寧的神色之後又換了風向。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「還是我有這榮幸與諸誠小姐相約下次暢聊?」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「當然好，時間……就趕在古騰堡先生被鬼抓住之前吧。」璃璃子點點頭，站起身來。「我就不打擾大法典的魔法使和理想鄉的書籍卿會談了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">璃璃子轉身，以同時能看到倆人的角度傾頭笑道。
+「以我現有的知識，能做出的選擇十分有限，兩位若不嫌棄，還請……盡早，向小女子賜教。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">白話翻譯過來就是，你們再不多透露一點消息，我就要去跟獵鬼打小報告了。這倆人應該聽的懂吧，嗯嗯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「當然當然，我會盡快做準備邀請您過來作客...要迎接年輕又有智慧的女性來訪，雜亂的研究室不先整理一番不行啊──」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">古騰堡此刻的心情似乎已經高飛，剛才的頹圮感一掃而空...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「年輕又有智慧的女性我還認識好幾位呢。」像是星夜小姐啦，還有星夜小姐啦，以及星夜小姐啦。「不介意的話，屆時還請讓我攜伴造訪。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好的，您要帶年輕的朋友們一起過來，我當然也很歡迎──」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「約翰─」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一直站在後方的書籍卿大概是看不下去了，忍不住出聲提醒</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「時間有限，談正事。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哎呀，這真是...不好意思啊。」搔頭</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那麼諸誠小姐，改日我會發邀請函給您，請您務必賞光。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好的，我會期待著。」<br>……雖然很在意書籍卿的動向，但拙劣的追蹤反而會造成不良影響吧。在心中斟酌一番後，璃璃子決定今日暫時撤退。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">——最不濟，也能拿阿房宮和理想鄉密會的情報，探探獵鬼的口風。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">向倆人分別點點頭後，璃璃子準備離開。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">當妳轉身離開時，妳注意到那名書籍卿向妳投來似笑非笑的表情...但只有短短一瞬，又回復到原本高冷的神態。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">接著，兩人的身姿也像霧氣般淡出，大概是打開讀路前往其他場所敘舊了吧</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不過，該怎麼說呢……活了百歲的老婆婆，在千年的的魔法使面前，也還只是年輕的女孩子啊。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">——不好，為了這點小事而開心，才是心態變老的證明吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">嘻，但反正沒人看到，現在就坦率地開心吧。璃璃子小跳步地走向公園出口。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">因為，接下來，一定會有很多需要笑著才能度過的難關，我猜的對嗎，師傅、師丈，還有……委託人，星夜小姐。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一起加油吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請從以下人物中選擇結錨點對象，屬性自訂：</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">魔法使：約翰尼斯‧古騰堡<br>書籍卿：利奧‧科穆寧</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">約翰尼斯‧古騰堡<br>屬性：興趣</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">諸誠璃璃子的場合 END</div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">PC1 緋室星夜的場合</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">為了還不知道何時可能會發生的困境，星夜，妳在上個月終於決定把累積多時的特休假請下去，飛往英國去找妳在學院的友人</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一方面借助友人作為正派研究者的魔法造詣幫助妳開發新的魔法，另一方面也是活絡活絡多年前在國外結下的人際關係網</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">這一個月來妳彷彿又回到當時在學院求學的生活，單純地鑽研魔法、討論魔道書構成原理、練習不熟悉的技術...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">有時還可以和舊友們喝喝下午茶...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">但快樂的時光總是像跑馬燈一樣一晃即逝，當妳從像凡人一樣從機場出入口搭計程車回家的路上，妳的念話頻道留言跟手機簡訊都要爆了...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看來在妳出國的這段期間，受妳所託的協力者們也獲得了許多有待討論的資訊...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">而大家不約而同地想第一時間跟妳說明/討論...甚至已經有人在前往妳家的路上了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">//請星夜開始行動</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在計程車上看著爆滿的留言揉了揉眉毛。<br>決定先無視所有世俗相關的訊息和來路不明的訊息，只回應朋友們。<br>其他東西歸檔起來之後再研究。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords"><br>『對，我已經下飛機了，大概再半小時到家。』以赤花的留言為首，開始一一回覆朋友們的訊息：『如果晚點大家方便的話，就在我家集合吧。』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">計程車很快地到達星夜的住家，向關心過度的司機道謝後，踏出車門。<br><br>一陣風吹來春天的氣息，也吹亂起了星夜的髮絲。<br>星夜用手順順頭髮，抬頭望向暌違一個月的熟悉大樓。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我回來了，」輕聲的說：「那麼，開始吧。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords"><br>為了看到這場漫長旅程的終點。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">......雖然在沒人看到的地方煞有介事的說了意味深長的話。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">根據慣例，這個氣氛會在看到家裡的客人之後徹底消失。<br><br>讓我們看看結果如何吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">星夜默默地打開門。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我回來了——」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">妳知道，妳家隔音良好<br>妳知道，妳家的防護措施品質良好值得信賴，除非是段數比妳高的魔法使入侵，才可能被突破<br>妳也知道，夕映並不是粗心大意對人沒防備的孩子<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">所以，當妳一打開門，朝玄關裡喊完話後，就看到一名陌生的年輕男性單膝跪地，正舉起手中的大克拉數鑽石戒指往前方表情複雜到難以解讀的夕映遞過去<br>這番可以出現在電視劇裡、知名飯店門口、著名旅遊景點、甚至是機場大廳，但千不該萬不該出現在你家客廳的名場景時...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">妳的反應是...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你哪位。」問著的同時舉起了右手。<br>手掌中是否有在凝聚什麼力量凡人或許是看不出來啦——</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽到妳不愠不火的發言，客廳裡的年輕男女同時轉頭向妳看過來</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「等一下，星夜小姐不要衝動！」<br>馬上理解接下來可能會發生什麼事，立刻出言阻止</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......這位想必就是緋室星夜小姐，您好，在下是石原敬一郎！遲至今日才得知您的住處所在，唐突拜訪，還請見諒！」<br>年輕男人一個轉身，眨眼間便來到妳的面前，規矩地正座彎身。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我很冷靜也沒有衝動喔，」微笑<br>「這只是看到不認識的人出現在我家客廳對妳做出像是求婚的動作時的正常困惑反應喔。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......所以，你找我家夕映什麼事？」<br>視線回到那個男人身上</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">姑且還是把手放下、把聚集的魔素驅散了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「夕映這一年多來承蒙您照顧，在下不勝感激！今日前來，是想以未婚夫身分將夕映接回去，好擇日成親！還望您理解！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">年輕人才剛抬起的頭顱又再度低了下去<br>妳看見夕映的雙眼跟嘴唇都各自抿成了一條線。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">皺眉<br>視線望向夕映，姑且用眼神確認一下要不要把他攆走。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......」目光焦點整整轉了360度</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">然後比出"OK，請開門"的動作。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「石原先生，我想像您這樣的紳士一定能理解，」邊說著邊走上前，『溫柔親切』的用手輕輕按著他的肩膀把他往大門的方向轉過去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『您突然出現，突然告知這麼重大的事情，年輕的小姐會一時混亂也是理所當然的對吧。』<br>說到這裡，大門自動打開。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「所以，希望您給夕映一點整理心情的時間。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「待夕映的心情準備好後，我會再邀請您的。還請您耐心等候。」拍拍他的肩膀，示意他慢走不送。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">說起來、石原這個姓，感覺有點耳熟呢...<br>心不在焉的邊送客邊想。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「多謝您的理解，我現在就立刻回去準備婚儀事宜！改日再來拜訪！」<br>年輕人似乎只接收到妳話中好聽的部分...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">他精神抖擻地站起身，立刻就消失在門外。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">星夜瞪了門一眼，門自動關上<br>自動上鎖、上鍊條、魔法鎖、實體保全全部啟動。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「呼...」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「.....這傢伙是怎麼找到這裡的。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我不知道...」<br>往後坐倒在沙發上，慢慢地滑落躺平，最後把自己的臉埋進抱枕裡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....」坐到夕映身邊:「抱歉久等了，我回來了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊...人生好難...」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在這個背景BGM終於變得抒情的時刻，星夜的魔法保全警鈴和電鈴聲一起響起。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽到電鈴響，又往自己臉上加了一顆抱枕。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....真的，人生好難。」聽到警報聲彈起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">......或許剛剛有點一時衝動<br>關門的時候把之前因為老是出問題而關掉的"對可疑訪客自動殲滅術式"給啟動了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「...停下來、等一下，關機!!!」急忙往門的方向衝過去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這個東西怎麼老是把知代當作敵人!!!」不用看都知道是誰來了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">....在一陣折騰後，勉強在無人傷亡的狀況下解除警報把門打開。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「呼、啊、啊哈哈，星夜小姐家的術式今天也很盡責！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">知代抹了抹額上的汗，似乎對於自己今天沒有造成任何傷亡充滿了進步的自信。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「.....不，那不叫盡責叫短路...」抹汗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……看著不認識的魔法使用警鈴代替門鈴，有點遲疑是不是來錯地方還是該入境隨俗。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這就是那個，要先取得資格才能入門的傳統……嗎？」看到認識的面孔後，稍微放寬心了點。「我是不是也該比照辦理挑戰星夜小姐的警衛術式呢？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">半開玩笑地問道。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哇！」緊張地往旁跳了一步，小心地檢查自己身上沒有任何東西流過去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊，璃璃子，好久不見。」嘆了一口氣。<br>「.....出糗的時候就會所有人都看到，也是我家的慣例了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊、初次見面您好，術式君只是很自然地把我當成需要排除的危險災厄，我想不是對任何人都這樣的！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">邊說邊仔細地觀測身邊的魔素流動……目前還滿穩定的.....</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「大家都先請進吧，璃璃子是第一次見到知代小姐嗎?」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">順便又瞪了一眼門，把所有鎖和保全都解除。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這就是星夜小姐有人望的證明吧。」笑盈盈地說道。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「您好，我是諸誠璃璃子，叫我璃璃子就可以了。」向知代點點頭。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊、是、您好，那個，」交友經驗過少的知代腦海裡旋轉著宇宙，「我是隸屬於阿房宮的【千夜一夜物語】，但請稱呼我為知代就可以了！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「大家先坐一下吧，我去泡個茶，說起來赤花應該也快到了....」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">姑且進行了一個社會化的鞠躬，好久沒有因為分科會以外的理由接觸其他魔法使了！</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在大家寒暄的過程中已經用抱枕把自己徹底隱藏起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「原來如此，幸會，知代小姐。」<br>……最近和阿房宮還真是有緣。//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">寒暄完後小心地進了客廳，上一次來是替星夜小姐慶生的時候吧.....悠理果然已經不在這個時代了.....</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一邊想著，一邊注意到了沙發上變成抱枕獸的存在。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......夕映...」試探性的問一下:「可以幫忙我準備一下杯子和茶點嗎...?」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">是夕映小姐啊！？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好...」從沙發上滾落，步履蹣跚地走進廚房</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">剛剛用來求婚的大克拉數鑽戒還留在客廳的桌子上...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......那個，夕映小姐不舒服的話，要不要讓她休息比較好？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我不確定夕映現在需要的是不是休息呢....」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這這樣....」好在意發生了什麼事，好在意桌子上的大克拉數鑽戒，「那個....是星夜小姐這次從英國回來的土產嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「莫非跟剛才大步流星離去的男人有關……」<br>這戒指，值不少錢呢。雖然對魔法使而言不一定有同等的價值。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「打擾了...？」熟門熟路的自己開了門，發現裡面意外的熱鬧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">指了指大鑽戒，然後看到赤花，「啊、赤花小姐！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「.....那傢伙竟然沒帶走...」垂下肩膀</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不你也沒給對方機會把東西拿走呢。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「說來話長了，先掃到旁邊吧...」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哈囉，知代小姐。」一進門就是婚嫁的話題，星夜家一如往常的熱鬧，「你們在玩甚麼...？」看著像玩具一樣誇張的鑽石戒指。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">跟另一位客人（諸誠）點點頭，在星夜家出現任何人好像都不是很意外。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">知代聞到了。<br>那是跟星夜其實有個十歲大的女兒一樣，散發著修羅場的氣息的話題。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">但知代現在是一個社會化很充足的外典。<br>知道有些話題還是不要觸碰比較好……</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">於是她乖乖地坐到了單人沙發上，思考著在這個沉重的氣氛裡說出更沉重的話題是不是一個好的選項。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「沒有在玩....」揉眉毛:「赤花，這是璃璃子、璃璃子，這是赤花。」非常隨便的這樣就當作有介紹過。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽見赤花的名字後，以不失禮的動作稍微凝神打量了一下赤花。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">這位想必就是前途似錦，集阿房宮技術於一身的菁英書警，青井赤花小姐了吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">禮貌性地也點頭回禮。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「您好，很高興認識呢。」摸了一下身上的口袋，掏出了花店的名片，「如果有需要的話我們可以提供花卉的相關服務。」把名片遞給璃璃子。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">哦哦，是這種展開嗎？<br>璃璃子立刻從魔法使模式切換成企業家營業模式。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哪裡，這邊才是，有需要時還請多利用『結緣堂』的二手販售和收購服務。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">接過名片後收好，並遞出自己的名片給赤花。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在大家的七嘴八舌自我介紹中把從英國帶回來的紅茶泡好。<br>和一些簡單的茶點一起送上餐桌。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在幫忙分發茶點時，夕映順手把那枚散發八卦氣味的鑽戒收起，跟多餘的餐具一起送回廚房...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看著夕映身後彷彿具體可見的憂愁，知代凝重地端起紅茶。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">準備茶點時稍微和夕映談了一下，決定晚點再由我把對話內容轉述給她。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">目送夕映回房休息後，才終於在客廳桌前坐好。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那、那個，我帶來的消息不是什麼聽了會讓人心情愉快的事情，所以假如其他人有好消息的話……星夜小姐可能先聽其他人的部分比較好吧。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看著另一邊充滿社會化的交流，內心充滿了糾結。
+本來是想快點和星夜小姐討論才趕快上門拜訪的，嗯嗯嗯～</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這個時機也不用區分好消息壞消息囉，」端起茶杯喝了一口<br>「....知代小姐先說也沒關係的。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">把薄外套對折掛在沙發上後坐了下來，領了杯紅茶啜飲。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在知代說話時，拿起兩包糖包，猶豫了一下後，放了一包回去，最後才加進紅茶裡品嚐。//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊、嗯、是。」深吸一口氣。「這是我從混血主義的書籍卿那裡得來的情報，理想鄉和舊世界秩序，不久前為了搶奪兩本夢幻對書而達成了協議。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「所以，如果我們要把目標先放在理想鄉上頭，可以預期會遭遇到更激烈的抵抗。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">邊聽著知代說話，邊把牛奶添進自己的杯子裡。<br>總算在不小心滿出來前回過神。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「然後是，因果之獸六冰千景目前仍然行蹤成謎，我已經請朋友替我打探她的下落了，但還沒有回音。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「理想鄉……嗯，我這邊也有關於他們的消息。理想鄉的書籍卿，利奧‧科穆寧最近和阿房宮的魔法使，約翰尼斯‧古騰堡有私下的往來。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「理想鄉加阿房宮，真是爆炸性的組合啊...」物理意味上的。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">是錯覺嗎？阿房宮的魔法使怎麼都和書籍卿來往這麼密切？<br>知代一邊傻笑一邊又喝了一口紅茶。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽著兩人報告的同時不停地留下冷汗，相對於打聽消息，自己反而是在這段時間被打聽的那邊。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「另外，據傳持有〈雨〉和〈輪迴〉兩本斷章的二葉葵，其愚者名叫做雪子‧賀茂。是足以在圓桌列席的獵鬼首領……的樣子。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「阿...原來是獵鬼的首領，難怪他可以調閱。」聽見璃璃子的發言，想起了伊萊恩的事情。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「.......雪、子。」在雪的第一個音節停頓了不自然的久。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「賀茂啊……」眨了眨眼，有點好奇地看向星夜。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我想這不會是巧合，日森家的孩子在我知道的範圍，她們的名字都是『Yu』開頭，」邊說邊用手指寫著這個音。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「前幾天夏威夷那個的場帶了英國來的獵鬼成員－伊萊恩，在問前輩手上的《無盡》，以她的說法，在二葉葵手上的《雨》和《無盡》她也調查過了。」似乎沒注意到星夜的停頓，跟其他人說明著。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....所有人都一口氣動起來了呢。」聽到赤花的話，輕聲的說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……果然配這種嚴肅的話題，一包糖的甜度還是不太夠<br>璃璃子果斷地從自己的托特包拿出一包煎餅，拆封拿出一片後，把剩下的擺在桌上。//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">點點頭，「但實際上我連這兩本禁書有甚麼影響力都還不清楚。」有些沮喪，「資訊感覺還是握在少數人手上。」腦袋裡轉著圓桌的那些高幹。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哇……」挺直了背脊，心理做好隨時要與大法典為敵的思想準備！</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那、那個，我這邊的人脈比較少，在情報上恐怕無法幫上星夜小姐太多的忙。但假如是要搶奪斷章或是掩護星夜小姐逃亡的話……！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">腦海裡已經開始了好萊塢動作片展開</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">oO（知代小姐一如往常的用人畜無害的臉說了恐怖的台詞呢...）</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「等一下、現在先不要進展到那裏。」一手揉著眉頭對知代說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「不到最後一刻不可以放棄和平解決的可能性喔。」毫無說服力的人這樣說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊、是、是的！」<br>原來是這樣啊？星夜小姐是打算和平解決的啊？（把腦內的想像畫面倒帶）</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……搶奪跟逃亡。」不小心咬碎了煎餅，連忙把掉到桌上的碎片撿起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我沒打算拜託大家這麼過分的事啦、不到最後一刻的話。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「早有考慮到和平解決的方向，這次也向阿房宮調度了些能幫得上忙的裝備。」從包包裡拿出單片眼鏡，「這是用他們隨便販售我和我們的個人情報換來的裝備，應該可以派得上用場。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......總覺得剛剛赤花帶過了一些不能聽過就算了的關鍵字。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「…………因為魔法使沒有個資法的概念嘛。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">姑且也屬於阿房宮一份子的知代，眼睛游泳。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「也對，如果是星夜小姐的話，應該不會選擇逃亡，而是把追擊者都擺平吧。」<br>雖然是開玩笑地說著，但感覺……並不是玩笑、呢。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">難怪師傅跟師丈說要『預先準備』。是這個意思嗎？璃璃子懂了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你說過我們是要和平解決對吧。」不安地回頭看向星夜，再看向那些夥伴的認知。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....是阿，現階段能做的事情，果然就像貓老師教過的一樣吧。」邊說邊把剛剛大家提到的名字用發光的軌跡寫在空中 。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「有不懂的，就去"問"懂的人。」<br>說成是貓老師教的大概也是一種責任轉嫁。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……星夜小姐沒有否定我的玩笑呢。<br>璃璃子依然面露微笑，心中卻掀起了波瀾。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嗯……」試著從自己看過的創作中搜尋和平解決的途徑。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">然後想起了最近最喜歡的一本小說裡女主角的作為，基本上就是先爆打對方一頓，再把其中一個敵人囚禁起來，好好地用愛去感化對方。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">這是可以複製的作法嗎……（在內心沉思著）</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那……具體來說，星夜小姐有希望我們優先去查訪的對象嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我想的場那邊應該還有些資訊沒跟我說清楚。」赤花先開口，「我可能會跟他打聽一下獵鬼那邊是不是有甚麼想法。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「現階段的話，我最感興趣的大概是他們吧。」<br>錯過了否定璃璃子玩笑的機會，星夜接著說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">空中的兩個名字『伊萊恩』、『利奧．科穆寧』亮了起來。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「伊萊恩檢閱過大法典持有的斷章，而理想鄉也持有一部份的斷章，我想探探他們知道什麼。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……說到提問。」整理了一下心情，璃璃子提出建議。「古騰堡先生似乎對那兩本禁書頗有瞭解，希望擇日邀約我去他的研究室詳談——我姑且取得了攜伴參加的同意。」//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「...古騰堡先生的邀約，可以的話我也想一同前往。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「沒問題，只要是年輕又有智慧的女性，古騰堡先生都不會拒絕吧。」//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">oO（聽起來我好像進不了他的研究室）</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「對對。」聽到璃璃子的『邀約』才想到，「伊萊恩應該也是會登門拜訪前輩，打聽關於《無盡》的事情。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「既然伊萊恩小姐想找我，那我就也和她聊聊吧。」笑著回答赤花。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我想請他喝到英國紅茶她會很開心的，但你可能不要做在紅茶裡面加牛奶這種可能會刺激到她的事情。」指著星夜的茶杯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....說起來古騰堡先生也是默默關注我們許久了呢，沒想到有機會直接見面。」苦笑回答璃璃子；「就拜託妳介紹囉。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....倒是加牛奶有什麼不對啊..」攪著杯子悶悶地說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">點了點頭，「唔，那我這邊就從書籍卿那邊下手吧……」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">星夜靜靜喝掉杯中添了鮮奶的紅茶，放下茶杯，望著所有人。
+</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....因為拜託大家的多少是有點危險的事，所以，請大家以自己的安全為第一優先喔。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">試著露出微笑對大家說。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....那麼，晚餐該怎麼辦呢，我來叫外送嗎?」接著瞬間轉移話題</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「！？可以在星夜小姐家吃晚餐嗎！？」露出解鎖新遭遇的表情。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">知代雖然有幫星夜慶生的經驗但還沒有一般地一起吃晚餐的經驗！</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「....這也不是什麼稀有事件吧....」邊說邊點開UXEREXTS</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「看看附近有甚麼餐廳吧。」客人的姿態。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">隨著滯留時間增加，出意外的機率也增加了，知代端座著，在內心祈禱今天可以平安到最後！</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我沒問題喔，但是夕映會想要自己一個人……喔，我是說，和星夜小姐兩個人歇會兒嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「.....我會再好好和她聊聊的，現在就先悠閒的吃頓飯吧。」猶豫一下後，這樣回答璃璃子。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">於是，在嚴肅氣氛下開啟的魔法女子會，最後變成討論食物熱量究竟會不會影響魔法使外顯身材的務實餐會...</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords"> //星夜請從本場景登場人物中選擇結錨點對象，屬性自訂</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">緋室星夜 : 選擇石原敬一郎
+命運屬性選擇興趣</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords"> 能夠突破星夜設下的防護來到這裡，絕對不會只是普通的凡人，就算是依賴他人的力量，也意味著他有奇異的人士做後盾
+</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">星夜想知道他身上隱藏的秘密、陰謀..甚至是可能性。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">星夜的場合 END</div></div><!--EOS-->
+<div class="_script" data-type="sect_title"><div class="_sectTitle">導入階段 END</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請大家擲骰決定初始魔力</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_6">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d6+4 取低 (1D6+4) ＞ 3[3]+4 ＞ 7<br>1d6+4 取低 (1D6+4) ＞ 5[5]+4 ＞ 9</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_1">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d6+4 (1D6+4) ＞ 5[5]+4 ＞ 9</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D6+5 初始魔力 (1D6+5) ＞ 4[4]+5 ＞ 9</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d6+4 初始魔力 (1D6+4) ＞ 2[2]+4 ＞ 6</div>
+</div>
+</div></div><!--EOS--></div>
+</body>
+</html>
