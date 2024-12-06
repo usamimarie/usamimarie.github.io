@@ -16,43 +16,52 @@ body{ background:#454752; }
 ._script {width: 100%;}
 
 
-._halt { padding:40px 0; }
+._halt { padding:30px 0; }
 ._bgImg { text-align: center; }
 ._bgImg img { max-width: 800px; }
-._talk { margin:0; display:flex; border-bottom:1px solid #3a3a3a; background:#1e1e1e; color:#eee; width:100%; max-width:1080px; }
-._leftCol { width: 20px; }
-._rightCol { width:100%; }
-._actorName{ padding:10px; height:16px; font-size:18px; }
-._actorImg { display:none; }
-._actorWords { margin:5px; font-size:1.1rem; padding:0 10px 10px 10px; border-radius:5px; }
+._talk { margin:5px 0; display:flex; border:1px solid black; background:#1e1e1e; color:#eee; width:100%; max-width:1080px; border-radius:5px; }
+._leftCol { width:122px; }
+._rightCol { width:calc(100% - 126px); }
+._actorName{ padding:5px 10px; height:20px; font-size:18px; }
+._actorImg { margin:6px; width:110px; height:110px; background-repeat:no-repeat; background-size:cover; background-color:#2a2a2a; }
+._actorWords { margin:5px; background:#2a2a2a; font-size:1.1rem; padding:10px; height:calc(100% - 60px); border-radius:5px; }
+._sectTitle { border-radius:5px; margin-bottom:5px; }
 
-._talk.otherCh { text-align:right; background:black; }
+@media only screen and (max-width: 400px) {
+._leftCol { width:100px; }
+._rightCol { width:calc(100% - 100px); }
+._actorImg { margin:35px 0 5px 10px; width: 85px; height: 85px; }
+}
+
+._talk.otherCh { width:calc(50%); text-align:right; margin-left:auto; }
+._talk.otherCh ._leftCol { display:none; }
+._talk.otherCh ._rightCol { width:100%; }
 ._talk.otherCh ._actorWords { background:black;color:white; }
 
 ._actor_0 ._actorName { color: #888888; }
 ._actor_0 ._actorName::after { content:""; }
-._actor_0 ._actorImg { background-image:url(); } 
+._actor_0 ._actorImg { background-image:url(https://images.plurk.com/5NZQsQXKmIDsjFHzEWqUuA.png); } 
 ._actor_1 ._actorName { color: #03a9f4; }
 ._actor_1 ._actorName::after { content:"緹希芙涅"; }
-._actor_1 ._actorImg { background-image:url(); } 
+._actor_1 ._actorImg { background-image:url(https://images.plurk.com/zSZsbVxQc3u69iZIvMnMl.png); } 
 ._actor_2 ._actorName { color: #9e3d3f; }
 ._actor_2 ._actorName::after { content:"縫"; }
-._actor_2 ._actorImg { background-image:url(); } 
+._actor_2 ._actorImg { background-image:url(https://images.plurk.com/3SyM4LbMYrA0zVuIg3HAT.png); } 
 ._actor_3 ._actorName { color: #888888; }
 ._actor_3 ._actorName::after { content:"酒保你老目"; }
-._actor_3 ._actorImg { background-image:url(); } 
+._actor_3 ._actorImg { background-image:url(https://images.plurk.com/lWyM3PPt6ojByPKx8wXZz.png); } 
 ._actor_4 ._actorName { color: #2196f3; }
 ._actor_4 ._actorName::after { content:"卡洛斯"; }
-._actor_4 ._actorImg { background-image:url(); } 
+._actor_4 ._actorImg { background-image:url(https://images.plurk.com/3jWR4K7kS9ZHqaqelrsoBx.png); } 
 ._actor_5 ._actorName { color: #ffeb3b; }
 ._actor_5 ._actorName::after { content:"阿卡姆"; }
-._actor_5 ._actorImg { background-image:url(); } 
+._actor_5 ._actorImg { background-image:url(https://images.plurk.com/3ddfIurL9FjwZLPttgihrh.png); } 
 ._actor_6 ._actorName { color: #673ab7; }
 ._actor_6 ._actorName::after { content:"阿耳克托斯"; }
-._actor_6 ._actorImg { background-image:url(); } 
+._actor_6 ._actorImg { background-image:url(https://images.plurk.com/41XS54OjEt0Zj3kJAW5QAz.png); } 
 ._actor_7 ._actorName { color: #888888; }
 ._actor_7 ._actorName::after { content:"山茶花"; }
-._actor_7 ._actorImg { background-image:url(); } 
+._actor_7 ._actorImg { background-image:url(https://images.plurk.com/6lDREYa6KqtEFbTBR5BULn.png); } 
 .otherCh{ display:none; }
 </style>
 </head>
@@ -64,10 +73,13 @@ body{ background:#454752; }
 <h1>Lancer[main]</h1>
 <div class="_subtitle"></div>
 
-<div id="_main"><div class="_script" data-type="talk">
+<div id="_main"><div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/4W3QxJ2VgtgvrRJr2VPnt9.png"></div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -77,7 +89,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -87,7 +99,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -97,7 +109,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -107,7 +119,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -117,7 +129,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -127,7 +139,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -137,28 +149,20 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
 <div class="_actorWords">傾聽吧，這就是新世界的產聲——</div>
 </div>
 </div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">　</div>
-</div>
-</div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/1O6AbEuA6zbbx1taRCehZn.png"></div></div><!--EOS-->
 <div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -168,7 +172,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -178,7 +182,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -188,7 +192,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -198,7 +202,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -208,7 +212,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -218,7 +222,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -228,7 +232,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -238,7 +242,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -248,7 +252,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -258,7 +262,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -268,7 +272,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -278,7 +282,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -288,7 +292,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -298,7 +302,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -308,7 +312,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -318,7 +322,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -328,7 +332,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -338,7 +342,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -348,7 +352,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -358,7 +362,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -368,7 +372,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -378,7 +382,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -388,7 +392,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -398,7 +402,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -408,7 +412,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -418,7 +422,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -428,7 +432,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -438,7 +442,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -448,7 +452,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -458,7 +462,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -468,7 +472,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -478,7 +482,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -488,7 +492,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -498,7 +502,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -508,7 +512,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -518,7 +522,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -528,7 +532,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -538,7 +542,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -548,7 +552,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -558,7 +562,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -568,7 +572,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -578,7 +582,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -588,7 +592,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -598,7 +602,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -608,7 +612,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -618,7 +622,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -628,7 +632,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -638,7 +642,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -648,7 +652,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -658,7 +662,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -668,7 +672,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -678,7 +682,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -688,7 +692,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -698,7 +702,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -708,7 +712,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -718,7 +722,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -728,7 +732,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -738,7 +742,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -748,7 +752,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -758,7 +762,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -768,7 +772,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -778,7 +782,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -788,7 +792,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -798,7 +802,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -808,7 +812,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -818,7 +822,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -828,7 +832,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -838,7 +842,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -848,7 +852,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -858,7 +862,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -868,7 +872,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -878,7 +882,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -888,7 +892,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -898,7 +902,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -908,7 +912,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -918,7 +922,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -928,7 +932,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -938,7 +942,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_1">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -948,7 +952,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -958,7 +962,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -966,10 +970,12 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/6gYHGuZM4a7BwDplJ1WK5T.png"></div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -979,7 +985,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -989,7 +995,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -999,7 +1005,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1009,7 +1015,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1019,27 +1025,37 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
-<div class="_actorWords">『早安!卡洛斯先生!美好的早晨已經開始了，希望你經歷了一場美好的宿醉!』<br>你聽見酒保的電子合成音喊著，在你腦海中嗡嗡作響。</div>
+<div class="_actorWords">『早安!卡洛斯先生!美好的早晨已經開始了，希望你經歷了一場美好的宿醉!』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你聽見酒保的電子合成音喊著，在你腦海中嗡嗡作響。</div>
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
-<div class="_actorWords">「什．．．．．．什麼？」</div>
+<div class="_actorWords">「什……什麼？」</div>
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1049,7 +1065,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1057,19 +1073,9 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_3">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords"></div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1079,7 +1085,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1089,7 +1095,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1099,7 +1105,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1109,7 +1115,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1119,7 +1125,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_5">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1129,7 +1135,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_5">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1139,7 +1145,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1149,7 +1155,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1157,29 +1163,9 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_4">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">『醫生小姐抱歉，昨晚的演出太過完美（希望你也在場）讓我被太ｈｉｇｈ的觀眾灌酒到斷片，我想請問現在去回診還來得及嗎？』開始打訊息</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_3">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">『兩位需要一點醒酒的飲料嗎？』</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_5">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1187,19 +1173,19 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_3">
+<div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
-<div class="_actorWords">『但是我有一個好消息！醒酒的飲料已經完成了！』無視阿卡姆的拒絕，他將兩杯聞起來像咖啡的東西放上了吧檯。</div>
+<div class="_actorWords">『醫生小姐抱歉，昨晚的演出太過完美（希望你也在場）讓我被太ｈｉｇｈ的觀眾灌酒到斷片，我想請問現在去回診還來得及嗎？』開始打訊息</div>
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1207,9 +1193,29 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『兩位需要一點醒酒的飲料嗎？』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『但是我有一個好消息！醒酒的飲料已經完成了！』無視阿卡姆的拒絕，他將兩杯聞起來像咖啡的東西放上了吧檯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1219,7 +1225,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1229,7 +1235,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1237,19 +1243,9 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_5">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">「這樣醉醺醺地去找縫感覺會被他禮貌地勸誡一頓，好像很尊重你的個人自由但其實沒有。」阿卡姆聳肩勸卡洛斯別去。</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1257,19 +1253,9 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_4">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">「不管怎樣讓她等這麼久還是太不好意思了，我先走一步啦兩位。」</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_3">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1279,7 +1265,27 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_5">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這樣醉醺醺地去找縫感覺會被他禮貌地勸誡一頓，好像很尊重你的個人自由但其實沒有。」阿卡姆聳肩勸卡洛斯別去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「不管怎樣讓她等這麼久還是太不好意思了，我先走一步啦兩位。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1289,17 +1295,20 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
 <div class="_actorWords">迅速回房間梳洗了一下,用了一些去味的產品後奔向診所。</div>
 </div>
 </div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/43mR27o55FZwxOKxjsfNws.png"></div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1309,7 +1318,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1319,17 +1328,20 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
 <div class="_actorWords">「天空」只延伸到你上方幾十空尺處，是一片厚重的金屬和塑膠板，上面有著權充陽光的照明燈。<br>「地面」是往上彎的圓弧，無數建築物緊密的插在這個圓弧上，屋頂幾乎要碰在一起。</div>
 </div>
 </div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/1O6AbEuA6zbbx1taRCehZn.png"></div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1339,7 +1351,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1349,7 +1361,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1359,7 +1371,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1369,7 +1381,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1379,7 +1391,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1389,7 +1401,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1399,7 +1411,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1409,7 +1421,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1419,7 +1431,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1429,7 +1441,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1439,7 +1451,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1449,7 +1461,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1459,7 +1471,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1469,7 +1481,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1479,7 +1491,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1489,7 +1501,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1499,7 +1511,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1509,7 +1521,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1519,7 +1531,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1529,7 +1541,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1539,7 +1551,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1549,7 +1561,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1559,7 +1571,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1569,7 +1581,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1579,7 +1591,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1589,7 +1601,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1599,7 +1611,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1609,7 +1621,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1619,7 +1631,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1629,7 +1641,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_7">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1639,7 +1651,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_7">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1649,7 +1661,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1657,9 +1669,19 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_7">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">山茶花操控的機器人在送完茶後，也端莊的站在阿耳克托斯身旁，像是隨時準備幫她服務，或者也可以看成興致勃勃的在偷聽。<br><br>雖然她完全沒有偷聽的必要就是了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1669,107 +1691,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">雖然嘴上開了玩笑，但還是回憶了一下在這段時間有沒有剛好聽到相關的傳聞。</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">#請進行判定<br>如果判定失敗，意味著你之前在打聽傳言時引起了一些不妙的人注意<br>這可能在以後產生影響</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_7">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">山茶花操控的機器人在送完茶後，也端莊的站在阿耳克托斯身旁，像是隨時準備幫她服務，或者也可以看成興致勃勃的在偷聽。<br><br>雖然她完全沒有偷聽的必要就是了。</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_4">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">#申請使用 市井流言+2 調查+2</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">#一次只能使用一個觸發喔<br>但我判斷"搜尋者"這個背景有幫助，故+1準度</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">#請擲[1d20+1d6+2]</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_4">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">1d20+1d6+2 (1D20+1D6+2) ＞ 2[2]+3[3]+2 ＞ 7</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">你自己能回想起來的傳聞並不比縫告訴你的多多少。<br>不過，如今回想起來，你似乎曾經在不知情時問過不少關於SSC的問題，難道那是下意識的嗎?</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">如今回想起來，你腦海中閃過一個畫面。那是你曾看過的一個銳利、危險的眼神。<br>那是當你在酒吧中提起關於SSC的話題時，你在酒客中的某人身上曾經感受到的一抹敵意。</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_0">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">但你想不起那是酒客中的誰。</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_4">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1779,7 +1701,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1789,7 +1711,97 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然嘴上開了玩笑，但還是回憶了一下在這段時間有沒有剛好聽到相關的傳聞。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">#請進行判定<br>如果判定失敗，意味著你之前在打聽傳言時引起了一些不妙的人注意<br>這可能在以後產生影響</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">#申請使用 市井流言+2 調查+2</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">#一次只能使用一個觸發喔<br>但我判斷"搜尋者"這個背景有幫助，故+1準度</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">#請擲[1d20+1d6+2]</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d20+1d6+2 (1D20+1D6+2) ＞ 2[2]+3[3]+2 ＞ 7</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你自己能回想起來的傳聞並不比縫告訴你的多多少。<br>不過，如今回想起來，你似乎曾經在不知情時問過不少關於SSC的問題，難道那是下意識的嗎?</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">如今回想起來，你腦海中閃過一個畫面。那是你曾看過的一個銳利、危險的眼神。<br>那是當你在酒吧中提起關於SSC的話題時，你在酒客中的某人身上曾經感受到的一抹敵意。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">但你想不起那是酒客中的誰。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_4">
+<div class="_leftCol">
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1799,7 +1811,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1809,7 +1821,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1819,7 +1831,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_7">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1829,7 +1841,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_4">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1839,7 +1851,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1849,7 +1861,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_7">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1859,7 +1871,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1869,7 +1881,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_2">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1879,7 +1891,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1889,7 +1901,7 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1897,19 +1909,9 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
-<div class="_talk mainCh _actor_2">
-<div class="_leftCol">
-<div class="_actorImg _hidden"></div>
-</div>
-<div class="_rightCol">
-<div class="_actorName"></div>
-<div class="_actorWords">「……啊，好巧，我們的第一份工作似乎到了？」</div>
-</div>
-</div></div><!--EOS-->
-<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1917,9 +1919,19 @@ body{ background:#454752; }
 </div>
 </div></div><!--EOS-->
 <div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_2">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……啊，好巧，我們的第一份工作似乎到了？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_6">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
@@ -1929,13 +1941,16 @@ body{ background:#454752; }
 <div class="_script" data-type="talk">
 <div class="_talk mainCh _actor_0">
 <div class="_leftCol">
-<div class="_actorImg _hidden"></div>
+<div class="_actorImg "></div>
 </div>
 <div class="_rightCol">
 <div class="_actorName"></div>
 <div class="_actorWords">這個簡潔的訊息，是你們成軍之後的第一個任務。<br>事後回想起來，也是今後一連串改變星系命運的動盪開端——</div>
 </div>
 </div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
+<div class="_script" data-type="changeBg"><div class="_bgImg"><img src="https://images.plurk.com/4W3QxJ2VgtgvrRJr2VPnt9.png"></div></div><!--EOS-->
+<div class="_script" data-type="halt"><div class="_halt"></div></div><!--EOS-->
 <div class="_script" data-type="sect_title"><div class="_sectTitle">金焰燎原</div></div><!--EOS-->
 <div class="_script" data-type="sect_title"><div class="_sectTitle">In Golden Flame</div></div><!--EOS-->
 <div class="_script" data-type="sect_title"><div class="_sectTitle">Mission Start</div></div><!--EOS--></div>
