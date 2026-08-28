@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Pathbuilder 2e 中文完整角色卡</title>
+    <style>
+        :root {
+            --bg-main: #13171e;
+            --bg-card: #1c212d;
+            --bg-item: #242b3a;
+            --bg-input: #12151c;
+            --accent-orange: #ff5722;
+            --accent-blue: #3b82f6;
+            --text-main: #e2e8f0;
+            --text-sub: #94a3b8;
+            --border-color: #2e374a;
+        }
+
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-main); color: var(--text-main); margin: 20px; }
+        .container { max-width: 1050px; margin: 0 auto; background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); }
+        
+        .char-header { display: flex; gap: 15px; margin-bottom: 20px; background: var(--bg-item); padding: 12px; border-radius: 6px; }
+        .char-header label { font-size: 12px; color: var(--text-sub); display: block; }
+        .char-header input { background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 6px; border-radius: 4px; width: 100%; box-sizing: border-box; }
+
+        .grid { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
+        .card { background: var(--bg-item); padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); }
+        h2 { font-size: 16px; margin-top: 0; color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .stat-box { background: var(--bg-input); padding: 6px; border-radius: 4px; text-align: center; border: 1px solid var(--border-color); }
+        .stat-box label { font-size: 11px; color: var(--text-sub); display: block; }
+        .stat-box input { width: 100%; text-align: center; background: transparent; border: none; color: #fff; font-size: 15px; font-weight: bold; }
+
+        .dc-calc-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 20px; }
+        .dc-calc-title { text-align: center; font-weight: bold; font-size: 15px; color: #fff; margin-bottom: 10px; background: #000; padding: 4px; border-radius: 4px; }
+        .dc-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; font-size: 13px; }
+        .val-badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; min-width: 30px; text-align: center; }
+        .bg-green { background: #a2d1a3; color: #000; }
+        .bg-red { background: #f8c2c2; color: #000; }
+        .bg-blue { background: #c2e0f8; color: #000; }
+        
+        .teml-group { display: inline-flex; gap: 2px; background: #2a3245; padding: 2px; border-radius: 4px; }
+        .teml-btn { font-size: 11px; padding: 2px 6px; cursor: pointer; color: var(--text-sub); border-radius: 2px; user-select: none; }
+        .teml-btn.active { background: var(--accent-orange); color: #fff; font-weight: bold; }
+
+        .section-title { text-align: center; color: var(--accent-orange); font-weight: bold; font-size: 16px; margin: 25px 0 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; }
+        .sub-section-title { text-align: left; color: var(--accent-orange); font-weight: bold; font-size: 14px; margin: 15px 0 8px; padding-left: 5px; border-left: 3px solid var(--accent-orange); }
+        
+        /* 專長區域專用標題 */
+        .feat-section-title { text-align: left; color: #ff5722; font-weight: bold; font-size: 16px; margin: 20px 0 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; }
+
+        .spell-table-header { display: grid; grid-template-columns: 45px 45px 2fr 0.8fr 1.5fr 1fr 1fr 1.2fr; font-size: 11px; color: var(--text-sub); text-align: center; padding: 4px 10px; }
+        .spell-row { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 6px; overflow: hidden; }
+        .spell-row-summary { display: grid; grid-template-columns: 45px 45px 2fr 0.8fr 1.5fr 1fr 1fr 1.2fr; align-items: center; padding: 8px 10px; cursor: pointer; font-size: 13px; text-align: center; }
+        .spell-row-summary:hover { background: #1e2534; }
+        .spell-name { text-align: left; font-weight: bold; color: #fff; }
+
+        /* 專長與儀式列簡化樣式 */
+        .feat-row-summary { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; cursor: pointer; font-size: 13px; }
+        .feat-row-summary:hover { background: #1e2534; }
+
+        .chk-container { display: flex; justify-content: center; align-items: center; }
+        .spell-chk { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent-orange); }
+        .spell-chk-cast { accent-color: #ef4444; }
+
+        .spell-row.cast-used { opacity: 0.5; background: #181111; }
+        .spell-row.cast-used .spell-name { text-decoration: line-through; color: #888; }
+
+        /* 展開細節區塊 - 暗色卡片主題 */
+        .spell-detail { display: none; padding: 12px; background: #181d28; color: var(--text-main); font-size: 13px; text-align: left; border-top: 1px solid var(--border-color); }
+        .spell-detail-header { background: #2d1818; color: #fff; padding: 6px 10px; font-weight: bold; display: flex; justify-content: space-between; border-radius: 4px; border: 1px solid #5a2828; margin-bottom: 8px; }
+        .trait-tag { background: #800000; color: #fff; padding: 2px 6px; font-size: 11px; font-weight: bold; border-radius: 2px; display: inline-block; margin-right: 4px; border: 1px solid #ff7b72; }
+        .spell-meta { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; line-height: 1.5; }
+        .spell-desc { line-height: 1.6; color: #cbd5e1; border-top: 1px dotted var(--border-color); padding-top: 8px; }
+        .spell-heightened { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border-color); font-size: 12px; color: #f59e0b; }
+
+        /* 內嵌狀態卡片樣式 */
+        .inline-status-card { margin-top: 8px; padding: 8px 12px; background: #242b3a; border: 1px solid #ffb74d; border-radius: 4px; color: #e2e8f0; font-size: 12px; }
+        .inline-link { color: #f59e0b; text-decoration: underline; cursor: pointer; font-weight: bold; }
+
+        /* 內文中的自訂小表格（例如哈羅牌檢定表） */
+        .inner-table { width: 100%; max-width: 350px; border-collapse: collapse; margin: 10px 0; font-size: 12px; }
+        .inner-table th, .inner-table td { border: 1px solid var(--border-color); padding: 6px; text-align: left; }
+        .inner-table th { background: #004d25; color: #fff; }
+        .inner-table td { background: #12151c; }
+
+        .btn-rest { background: #2e8b57; color: white; border: none; padding: 8px 16px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 10px; width: 100%; }
+        .btn-rest:hover { background: #246b43; }
+
+        /* 聚能池樣式 */
+        .focus-pool-container { display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--accent-orange); border-radius: 6px; padding: 10px 15px; margin-bottom: 15px; }
+        .focus-pool-title { font-weight: bold; color: var(--accent-orange); font-size: 14px; }
+        .focus-pips { display: flex; gap: 8px; }
+        .focus-pip { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent-orange); background: transparent; cursor: pointer; }
+        .focus-pip.filled { background: var(--accent-orange); box-shadow: 0 0 8px rgba(255, 87, 34, 0.6); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="char-header">
+        <div style="flex:2;"><label>角色名稱</label><input type="text" value="蘿賽緹雅"></div>
+        <div style="flex:1;"><label>職業</label><input type="text" value="女巫"></div>
+        <div style="flex:1;"><label>等級</label><input id="char-level" type="number" value="10" onchange="calculateSpells()"></div>
+    </div>
+
+    <div class="grid">
+        <!-- 左側：狀態與屬性與專長 -->
+        <div class="card">
+            <h2>狀態與屬性</h2>
+            <div style="margin-bottom:10px;">
+                <label style="font-size:12px; color:var(--text-sub);">生命值 (HP)</label>
+                <input type="text" value="88 / 88" style="width:100%; background:var(--bg-input); border:1px solid var(--border-color); color:#fff; padding:5px; border-radius:4px;">
+            </div>
+            
+            <h2>屬性調整值</h2>
+            <div class="stat-grid">
+                <div class="stat-box"><label>力量</label><input type="text" value="-1"></div>
+                <div class="stat-box"><label>敏捷</label><input type="text" value="+3"></div>
+                <div class="stat-box"><label>體質</label><input type="text" value="+2"></div>
+                <div class="stat-box"><label>智力</label><input id="stat-int" type="number" value="4" onchange="calculateSpells()"></div>
+                <div class="stat-box"><label>感知</label><input type="text" value="+4"></div>
+                <div class="stat-box"><label>魅力</label><input type="text" value="+4"></div>
+            </div>
+
+<!-- 專長區塊 -->
+            <div class="feat-section-title">專長</div>
+            <div class="spell-row">
+                <div class="feat-row-summary" onclick="toggleDetail('feat-cauldron')">
+                    <span class="spell-name">大釜 Cauldron</span>
+                    <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+                </div>
+                <div id="feat-cauldron" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>大釜 CAULDRON</span>
+                        <span>專長 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">女巫</span>
+                    </div>
+                    <div class="spell-desc">
+                        在4級以及之後每2級，你獲得一種該等級及以下的常見油或藥水的配方（如果你4級為4級藥水，如果你6級就為6級藥水，以此類推）。 如果你擁有魔寵，你可以讓魔寵學習這些配方，而非儲存在你的配方書當中。 你的魔寵可以如同學習新法術一般學習新配方，並同法術一樣能從被殺死的魔寵傳遞到新魔寵身上。<br><br>
+                        在你每日準備時，你可以使用已知配方製作一份臨時的油或藥水。 如果你的法術DC具有大師熟練度，你可以在每日準備時製作一組兩份臨時的油或藥水，如果為傳奇熟練度，則製作一組三份。 你以此法製作的任何物品在下次進行每日準備時都會變成一瓶惰性液體，而臨時物品的任何剩餘效果都將結束。 臨時的油和藥水沒有價值。
+                    </div>
+                </div>
+            </div>
+            <!-- 2. 哈羅牌占卜師入門 -->
+            <div class="spell-row">
+                <div class="feat-row-summary" onclick="toggleDetail('feat-harrower-dedication')">
+                    <span class="spell-name">哈羅牌占卜師入門 Harrower Dedication</span>
+                    <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+                </div>
+                <div id="feat-harrower-dedication" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>HARROWER DEDICATION</span>
+                        <span>變體</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">變體</span>
+                        <span class="trait-tag">入門</span>
+                    </div>
+                    <div class="spell-desc">
+                        每日1次，當你執行每日準備時，你能為自己進行一次哈羅牌占卜。 從你的牌庫中抽一張牌——在接下來的24小時內，這張牌所屬的牌組將激活成為你的哈羅預兆，並且會影響你其他幾個哈羅牌占卜師專長的效果，詳見後文。 你獲得避開厄運反應動作。<br><br>
+Avoid Dire Fate 避開厄運<br>
+需求 你有啟動的哈羅預兆; <br>
+觸發 你在和你哈羅預兆的牌組相關聯的檢定中失敗或大失敗<br>
+效果 你能將失敗視作成功，大失敗視作失敗。 你不再擁有啟動的哈羅預兆。<br>
+                    </div>
+                </div>
+            </div>
+            <!-- 閱讀心理共鳴 -->
+            <div class="spell-row">
+                <div class="feat-row-summary" onclick="toggleDetail('feat-read-psychometric-resonance')">
+                    <span class="spell-name">閱讀心理共鳴 Read Psychometric Resonance</span>
+                    <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+                </div>
+                <div id="feat-read-psychometric-resonance" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>閱讀心理共鳴 READ PSYCHOMETRIC RESONANCE</span>
+                        <span>專長</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">技能</span>
+                    </div>
+                    <div class="spell-desc">
+                        只需輕輕一按，您就可以閱讀其前主人在物品上留下的心能印象。這種探索活動的本質類似於'偵測魔法'，因此你在尋找心能共振時必須以半速或更低的速度移動。執行此操作時，你必須用裸露的雙手掃過你經過的任何物體。這能讓你偵測到明顯帶有情緒共鳴的物體，例如孩子心愛的泰迪熊帶來的快樂，鰥夫的結婚戒指帶來的悲傷，或殺死受害者的凶器帶來的恐懼。如果你正在尋找某種特定類型的情感共鳴，你可以選擇忽略其他情感。如果你找到一個有心理共鳴的物品，你可以透過心理測量評估動作深入探索該共鳴。<br><br>
+心理測量評估（Psychometric Assessment）（專注，情緒，探索，心理，異能）<br>
+需求你的手正在觸摸一個你檢測到心理共鳴的物體;<br>
+效果你花費1分鐘專注於該物體，以看到最初給該物體灌輸這種情感的人的面容。如果相關情緒為痛苦的負面情緒，你可能會受到1d6心靈傷害，由GM裁定。
+                    </div>
+                </div>
+            </div>
+            <!-- 祛邪魔法 -->
+            <div class="spell-row">
+                <div class="feat-row-summary" onclick="toggleDetail('feat-root-magic')">
+                    <span class="spell-name">祛邪魔法 Root Magic</span>
+                    <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+                </div>
+                <div id="feat-root-magic" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>祛邪魔法 ROOT MAGIC</span>
+                        <span>專長</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">技能</span>
+                    </div>
+                    <div class="spell-desc">
+                        你的護身符能抵禦污穢的魔力。當你進行每日準備時，你可以縫合好一個裝有香草、頭髮、聖油和其它儀式材料的香囊，並將其給與一位盟友；該盟友不能是你自己。該盟友當天第一次對法術或作祟進行豁免檢定時，獲得+1環境加值。若你的神秘技能為專家，環境加值為+2，若你的神秘技能為傳奇，環境加值為+3。</p>
+                    </div>
+                </div>
+            </div>
+<!-- 動作區塊 -->
+<div class="feat-section-title">動作</div>
+<div class="spell-row">
+    <div class="feat-row-summary" onclick="toggleDetail('feat-sustain-action')">
+        <span class="spell-name">維持 Cauldron</span>
+        <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+    </div>
+    <div id="feat-sustain-action" class="spell-detail">
+        <div class="spell-detail-header">
+            <span>維持 Sustain</span>
+            <span>動作 ◆ </span>
+        </div>
+        <div style="margin-bottom: 6px;">
+            <span class="trait-tag">專注</span>
+        </div>
+        <div class="spell-desc">
+選擇一個持續時間為維持，或列出了維持時會獲得特殊增益的效果。大多數類似效果來自法術或激活魔法物品。如果該效果的持續時間為維持，它的持續時間會延長到你的下一回合結束（在同一回合維持一次以上不會繼續延長持續時間）。如果一項能力可以維持，但沒有列出持續時間，則最多可以維持10分鐘。<br><br>
+一個效果可能會列出你維持它時才會獲得的額外增益，這種情況有可能出現在持續時間不為維持效果上。如果該效果具有特殊增益且持續時間為維持，那麼你的維持動作會延長持續時間並獲得特殊增益。<br><br>
+
+如果你的維持動作被打斷，該能力結束。
+        </div>
+    </div>
+</div>
+        </div>
+
+
+        <!-- 右側：法術區塊 -->
+        <div class="card">
+            <h2>法術攻擊與法術 DC</h2>
+            
+            <div class="dc-calc-box">
+                <div class="dc-calc-title">法術攻擊與法術 DC</div>
+                <div class="dc-row">
+                    <span>攻擊</span>
+                    <span id="atk-val" class="val-badge bg-green">+18</span>
+                    <span>= 智力</span>
+                    <span id="atk-int" class="val-badge bg-red">4</span>
+                    <span>+ 熟練</span>
+                    <span id="atk-prof" class="val-badge bg-red">14</span>
+                    
+                    <div class="teml-group">
+                        <span class="teml-btn" onclick="setProf(2, this)">T</span>
+                        <span class="teml-btn active" onclick="setProf(4, this)">E</span>
+                        <span class="teml-btn" onclick="setProf(6, this)">M</span>
+                        <span class="teml-btn" onclick="setProf(8, this)">L</span>
+                    </div>
+
+                    <span>+ 道具</span>
+                    <input id="item-bonus" type="number" value="0" style="width:35px; text-align:center;" class="val-badge bg-blue" onchange="calculateSpells()">
+                </div>
+                
+                <div class="dc-row" style="margin-top: 10px;">
+                    <span>DC</span>
+                    <span id="dc-val" class="val-badge bg-green">28</span>
+                    <span>= 基本 10 + 智力</span>
+                    <span id="dc-int" class="val-badge bg-red">4</span>
+                    <span>+ 熟練</span>
+                    <span id="dc-prof" class="val-badge bg-red">14</span>
+                </div>
+            </div>
+
+            <button class="btn-rest" onclick="resetCastSlots()">🟢 長休 (恢復所有施放消耗欄位與聚能點數)</button>
+
+            <!-- 巫術 (Hexes) -->
+            <div class="section-title">Hexes (巫術)</div>
+            <div class="focus-pool-container">
+                <div class="focus-pool-title">聚能池 (Focus Pool)</div>
+                <div class="focus-pips">
+                    <div class="focus-pip filled" onclick="toggleFocusPip(this)"></div>
+                    <div class="focus-pip filled" onclick="toggleFocusPip(this)"></div>
+                    <div class="focus-pip filled" onclick="toggleFocusPip(this)"></div>
+                </div>
+            </div>
+            
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域/效果</span>
+            </div>
+
+            <!-- 巫術戲法：尖笑 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cackle-detail')">
+                    <div class="chk-container">—</div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">尖笑 Cackle</span><span>自由</span><span>—</span><span>—</span><span>—</span><span>維持 1 個法術</span>
+                </div>
+                <div id="cackle-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>尖笑 CACKLE</span>
+                        <span>巫術戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕有</span><span class="trait-tag">女巫</span><span class="trait-tag">巫術</span><span class="trait-tag">專注</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> 自由動作；<b>觸發</b> 你的一個法術的持續時間為「維持」
+                    </div>
+                    <div class="spell-desc">
+                        你發出瘋狂或狂喜的尖笑。你獲得一次<span class="inline-link" onclick="toggleDetail('sustain-spell-info'); event.stopPropagation();">維持法術 Sustained a Spell</span>的效果。
+                    </div>
+
+                    <!-- 內嵌維持法術規則說明 -->
+                    <div id="sustain-spell-info" class="inline-status-card" style="display:none; margin-top:10px;">
+                        <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                            <span>維持法術 SUSTAIN A SPELL</span>
+                            <span>動作 ◆</span>
+                        </div>
+                        <div style="margin-bottom: 6px;"><b>專注</b></div>
+                        <div>你選擇一個持續時間列為「維持」且由你施放的持續法術或效應。如果該效應註明你在維持時能做出選擇，你此時做出選擇。將該效應的持續時間延長至你下一回合結束（如果該效應有最大持續時間，則不能超過該上限）。你在一個回合中可以維持多個效應，但每個效應都必須分別使用維持法術動作。如果一個法術在施放的回合獲得延伸，它會持續到你下一回合結束。</div>
+                        <div style="margin-top: 6px; border-top: 1px dashed #555; padding-top: 6px; color: #94a3b8;">
+                            若你無法行動，或是在自己回合結束前沒有維持該法術，該法術就會結束。除非法術描述另有說明，否則你無法將法術維持超過 10 分鐘。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一環巫術：偏轉命運 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('nudge-fate-detail')">
+                    <div class="chk-container">—</div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">偏轉命運 Nudge Fate</span><span>◆</span><span>維持，至多1分鐘</span><span>30 呎</span><span>—</span><span>1 個生物</span>
+                </div>
+                <div id="nudge-fate-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>偏轉命運 NUDGE FATE</span>
+                        <span>巫術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕有</span><span class="trait-tag">女巫</span><span class="trait-tag">巫術</span><span class="trait-tag">專注</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1 個生物<br>
+                        <b>持續時間</b> 維持，至多1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你微微扭轉命運之輪，對目標施加命運的助力或詛咒。當你施放此法術時，選擇庇佑或詛咒：<br>
+                        * <b>庇佑：</b>每當目標嘗試一次攻擊骰、豁免骰或技能檢定時，如果在該骰上差1點就能成功（或差1點就能大成功），目標在該檢定上獲得 +1 狀態加值，從而將失敗轉為成功（或將成功轉為大成功）。<br>
+                        * <b>詛咒：</b>每當目標嘗試一次攻擊骰、豁免骰或技能檢定時，如果其結果剛好達到成功（或大成功）的標準，目標在該檢定上承受 -1 狀態減值，從而將結果降為失敗（或降為成功）。<br>
+                        一旦此加值或減值改變了一次擲骰的結果，此法術立即結束。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一環巫術：眠夢帷幕 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('veil-of-dreams-detail')">
+                    <div class="chk-container">—</div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">眠夢帷幕 Veil of Dreams</span><span>◆</span><span>維持，至多1分鐘</span><span>30 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="veil-of-dreams-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>眠夢帷幕 VEIL OF DREAMS</span>
+                        <span>巫術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕有</span><span class="trait-tag">女巫</span><span class="trait-tag">巫術</span><span class="trait-tag">專注</span><span class="trait-tag">心靈</span><span class="trait-tag">睡眠</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1 個生物<br>
+                        <b>防禦</b> 意志；<b>持續時間</b> 維持，至多1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你用昏昏欲睡的幻夢籠罩目標的心靈。目標必須進行一次意志豁免。<br>
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>目標在對抗睡眠效果的豁免上承受 -1 狀態減值，且其察覺檢定與意志豁免承受 -1 狀態減值，持續1輪。<br>
+                        <b>失敗：</b>目標在對抗睡眠效果的豁免上承受 -1 狀態減值，且其察覺檢定與意志豁免承受 -1 狀態減值。此外，若目標在持續時間內陷入睡著或失去意識，它無法嘗試察覺檢定來主動醒來。<br>
+                        <b>大失敗：</b>同失敗，但減值變為 -2。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一環巫術：霧化魔寵 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('mistform-familiar-detail')">
+                    <div class="chk-container">—</div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">霧化魔寵 Mistform Familiar</span><span>◆</span><span>維持，至多1分鐘</span><span>15 呎</span><span>—</span><span>你的魔寵</span>
+                </div>
+                <div id="mistform-familiar-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>霧化魔寵 MISTFORM FAMILIAR</span>
+                        <span>巫術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕有</span><span class="trait-tag">女巫</span><span class="trait-tag">巫術</span><span class="trait-tag">專注</span><span class="trait-tag">變化</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>射程</b> 15尺；<b>目標</b> 你的魔寵<br>
+                        <b>持續時間</b> 維持，至多1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你的魔寵化為半實體的薄霧。你的魔寵獲得隱蔽（Concealed）狀態，並且獲得抵抗所有傷害 2（精準傷害與非魔法傷害除外）的抗力。此外，魔寵可以擠過極其狹窄的縫隙而無需擠壓。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+2)</b> 抗力增加 2。
+                    </div>
+                </div>
+            </div>
+<!-- 五環巫術：頃刻修養 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('restorative-moment-detail')">
+                    <div class="chk-container">—</div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">頃刻修養 Restorative Moment</span><span>◆◆</span><span>—</span><span>30 呎</span><span>—</span><span>1個生物</span>
+                </div>
+                <div id="restorative-moment-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>頃刻修養 RESTORATIVE MOMENT</span>
+                        <span>聚能 5</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">專注</span><span class="trait-tag">聚能</span><span class="trait-tag">巫術</span><span class="trait-tag">操作</span><span class="trait-tag">女巫</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        庇護主在目標周圍編織時間的絲線，給予他修養一天的某些增益。目標降低1點<span style="color: #ff9800; cursor: pointer; text-decoration: underline;" onclick="toggleDetail('doomed-detail'); event.stopPropagation();">毀滅</span>和<span style="color: #ff9800; cursor: pointer; text-decoration: underline;" onclick="toggleDetail('drained-detail'); event.stopPropagation();">流失</span>狀態值，並且可以立即對階段時長小於等於1日的苦難嘗試一次豁免。目標隨後臨時免疫於此法術1日。
+                    </div>
+
+                    <!-- 毀滅 DOOMED 狀態說明區塊 -->
+                    <div id="doomed-detail" class="spell-detail" style="display: none; margin-top: 10px; border-left: 3px solid #ff9800; padding-left: 10px;">
+                        <div class="spell-detail-header">
+                            <span>毀滅 DOOMED</span>
+                            <span>狀態</span>
+                        </div>
+                        <div class="spell-desc">
+                            強大的力量握緊了你的靈魂，使你更接近死亡。毀滅狀態擁有狀態值。你死亡時可累積的最大瀕死值會減少等同毀滅值的金額。若你最大瀕死值被降到0，你立刻死亡。死亡後，你不再擁有毀滅狀態。<br><br>
+                            每當你進行一次完整的夜晚休息後，你的毀滅值減少1。
+                        </div>
+                    </div>
+
+                    <!-- 流失 DRAINED 狀態說明區塊 -->
+                    <div id="drained-detail" class="spell-detail" style="display: none; margin-top: 10px; border-left: 3px solid #ff9800; padding-left: 10px;">
+                        <div class="spell-detail-header">
+                            <span>流失 DRAINED</span>
+                            <span>狀態</span>
+                        </div>
+                        <div class="spell-desc">
+                            當生物成功吸取你的血液或生命力後，你會變得更虛弱。流失狀態擁有狀態值。你基於體質的擲骰和DC會獲得等同流失狀態值的狀態減值，例如強韌豁免。你同時失去等於你等級（最低1）乘以流失值的生命值，你的最大生命值也會減少相同的結果。例如，身為3級角色的你被一種效果造成了流失3，你失去9點生命值，最大生命值也減少9。此法流失的生命值不視為受到傷害。<br><br>
+                            每當你進行一次完整的夜晚休息，你的流失值減少1。這會增加你的最大生命值，但不會立刻恢復損失的生命值。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 常駐 / 背景與內在效果 -->
+            <div class="section-title">Special & Passive Abilities (常駐與特殊能力)</div>
+            
+            <!-- 常駐與特殊技能 -->
+            <div class="sub-section-title">常駐與特殊技能</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>效果/說明</span>
+            </div>
+            
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('spirit-sense')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">精魂感知 Spirit Sense</span><span>◆◆</span><span>10 分鐘</span><span>30 呎瀰漫</span><span>—</span><span>作祟與精魂感知</span>
+                </div>
+                <div id="spirit-sense" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>精魂感知 SPIRIT SENSE</span>
+                        <span>法術 2</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">偵測</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>區域</b> 30呎瀰漫<br>
+                        <b>持續</b> 10分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你向玄妙的世界打開心靈，令你能感受到附近的精魂。即使你沒有在搜索，你也會獲得一個檢定來發現區域中的作祟（haunts）和精魂（spirits）。你在關於作祟和精魂的後續檢定上獲得+1狀態加值：用於搜索的察覺檢定、嘗試回憶知識、判斷其存在原因的技能檢定、解除作祟的技能檢定。你在對抗作祟和精魂的AC和豁免骰上也會獲得+1狀態加值。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (6環)</b> 法術持續時間變成直到你下次進行每日準備。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('guidance-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">內在異能戲法｜神導術 Guidance</span><span>◆</span><span>直到下回合開始</span><span>30 呎</span><span>—</span><span>1 個生物</span>
+                </div>
+                <div id="guidance-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>神導術 GUIDANCE</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能，原能<br>
+                        <b>施法</b> ◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物<br>
+                        <b>持續</b> 直到你的下一個回合開始
+                    </div>
+                    <div class="spell-desc">
+                        你請求超自然存在的引導，賦予目標在持續時間結束前的一次攻擊骰，察覺檢定，豁免骰，或技能檢定上獲得+1狀態加值。目標在擲骰前選擇是否使用該加值。如果目標使用該加值，則該法術結束。無論怎樣結束，該目標接下來會臨時免疫1小時。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('shield-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">Cantrip Connection｜護盾術 SHIELD</span><span>◆</span><span>直到下回合開始</span><span>—</span><span>—</span><span>自己</span>
+                </div>
+                <div id="shield-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>護盾術 SHIELD</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">力場</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>持續</b> 直到你的下一個回合開始
+                    </div>
+                    <div class="spell-desc">
+                        你舉起一面力場構成的魔法護盾。這視同你使用了舉起盾牌動作，賦予你在AC上的+1環境加值，直到你的下個回合開始，但這裡不需要手來使用。<br>
+                        當法術生效時，你可以使用你的魔法護盾來進行盾牌格擋反應動作。該盾牌具有硬度5。你可以使用該法術的反應動作來減少任何來自法術或魔法效果的傷害，即使這不會造成物理傷害。在你使用盾牌格擋後，該法術結束，並且你無法在10分鐘內再次施放它。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+2)</b> 此盾牌的硬度增加5。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('force-barrage-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">Spell Battery｜力場飛彈 Force Barrage</span><span>◆~◆◆◆</span><span>立即</span><span>120 呎</span><span>—</span><span>1+ 生物</span>
+                </div>
+                <div id="force-barrage-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>力場飛彈 FORCE BARRAGE</span>
+                        <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('spell-battery-info'); event.stopPropagation();">Spell Battery 二環</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">力場</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆-◆◆◆<br>
+                        <b>射程</b> 120尺；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        你發射出一塊由魔法固化而來的碎片，射向你視野中的生物。它自動命中，並造成1d4+1力場傷害。你施放法術時每額外使用一個動作，你射出的碎片增加一個，最大為3個動作發射三個碎片。你為每個碎片分別選擇目標。如果你對同一個目標射擊超過1個碎片，將該傷害加在一起再計算傷害加值，減值，抗力，弱點等。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+2)</b> 你花費的每個動作額外射出一枚碎片。
+                    </div>
+
+                    <div id="spell-battery-info" class="inline-status-card" style="display:none; margin-top:10px;">
+                        <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                            <span>SPELL BATTERY</span>
+                            <span>主人能力</span>
+                        </div>
+                        <div>你獲得一個比你最高環級法術位至少低3環的額外法術位；你必須能夠使用法術位施放4環法術才能選擇此主人能力。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 牧師基本施法 -->
+            <div class="sub-section-title">牧師基本施法</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域/效果</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('divine-lance-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">聖槍術 Divine Lance</span><span>◆◆</span><span>立即</span><span>60 呎</span><span>AC</span><span>1 個生物</span>
+                </div>
+                <div id="divine-lance-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>聖槍術 DIVINE LANCE</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">攻擊</span><span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">受祝</span><span class="trait-tag">精魂</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 60尺；<b>目標</b> 1個生物；<b>防禦</b> AC
+                    </div>
+                    <div class="spell-desc">
+                        你施放一道神聖能量的射線。對目標嘗試一次遠程法術攻擊，對抗目標的AC。命中時，此目標承受 2d4 精魂傷害（重擊時造成雙倍傷害）。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此傷害增加 1d4。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('vitality-lash-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">命能襲 Vitality Lash</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>基礎強韌</span><span>1 個不死生物/虛能治療生物</span>
+                </div>
+                <div id="vitality-lash-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>命能襲 VITALITY LASH</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">命能</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個不死生物或其他具有虛能治療的生物；<b>防禦</b> 基礎強韌
+                    </div>
+                    <div class="spell-desc">
+                        你用創生熔爐的能量破壞目標的腐敗本源。你造成 2d6 點命能傷害，這需進行一次基礎強韌豁免。如果生物在豁免中大失敗，直到你的下個回合開始前，他還會陷入力竭1。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此傷害增加 1d6。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('benediction-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">祝佑術 Benediction</span><span>◆◆</span><span>1 分鐘</span><span>15 呎瀰漫</span><span>—</span><span>盟友 AC +1</span>
+                </div>
+                <div id="benediction-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>祝佑術 BENEDICTION</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">靈光</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>區域</b> 15尺瀰漫<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        神聖的庇護幫助你保護夥伴。當你和你的盟友身處瀰漫區域內時，AC獲得+1狀態加值。在隨後的回合內，每回合一次，你能維持法術來讓瀰漫區域的半徑增加10尺。祝佑術能反制詛咒術。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('peaceful-rest-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">遺體安眠 Peaceful Rest</span><span>◆◆</span><span>直到每日準備</span><span>接觸</span><span>—</span><span>1 具屍體</span>
+                </div>
+                <div id="peaceful-rest-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>遺體安眠 PEACEFUL REST</span>
+                        <span>法術 2</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 接觸；<b>目標</b> 1個屍體<br>
+                        <b>持續</b> 直到你下次進行每日準備
+                    </div>
+                    <div class="spell-desc">
+                        該目標屍體不會腐爛，也無法轉換為不死生物。如果屍體成為要求死亡在一定時間內的法術效果目標（例如，死者復活），遺體安眠的持續時間不計入該時間限制。此法術也會避免通常的臭蟲和害蟲（例如蛆蟲）侵蝕屍體。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (5環級)</b> 此法術的持續時間為無限，但該法術需要額外一個動作來施放，並且需要開銷（價值6gp的防腐液）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('holy-light-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">灼熱聖光 Holy Light</span><span>◆◆</span><span>立即</span><span>120 呎</span><span>AC</span><span>1 個生物</span>
+                </div>
+                <div id="holy-light-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>灼熱聖光 HOLY LIGHT</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">攻擊</span><span class="trait-tag">專注</span><span class="trait-tag">火</span><span class="trait-tag">聖潔</span><span class="trait-tag">光亮</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺；<b>目標</b> 1個生物；<b>防禦</b> AC
+                    </div>
+                    <div class="spell-desc">
+                        你發出一道帶有神聖能量的閃耀射線。嘗試一次遠程法術攻擊。該射線造成 5d6 火焰傷害。如果目標有邪穢特徵，你造成額外 5d6 精魂傷害。<br>
+                        <b>大成功：</b>目標承受雙倍傷害。<br>
+                        <b>成功：</b>目標承受完整傷害。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此火焰傷害增加 2d6，對邪穢生物造成的額外精魂傷害增加 2d6。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 儀式 (Rituals) 區塊 -->
+            <div class="sub-section-title">儀式 (Rituals)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>施放時間</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/效果</span>
+            </div>
+
+            <!-- 哈羅牌占卜 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('harrowing-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">哈羅牌占卜 Harrowing</span><span>1 小時</span><span>1 個月</span><span>接觸</span><span>—</span><span>1 個自願生物</span>
+                </div>
+                <div id="harrowing-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>哈羅牌占卜 HARROWING</span>
+                        <span>DC：Lv10：25，算命+16 儀式 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">預言系</span><span class="trait-tag">幸運</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>施放</b> 1小時；<b>開銷</b> 稀有顏料與墨水，價值為20 gp×目標等級<br>
+                        <b>主要檢定</b> 算命學識（受訓）或 神秘（專家）<br>
+                        <b>射程</b> 接觸；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1個月，或直到目標實現
+                    </div>
+                    <div class="spell-desc">
+                        通常解讀哈羅牌並不能影響人的命運，但當你執行一個哈羅牌儀式來注入異能力量時，可以為解讀它的目標帶來真正的魔法增益，讓他們在不久的將來能掌控一項任務或目標。儀式施放過程的前50分鐘用來為準備解讀的目標生物做準備，他需要透過冥想來專注於要關注的任務或目標，並允許你在目標的身體上畫或用墨水畫出神秘的符號，將它們與即將到來的解讀聯繫起來。儀式的最後10分鐘則是解讀過程，在這個過程裡目標身上的符號會逐漸消失，融入他們的命中。<br><br>
+                        解讀哈羅牌儀式的目標必須描述他們打算在不久的未來嘗試的一系列事件或行動過程——例如「逮捕特定的通緝犯」或「前往瓦瑞西亞去調查斯托瓦爾階梯（Storval Stairs）」。如果你願意，可以在現實中拿出哈羅牌來進行解讀，使用任何形式來表現解讀過程， statewide 在儀式完成時，目標獲得一個潛在的機會來操縱他們和命運的聯繫，這是由你在執行儀式時的主要技能檢定決定的。<br><br>
+                        只要這個儀式的效果還在生效，生物就<b>暫時免疫</b>於新施放的哈羅牌占卜儀式。<br><br>
+                        <b>大成功：</b>在追求目標的過程中，目標獲得了對命運和機會的掌控，獲得一張「百搭牌」（wild card）。隨機選擇一個哈羅牌組，這可以透過投擲1d6，或是從一套完整的哈羅牌中抽取一張。然後參考下面的「牌組相關檢定表」。在該儀式效果持續期間內的任何時候，該生物都可以使用這張百搭牌，立即重骰任何相關的檢定，並且重骰具有+4狀態加值。他必須應用重骰之後的結果。一旦重骰完畢，百搭牌會被消耗，哈羅牌儀式的效果也就結束了。<br>
+                        <b>成功：</b>同大成功，但百搭牌不能賦予重骰檢定狀態加值。<br>
+                        <b>失敗：</b>同成功，但百搭牌賦予重骰檢定-4狀態減損。<br>
+                        <b>大失敗：</b>目標的命運遠超過他們所能掌控的範圍。百搭牌沒有效果，在接下來的一個月內，如果再次對目標釋情哈羅牌占卜儀式，只會自動得到大失敗的結果。
+                        
+                        <table class="inner-table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">牌組相關檢定表</th>
+                                </tr>
+                                <tr>
+                                    <th>牌組</th>
+                                    <th>關聯檢定</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1-錘（力量）</td><td>打擊（近戰和遠程）</td></tr>
+                                <tr><td>2-鑰（敏捷）</td><td>反射豁免</td></tr>
+                                <tr><td>3-盾（體質）</td><td>強韌豁免</td></tr>
+                                <tr><td>4-書（智力）</td><td>技能檢定</td></tr>
+                                <tr><td>5-星（感知）</td><td>意志豁免</td></tr>
+                                <tr><td>6-冠（魅力）</td><td>所有其他檢定（包括純骰）</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 目標獲得一張額外的百搭牌。嘗試對每張額外的百搭牌進行一次主要技能檢定，以分別確定每張百搭牌的收益。一旦目標用完了所有的百搭牌，哈羅牌占卜儀式的持續時間就會結束。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 呼喚精魂 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('call-spirit-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">呼喚精魂 Call Spirit</span><span>1 小時</span><span>最多 10 分鐘</span><span>—</span><span>意志</span><span>呼喚 1 個靈魂</span>
+                </div>
+                <div id="call-spirit-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>呼喚靈魂 CALL SPIRIT</span>
+                        <span>儀式 5</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">死靈系</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>施放</b> 1小時<br>
+                        <b>主要檢定</b> 神秘（專家）或 宗教（專家）<br>
+                        <b>次要檢定</b> 神秘或宗教（取主要檢定中沒用到的技能）；<b>次要施法者</b> 1<br>
+                        <b>開銷</b> 稀有蠟燭與焚香，總價值50gp<br>
+                        <b>持續時間</b> 最多10分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你掀開了彼世與此世的界限，將靈魂從其安息之地喚起。你必須呼喚靈魂的名字，必須準備與靈魂相關的物件，例如它生前的隨身物品、衣服、或取自它屍體的殘態。不願意回應你的呼喚的靈魂能夠嘗試一次意志豁免來拒絕；豁免大成功時，另一個騙子靈魂會裝做你所呼喚的靈魂回應呼喚。如果靈魂生前沒有見過你，那麼它抵抗呼喚的意志豁免DC會降低2點。無論如何，靈魂會出現在你面前，其縹緲的外觀就如同你想呼喚的生物一樣。在持續時間內的每一分鐘，你都能夠問靈魂一個問題。它會以自己喜歡的方式回答，甚至可以拒絕回答。如果靈魂不在彼方（例如它現在是不死生物）的話，大失敗以外的其他結果都會得到儀式失敗的效果。<br><br>
+                        <b>大成功：</b>靈魂會十分配合你，即使它有足夠的理由來欺騙你，也會在欺騙檢定中承受-2的環境減值。<br>
+                        <b>成功：</b>你能夠呼喚靈魂。<br>
+                        <b>失敗：</b>你無法呼喚靈魂。<br>
+                        <b>大失敗：</b>一個或更多的邪惡靈魂（evil spirits）出現並對你發動攻擊。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 通神術 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('commune-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">通神術 Commune</span><span>1 日</span><span>至多 10 分鐘</span><span>—</span><span>—</span><span>回答至多 7 個問題</span>
+                </div>
+                <div id="commune-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>通神術 COMMUNE</span>
+                        <span>儀式 6</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">預測</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>施放</b> 1日；<b>開銷</b> 稀有焚香，總價值150gp；<b>次要施法者</b> 1<br>
+                        <b>主要檢定</b> 自然（大師）、神秘（大師）、或 宗教（大師）<br>
+                        <b>次要檢定</b> 自然、神秘或宗教（取主要檢定使用的技能）<br>
+                        <b>持續</b> 至多10分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你呼喚一名未知的強大存在來回答問題，此存在的本質取決於你在主要檢定中所使用的技能。<br>
+                        * <b>自然：</b>自然界的原始精魂，它了解半徑3英里內的動物、魔獸、精類、真菌、植物、地形和自然資源。<br>
+                        * <b>神秘：</b>異界存在或其他神秘實體，如元素生物、被遺忘的精魂、以及觀察者，它們了解被遺忘的知識、位面、鮮為人知的秘密或其他奧秘。<br>
+                        * <b>宗教：</b>天族以及魔族這樣與神明相關的存在，它們了解自身服侍的神明以及神祇各自的權能；如果你自身奉神明的話，它們通常會是你所信奉神明的僕人。<br><br>
+                        你至多能夠問7個可以用「是」或「否」回答的問題。該存在會以一個單字的來回答問題，例如“是”、“否”、“可能”和“不知道”，這些存總是會根據自身的立場來作答，且可以說謊。<br><br>
+                        <b>大成功：</b>你呼喚了一個更為強大的存在，它與你所感興趣的事物具有緊密的聯繫，甚至有可能是你所信仰的神祇。該存在不會欺騙你，但它仍有可能不知道問題的答案。當提供清晰的回答是一件重要的事情時，該存在會用至多五個字的短句來回答你，例如“若你立即去”，或“那是真的”。<br>
+                        <b>成功：</b>你能夠正常提問並得到答案。<br>
+                        <b>失敗：</b>你無法聯繫到合適的存在。<br>
+                        <b>大失敗：</b>你的意識暴露在浩瀚的宇宙中，在1星期內陷入呆滯4狀態（無法用任何手段消除）。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 儀式短刀 -->
+            <div class="sub-section-title">儀式短刀</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域/效果</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('dagger-soothe')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安撫術 Soothe</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>恢復 1d10+4 HP，心靈豁免 +2</span>
+                </div>
+                <div id="dagger-soothe" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安撫術 SOOTHE</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">治療</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你安撫目標的精神，增強其精神防禦並治療其傷口。目標在你施放該法術時，回復 1d10+4 生命值，並且在持續時間中，目標對抗心靈效果的豁免上獲得 +2 狀態加值。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此治療量增加 1d10+4。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 訂製法杖（心靈） -->
+            <div class="sub-section-title">訂製法杖（心靈）</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域/效果</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-message')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">傳訊術 Message (戲法)</span><span>◆</span><span>120 呎</span><span>—</span><span>—</span><span>1 個生物</span>
+                </div>
+                <div id="staff-message" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>傳訊術 MESSAGE</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">幻術</span><span class="trait-tag">語言</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        你嘴唇微動，耳語發出一條訊息，只有目標能夠聽到。目標也能做出簡短的耳語回應，且只有你能聽到。只要你能看到目標或知道其確切位置，此法術就可以穿透阻礙物，但如果路徑上有防護耳語或聲音的障壁則會受到阻擋。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-soothe-1')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安撫術 Soothe (一環)</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>恢復 1d10+4 HP，心靈豁免 +2</span>
+                </div>
+                <div id="staff-soothe-1" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安撫術 SOOTHE</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">治療</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你安撫目標的精神，增強其精神防禦並治療其傷口。目標在你施放該法術時，回復 1d10+4 生命值，並且在持續時間中，目標對抗心靈效果的豁免上獲得 +2 狀態加值。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此治療量增加 1d10+4。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-sleep')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">睡眠術 Sleep (一環)</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>意志</span><span>5 呎爆發</span>
+                </div>
+                <div id="staff-sleep" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>睡眠術 SLEEP</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span><span class="trait-tag">睡眠</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>區域</b> 5尺爆發；<b>防禦</b> 意志
+                    </div>
+                    <div class="spell-desc">
+                        區域中的每個生物垂頭歪腦昏昏欲睡。由於該法術失去意識的生物不會倒地，也不會鬆開其持握的東西。該法術不會令生物無法透過覺察醒來，並因此限制其在戰鬥中的能力。<br>
+                        <b>大成功：</b>該生物不受影響。<br>
+                        <b>成功：</b>生物在覺察檢定上承受 -1 狀態減值，持續 1 輪。<br>
+                        <b>失敗：</b>該生物失去意識。如果它在 1 分鐘後仍然失去意識，它會自動醒來。<br>
+                        <b>大失敗：</b>該生物失去意識。如果它在 1 小時後仍然失去意識，它自動醒來。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 目標在失敗時失去意識 1 輪，在大失敗時失去意識 1 分鐘。它們會倒地，並鬆開其持握的東西，並且它們無法嘗試覺察檢定以醒來。當持續時間結束時，該生物會正常睡著，而不是自動醒來。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-soothe-2')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安撫術 Soothe (二環)</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>恢復 2d10+8 HP，心靈豁免 +2</span>
+                </div>
+                <div id="staff-soothe-2" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安撫術 SOOTHE</span>
+                        <span>法術 2 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">治療</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你安撫目標的精神，增強其精神防禦並治療其傷口。目標在你施放該法術時，回復 2d10+8 生命值，並且在持續時間中，目標對抗心靈效果的豁免上獲得 +2 狀態加值。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-charitable-impulse')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">慈善衝動 Charitable Impulse (二環)</span><span>◆◆</span><span>持續可變</span><span>30 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="staff-charitable-impulse" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>慈善衝動 CHARITABLE URGE</span>
+                        <span>法術 2</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物；<b>防禦</b> 意志<br>
+                        <b>持續</b> 持續可變
+                    </div>
+                    <div class="spell-desc">
+                        你大談施捨之高尚，強迫目標給予其所有物。目標必須進行一次意志豁免。如果目標身上沒有物品，則該法術失敗。<br>
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>由於抵抗這種衝動，目標陷入震懾1。<br>
+                        <b>失敗：</b>目標下個回合做任何事之前必須先將一件自己擁有的物品贈與最近的生物。由目標選擇贈與的物品，如果他僅有的物品目前正用來保護自己，那麼他可以選擇陷入震懾1輪，而不是放棄該物品。目標可能需要使用互動動作取出物品，或移動到最近的生物身邊，然後像正常情況下一樣使用互動動作遞出物品。<br>
+                        <b>大失敗：</b>類似失敗，但持續4輪，目標在自己的每個回合內都會重複受到該失敗效果的影響。每當目標結束回合時，他都可以重新進行一次意志豁免，成功則剩餘持續時間減少1輪，大成功則該法術效果完全結束。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 戲法 (Cantrips) -->
+            <div class="section-title">Cantrips (戲法)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">偵測魔法 Detect Magic</span><span>◆◆</span><span>立即</span><span>30 呎脈衝</span><span>—</span><span>區域</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">指路術 Know Direction</span><span>◆◆</span><span>立即</span><span>—</span><span>—</span><span>自己</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">閱讀靈光 Read Aura</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>1 個物品</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">光亮術 Light</span><span>◆◆</span><span>1 小時</span><span>接觸</span><span>—</span><span>1 個物件</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">傳訊術 Message</span><span>◆</span><span>120 呎</span><span>—</span><span>—</span><span>1 個生物</span></div></div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('needle-darts-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">尖銳飛針 Needle Darts</span><span>◆◆</span><span>立即</span><span>60 呎</span><span>AC</span><span>1 個生物</span>
+                </div>
+                <div id="needle-darts-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>尖銳飛針 NEEDLE DARTS</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">攻擊</span><span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">金</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 60尺；<b>目標</b> 1個生物；<b>防禦</b> AC
+                    </div>
+                    <div class="spell-desc">
+                        你將隨身物品中的1片金屬化為3根尖銳飛針，然後把它們並在一起飛向目標。作出1次法術攻擊檢定對抗你的目標的AC。飛針造成3d4點穿刺傷害並可能導致目標出血。<br>
+                        形成飛針的金屬所具有的特殊性質也能賦予飛針；舉例來說，寒鐵飛針能夠對具有寒鐵弱點的生物造成額外傷害。所有飛針均由相同的金屬構成，這些金屬會在攻擊後返回你的隨身物品。<br>
+                        <b>大成功：</b>目標承受雙倍傷害以及1點持續流血傷害。<br>
+                        <b>成功：</b>目標承受全額傷害。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 你發出1支額外飛針，使得法術常規傷害增加1d4點，並且使得重擊時造成的持續流血傷害增加1點。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">暈眩術 Daze</span><span>◆◆</span><span>2 回合</span><span>60 呎</span><span>意志</span><span>1 個生物</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">法師之手 Mage Hand</span><span>◆◆</span><span>專注</span><span>30 呎</span><span>—</span><span>1 個物品</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">魔法伎倆 Prestidigitation</span><span>◆◆</span><span>1 小時</span><span>10 呎</span><span>—</span><span>1 個物件</span></div></div>
+
+            <!-- 1 環法術 -->
+            <div class="section-title">Spell Rank 1 (一環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">隨身書閣 Pocket Library</span><span>◆◆</span><span>24 小時</span><span>自己</span><span>—</span><span>知識檢定 +1</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">閱讀物件 Read Object</span><span>◆◆</span><span>立即</span><span>接觸</span><span>—</span><span>1 個物件</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">麵包屑導航 Breadcrumbs</span><span>◆◆</span><span>1 小時</span><span>接觸</span><span>—</span><span>路徑</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">符文武器 Runic Weapon</span><span>◆◆</span><span>1 分鐘</span><span>接觸</span><span>—</span><span>1 把武器</span></div></div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('mystic-armor-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" checked onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">法師護甲 Mystic Armor</span><span>◆◆</span><span>直到每日準備</span><span>自己</span><span>—</span><span>AC +1</span>
+                </div>
+                <div id="mystic-armor-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>法術護甲 MYSTIC ARMOR</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>持續</b> 直到你下次進行每日準備
+                    </div>
+                    <div class="spell-desc">
+                        你用閃光的魔法能量保護自身，在AC上獲得+1的物品加值，並有最大敏捷加值+5。當你穿戴法術護甲時，使用你的無甲熟練度來計算你的AC。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 你在豁免骰上獲得+1物品加值。<br>
+                        <b>升階 (6環級)</b> 該對AC的物品加值增加到+2，並且你在豁免骰上獲得+1物品加值。<br>
+                        <b>升階 (8環級)</b> 該對AC的物品加值增加到+2，並且你在豁免骰上獲得+2物品加值。<br>
+                        <b>升階 (10環級)</b> 該對AC的物品加值增加到+3，並且你在豁免骰上獲得+3物品加值。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank1-force-barrage-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">力場飛彈 Force Barrage</span><span>◆~◆◆◆</span><span>立即</span><span>120 呎</span><span>—</span><span>1+ 生物</span>
+                </div>
+                <div id="rank1-force-barrage-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>力場飛彈 FORCE BARRAGE</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">力場</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆-◆◆◆<br>
+                        <b>射程</b> 120尺；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        你發射出一塊由魔法固化而來的碎片，射向你視野中的生物。它自動命中，並造成1d4+1力場傷害。你施放法術時每額外使用一個動作，你射出的碎片增加一個，最大為3個動作發射三個碎片。你為每個碎片分別選擇目標。如果你對同一個目標射擊超過1個碎片，將該傷害加在一起再計算傷害加值，減值，抗力，弱點等。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+2)</b> 你花費的每個動作額外射出一枚碎片。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank1-sleep-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">睡眠術 Sleep</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>意志</span><span>5 呎爆發</span>
+                </div>
+                <div id="rank1-sleep-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>睡眠術 SLEEP</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span><span class="trait-tag">睡眠</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>區域</b> 5尺爆發；<b>防禦</b> 意志
+                    </div>
+                    <div class="spell-desc">
+                        區域中的每個生物垂頭歪腦昏昏欲睡。由於該法術失去意識的生物不會倒地，也不會鬆開其持握的東西。該法術不會令生物無法透過覺察醒來，並因此限制其在戰鬥中的能力。<br>
+                        <b>大成功：</b>該生物不受影響。<br>
+                        <b>成功：</b>生物在覺察檢定上承受 -1 狀態減值，持續 1 輪。<br>
+                        <b>失敗：</b>該生物失去意識。如果它在 1 分鐘後仍然失去意識，它會自動醒來。<br>
+                        <b>大失敗：</b>該生物失去意識。如果它在 1 小時後仍然失去意識，它自動醒來。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 目標在失敗時失去意識 1 輪，在大失敗時失去意識 1 分鐘。它們會倒地，並鬆開其持握的東西，並且它們無法嘗試覺察檢定以醒來。當持續時間結束時，該生物會正常睡著，而不是自動醒來。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">料敵機先 Sure Strike</span><span>◆</span><span>回合結束前</span><span>自己</span><span>—</span><span>攻擊雙骰取高</span></div></div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('ill-omen-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">凶兆 Ill Omen</span><span>◆◆</span><span>1 回合</span><span>30 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="ill-omen-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>凶兆 ILL OMEN</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">詛咒</span><span class="trait-tag">操作</span><span class="trait-tag">厄運</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物；<b>防禦</b> 意志<br>
+                        <b>持續</b> 1輪
+                    </div>
+                    <div class="spell-desc">
+                        目標遭受厄運，使其難以維持狀態。目標必須嘗試一次意志豁免。<br>
+                        <b>成功：</b>目標不受影響。<br>
+                        <b>失敗：</b>在持續時間中，目標第一次嘗試攻擊骰或技能檢定時，它必須骰兩次並使用較差的效果。<br>
+                        <b>大失敗：</b>在持續時間中，每當目標嘗試攻擊骰或技能檢定時，它必須骰兩次並使用較差的結果。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank1-soothe-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安撫術 Soothe</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>恢復 1d10+4 HP</span>
+                </div>
+                <div id="rank1-soothe-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安撫術 SOOTHE</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">治療</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你安撫目標的精神，增強其精神防禦並治療其傷口。目標在你施放該法術時，回復 1d10+4 生命值，並且在持續時間中，目標對抗心靈效果的豁免上獲得 +2 狀態加值。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 此治療量增加 1d10+4。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 環法術 -->
+            <div class="section-title">Spell Rank 2 (二環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank2-soothe-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安撫術 Soothe (升環)</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>恢復 2d10+8 HP</span>
+                </div>
+                <div id="rank2-soothe-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安撫術 SOOTHE</span>
+                        <span>法術 2 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">治療</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個自願生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你安撫目標的精神，增強其精神防禦並治療其傷口。目標在你施放該法術時，回復 2d10+8 生命值，並且在持續時間中，目標對抗心靈效果的豁免上獲得 +2 狀態加值。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">顯光塵 Glitterdust</span><span>◆◆</span><span>1 分鐘</span><span>120 呎</span><span>反射</span><span>10 呎爆發</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">黑暗術 Darkness</span><span>◆◆</span><span>1 分鐘</span><span>120 呎</span><span>—</span><span>20 呎爆發</span></div></div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">敲擊術 Knock</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>—</span><span>1 個鎖/門</span></div></div>
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank2-charitable-impulse')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">慈善衝動 Charitable Impulse</span><span>◆◆</span><span>持續可變</span><span>30 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="rank2-charitable-impulse" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>慈善衝動 CHARITABLE URGE</span>
+                        <span>法術 2</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物；<b>防禦</b> 意志<br>
+                        <b>持續</b> 持續可變
+                    </div>
+                    <div class="spell-desc">
+                        你大談施捨之高尚，強迫目標給予其所有物。目標必須進行一次意志豁免。如果目標身上沒有物品，則該法術失敗。<br>
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>由於抵抗這種衝動，目標陷入震懾1。<br>
+                        <b>失敗：</b>目標下個回合做任何事之前必須先將一件自己擁有的物品贈與最近的生物。由目標選擇贈與的物品，如果他僅有的物品目前正用來保護自己，那麼他可以選擇陷入震懾1輪，而不是放棄該物品。目標可能需要使用互動動作取出物品，或移動到最近的生物身邊，然後像正常情況下一樣使用互動動作遞出物品。<br>
+                        <b>大失敗：</b>類似失敗，但持續4輪，目標在自己的每個回合內都會重複受到該失敗效果的影響。每當目標結束回合時，他都可以重新進行一次意志豁免，成功則剩餘持續時間減少1輪，大成功則該法術效果完全結束。
+                    </div>
+                </div>
+            </div>
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">通曉語言 Comprehend Languages</span><span>◆◆</span><span>1 小時</span><span>接觸</span><span>—</span><span>1 個生物</span></div></div>
+
+            <!-- 3 環法術 -->
+            <div class="section-title">Spell Rank 3 (三環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank3-sleep-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">睡眠術 Sleep (升環)</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>意志</span><span>5 呎爆發</span>
+                </div>
+                <div id="rank3-sleep-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>睡眠術 SLEEP</span>
+                        <span>法術 3 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span><span class="trait-tag">睡眠</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>區域</b> 5尺爆發；<b>防禦</b> 意志
+                    </div>
+                    <div class="spell-desc">
+                        區域中的每個生物垂頭歪腦昏昏欲睡。由於該法術失去意識的生物不會倒地，也不會鬆開其持握的東西。該法術不會令生物無法透過覺察醒來，並因此限制其在戰鬥中的能力。<br>
+                        <b>大成功：</b>該生物不受影響。<br>
+                        <b>成功：</b>生物在覺察檢定上承受 -1 狀態減值，持續 1 輪。<br>
+                        <b>失敗：</b>該生物失去意識。如果它在 1 分鐘後仍然失去意識，它會自動醒來。<br>
+                        <b>大失敗：</b>該生物失去意識。如果它在 1 小時後仍然失去意識，它自動醒來。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 目標在失敗時失去意識 1 輪，在大失敗時失去意識 1 分鐘。它們會倒地，並鬆開其持握的東西，並且它們無法嘗試覺察檢定以醒來。當持續時間結束時，該生物會正常睡著，而不是自動醒來。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 三環：倦怠傳染 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('infectious-ennui-3-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">倦怠傳染 Infectious Ennui</span><span>◆◆</span><span>維持，至多1分鐘</span><span>60 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="infectious-ennui-3-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>倦怠傳染 INFECTIOUS ENNUI</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕有</span><span class="trait-tag">惑控系</span><span class="trait-tag">情緒</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能<br>
+                        <b>施法</b> ◆◆ 語言，姿勢<br>
+                        <b>射程</b> 60尺；<b>目標</b> 1 個生物<br>
+                        <b>防禦</b> 意志；<b>持續時間</b> 維持，至多1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你揮手進行短暫的祈禱，讓目標生物的腦海中產生倦怠感，目睹自己迫在眉睫的厄運，目標生物必須進行意志豁免。<br><br>
+
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>目標產生了一時的倦怠。其思想在無意義的存在中掙扎，使其陷入 <span class="inline-link" onclick="toggleDetail('ennui-slowed-info-3'); event.stopPropagation();">緩慢 1</span>，但下一輪目標的回合結束時，法術效果也隨之結束。<br>
+                        <b>失敗：</b>目標產生倦怠的感覺，陷入 <span class="inline-link" onclick="toggleDetail('ennui-slowed-info-3'); event.stopPropagation();">緩慢 1</span> 和 <span class="inline-link" onclick="toggleDetail('ennui-frightened-info-3'); event.stopPropagation();">驚懼 1</span>，並且保持緩慢狀態，只要法術繼續維持，目標的驚懼狀態就無法降低到1以下。在目標的回合開始時，選擇距離目標30尺內的一個生物嘗試意志豁免，如果失敗，該生物陷入緩慢1持續1輪。無論豁免成功與否，該生物都會臨時免疫本次施展的倦怠傳染效果（次要目標不會持續傳播倦怠）。<br>
+                        <b>大失敗：</b>類似失敗，但主要目標陷入 <span class="inline-link" onclick="toggleDetail('ennui-slowed-info-3'); event.stopPropagation();">緩慢 2</span> 和 <span class="inline-link" onclick="toggleDetail('ennui-frightened-info-3'); event.stopPropagation();">驚懼 2</span>。<br><br>
+
+                        <!-- 緩慢狀態說明 -->
+                        <div id="ennui-slowed-info-3" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>緩慢 SLOWED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div style="margin-bottom: 8px;">你的動作變少了。緩慢狀態擁有狀態值。當你在自己回合開始時恢復動作時，恢復的動作數量會減少緩慢值的數量。因緩慢狀態的效果在你自己回合開始時生效，因此若你在自己回合獲得緩慢狀態，你不會立刻失去動作。</div>
+                            <div style="border-top: 1px dashed #555; padding-top: 6px; margin-top: 6px;">
+                                <div style="font-weight:bold; color:#ffb74d; margin-bottom:2px;">獲得與失去動作 GAINING AND LOSING ACTIONS</div>
+                                <div>迅捷、緩慢和震懼是回合內主要獲得和失去動作的來源。具體運作規則在462頁。一言以蔽之，這些狀態都是在影響你在自己回合開始時恢復的動作數；因此，在自己的回合獲得這些狀態，並不會影響當回合的動作數。如果衝突的狀態讓你同時獲得和失去動作，你可以選擇失去哪個動作。例如，同時迅捷和緩慢1中的你，因為迅捷來自加速術，只允許你進行打擊或行走，所以你可以選擇因緩慢1而失去的動作是迅捷給予的這個動作，這樣你剩下的三個完整的動作組合起來更為靈活。</div>
+                                <div style="margin-top: 4px;">某些狀態阻止你進行某些特定的動作，例如反應動作。也有一些狀態只是說「你無法行動」。若你無法行動，你不能使用任何動作。與緩慢或震懼不同。這不會改變你恢復的動作數；它們只是阻止你使用動作。這意味著若你在自己回合被治療好了麻痺，你就可以立刻行動。</div>
+                            </div>
+                        </div>
+
+                        <!-- 驚懼狀態說明 -->
+                        <div id="ennui-frightened-info-3" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>驚懼 FRIGHTENED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div>你被恐懼擷緊，必須努力控制自己的情緒。驚懼狀態擁有狀態值。你的所有檢定和DC獲得等於驚懼狀態值的狀態減值。除非另有說明，否則你在自己回合結束時，已有的驚懼值會降低1。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('haste-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">加速 Haste</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>1 個生物</span>
+                </div>
+                <div id="haste-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>加速術 HASTE</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        魔法強化了目標，令其行動迅速。它獲得迅捷狀態，並且每回合可以使用該額外動作以打擊或行走。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (7環級)</b> 你能以至多6個生物為目標。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('invisibility-sphere-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">群體隱形 Invisibility Sphere</span><span>◆◆</span><span>10 分鐘</span><span>30 呎彌漫</span><span>—</span><span>你和至多5個自願生物</span>
+                </div>
+                <div id="invisibility-sphere-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>群體隱形 INVISIBILITY SPHERE</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">靈光</span><span class="trait-tag">幻術</span><span class="trait-tag">操作</span><span class="trait-tag">晦匿</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>目標</b> 你和至多5個自願生物；<b>區域</b> 30尺彌漫<br>
+                        <b>持續</b> 10分鐘
+                    </div>
+                    <div class="spell-desc">
+                        只要仍處於彌漫範圍內，你和所有目標就除彼此之外對其他生物都視為隱形。受該法術影響而隱形的生物如果離開法術區域就會變成可見，即便回到法術區域也仍然是可見狀態。只要任何受該法術影響而隱形的生物使用了敵對行動，那麼該法術就會在敵對行動完成後結束。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (5環)</b> 目標增加到你和至多10個自願生物。持續時間增加到1小時。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank3-cleanse-affliction-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">淨化苦難 Cleanse Affliction</span><span>◆◆</span><span>立即</span><span>接觸</span><span>—</span><span>反制疾病/毒素</span>
+                </div>
+                <div id="rank3-cleanse-affliction-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>淨化苦難 CLEANSE AFFLICTION</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">治療</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 接觸；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        你的魔法驅散傷害目標身體或心靈的<a href="https://pf2.huijiwiki.com/wiki/%E8%8B%A6%E9%9A%BE" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">苦難</a>。嘗試一次反制檢定，對抗目標身上的一種<a href="https://pf2.huijiwiki.com/wiki/%E7%96%BE%E7%97%85" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">疾病</a>或<a href="https://pf2.huijiwiki.com/wiki/%E6%AF%92%E7%B4%A0" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">毒素</a>；若成功，該苦難會被掃除。這無法修復苦難已經造成的傷害。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環)</b> 你也可以嘗試反制一個<a href="https://pf2.huijiwiki.com/wiki/%E8%AF%85%E5%92%92" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">詛咒</a>。你嘗試反制的一項苦難若成功反制，並且該苦難具有階段（Stages），則其階段減少1級（若大成功則減少2級）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">辨別位面 Recognize Planes</span><span>◆◆</span><span>立即</span><span>視線</span><span>—</span><span>外位面生物</span></div></div>
+            
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('time-jump-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">時間跳躍 Time Jump</span><span>◆</span><span>立即</span><span>自己</span><span>—</span><span>移動動作</span>
+                </div>
+                <div id="time-jump-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>時間跳躍 TIME JUMP</span>
+                        <span>法術 3</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>持續</b> 立即
+                    </div>
+                    <div class="spell-desc">
+                        你穿越時間，眨眼間橫跨戰場並重新現身。你獲得2個動作，每個動作都必須用於跳躍、站立、快步或行走。若有相應的速度，你也能夠將掘地、攀爬、飛行或游泳加入到該清單內。當你執行這些動作時，時間暫停。所有其他生物完全無法意識到你的動作，無法說話，也無法使用任何會被你的移動觸發的動作。當你執行這些動作期間，也無法執行任何其他動作，包括那些會被移動動作觸發的動作。這些動作一旦執行完畢，時間就會重新開始流動，對旁觀者而言，你看起來像是突然傳送穿過了自己走過的距離。向前穿越時間會讓人迷失，因此若你在施放該法術之後的1分鐘內再次使用時間跳躍，就會陷入持續1分鐘的呆滯4。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 環法術 -->
+            <div class="section-title">Spell Rank 4 (四環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('wall-of-mirrors-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">鏡牆術 Wall Of Mirrors</span><span>◆◆</span><span>1 分鐘</span><span>120 呎</span><span>基礎反射</span><span>牆體</span>
+                </div>
+                <div id="wall-of-mirrors-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>鏡牆術 WALL OF MIRRORS</span>
+                        <span>法術 4</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺<br>
+                        <b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你創造出一面至多50尺長與20尺高的閃亮反射玻璃固體牆。該牆有1尺厚並垂直豎立。你必須將該牆創造在連續的開放空間中，令其邊界不會穿過任何生物或物體，否則你會失去法術。<br>
+                        每塊10尺乘10尺的牆都具有AC 10，硬度10與40生命值，並且它免疫重擊和精準傷害。牆的每一側都對另一側的生物視為隱藏。如果1個生物打擊牆，牆也會使該生物承受與該攻擊同樣痛苦的心靈劇痛；生物受到4d4心靈傷害，並且可以進行基礎反射豁免抵抗此傷害。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (+1)</b> 每塊牆的生命值提升10。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('talking-corpse-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">死者交談 Talking Corpse</span><span>10 分鐘</span><span>10 分鐘</span><span>接觸</span><span>意志</span><span>1 具屍體</span>
+                </div>
+                <div id="talking-corpse-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>死者交談 TALKING CORPSE</span>
+                        <span>法術 4</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能<br>
+                        <b>施法</b> 10分鐘<br>
+                        <b>射程</b> 接觸；<b>目標</b> 1具屍體<br>
+                        <b>防禦</b> 意志；<b>持續</b> 10分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你授予一具屍體虛假的生機與說話能力。在法術持續時間內，你可以問該屍體最多三個問題。屍體會盡其生前的知識來回答，但可能語言簡短、晦澀或含糊不清。屍體沒有義務說實話，但對你的態度通常基於它生前對你的態度。<br>
+                        如果屍體不願意說話（例如生前是你的敵人），它可以進行一次意志豁免。若豁免成功，該法術失敗且該屍體在24小時內無法再成為死者交談的目標。如果屍體已經變成不死生物、遭受嚴重毀壞或沒有嘴巴，該法術自動失敗。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank4-cleanse-affliction-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">淨化苦難 (四環升環)</span><span>◆◆</span><span>立即</span><span>接觸</span><span>—</span><span>反制疾病/毒素/詛咒</span>
+                </div>
+                <div id="rank4-cleanse-affliction-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>淨化苦難 CLEANSE AFFLICTION</span>
+                        <span>法術 4 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">治療</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 接觸；<b>目標</b> 1個生物
+                    </div>
+                    <div class="spell-desc">
+                        你的魔法驅散傷害目標身體或心靈的<a href="https://pf2.huijiwiki.com/wiki/%E8%8B%A6%E9%9A%BE" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">苦難</a>。嘗試一次反制檢定，對抗目標身上的一種<a href="https://pf2.huijiwiki.com/wiki/%E7%96%BE%E7%97%85" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">疾病</a>、<a href="https://pf2.huijiwiki.com/wiki/%E6%AF%92%E7%B4%A0" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">毒素</a>或<a href="https://pf2.huijiwiki.com/wiki/%E8%AF%85%E5%92%92" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">詛咒</a>；若成功，該苦難會被掃除。這無法修復苦難已經造成的傷害。你嘗試反制的一項苦難若成功反制，並且該苦難具有階段（Stages），則其階段減少1級（若大成功則減少2級）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('rank4-sleep-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">睡眠術 (四環升環)</span><span>◆◆</span><span>立即</span><span>30 呎</span><span>意志</span><span>5 呎爆發</span>
+                </div>
+                <div id="rank4-sleep-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>睡眠術 SLEEP</span>
+                        <span>法術 4 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span><span class="trait-tag">睡眠</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>區域</b> 5尺爆發；<b>防禦</b> 意志
+                    </div>
+                    <div class="spell-desc">
+                        區域中的每個生物垂頭歪腦昏昏欲睡。由於該法術失去意識的生物不會倒地，也不會鬆開其持握的東西。該法術不會令生物無法透過覺察醒來，並因此限制其在戰鬥中的能力。<br>
+                        <b>大成功：</b>該生物不受影響。<br>
+                        <b>成功：</b>生物在覺察檢定上承受 -1 狀態減值，持續 1 輪。<br>
+                        <b>失敗：</b>該生物失去意識 1 輪。它們會倒地，並鬆開其持握的東西，並且它們無法嘗試覺察檢定以醒來。當持續時間結束時，該生物會正常睡著，而不是自動醒來。<br>
+                        <b>大失敗：</b>該生物失去意識 1 分鐘。它們會倒地，並鬆開其持握的東西，並且它們無法嘗試覺察檢定以醒來。當持續時間結束時，該生物會正常睡著，而不是自動醒來。
+                    </div>
+                </div>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('calm-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">安定心神 CALM</span><span>◆◆</span><span>1 分鐘</span><span>120 呎</span><span>意志</span><span>10 呎爆發</span>
+                </div>
+                <div id="calm-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>安定心神 CALM</span>
+                        <span>法術 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">失能</span><span class="trait-tag">心靈</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺；<b>區域</b> 10尺爆發<br>
+                        <b>防禦</b> 意志；<b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你平息該區域內生物的情緒。區域內的所有生物必須嘗試進行一次意志豁免。你可以隨意平息激烈的感情，例如將暴怒（Rage）狀態壓制（但不會消除它，當安定心神結束後若暴怒時間未過則恢復）。此外，該法術還具有以下效果：<br>
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>目標無法使用敵對行動（Hostile actions），直到它受到攻擊或受到敵對行動影響為止。<br>
+                        <b>失敗：</b>目標無法使用敵對行動，且獲得震懼 1（若已有震懼狀態，則不會降低但阻止增加），直到它受到攻擊或受到敵對行動影響為止。<br>
+                        <b>大失敗：</b>如同失敗，但目標獲得震懼 2，且如果它身處戰鬥中，它會放下武器並停止攻擊，直到它受到攻擊或受到敵對行動影響為止。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 環法術 -->
+            <div class="section-title">Spell Rank 5 (五環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div><span class="spell-name">影行術 Shadow Walk</span><span>8 小時</span><span>8 小時</span><span>接觸</span><span>—</span><span>目標生物</span></div></div>
+
+<!-- 五環：夢境訓練 -->
+<div class="spell-row">
+    <div class="spell-row-summary" onclick="toggleDetail('dreaming-potential-detail')">
+        <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+        <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+        <span class="spell-name">夢境訓練 Dreaming Potential</span><span>10 分鐘</span><span>8 小時</span><span>接觸</span><span>—</span><span>1 個自願睡眠生物</span>
+    </div>
+    <div id="dreaming-potential-detail" class="spell-detail">
+        <div class="spell-detail-header">
+            <span>夢境訓練 DREAMING POTENTIAL</span>
+            <span>法術 5</span>
+        </div>
+        <div style="margin-bottom: 6px;">
+            <span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+        </div>
+        <div class="spell-meta">
+            <b>根源</b> 異能<br>
+            <b>施法</b> 10分鐘<br>
+            <b>射程</b> 接觸；<b>目標</b> 1 個自願睡眠生物<br>
+            <b>持續時間</b> 8小時
+        </div>
+        <div class="spell-desc">
+            你令目標進入清醒夢中，這裡他可以在無窮變換的夢景中探索自身的無窮可能性。如果它完整8小時睡眠未被打擾，當其醒來時，它視為花費了一整天休整期以重訓，但它不能使用夢境訓練來進行需要導師或它在夢境中無法得到的特殊知識的重訓。
+        </div>
+    </div>
+</div>
+
+<!-- 五環升階：倦怠傳染 -->
+<div class="spell-row">
+    <div class="spell-row-summary" onclick="toggleDetail('infectious-ennui-5-detail')">
+        <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+        <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+        <span class="spell-name">倦怠傳染 Infectious Ennui</span><span>◆◆</span><span>維持，至多1分鐘</span><span>60 呎</span><span>意志</span><span>1 個生物</span>
+    </div>
+    <div id="infectious-ennui-5-detail" class="spell-detail">
+        <div class="spell-detail-header">
+            <span>倦怠傳染 INFECTIOUS ENNUI</span>
+            <span>法術 5</span>
+        </div>
+        <div style="margin-bottom: 6px;">
+            <span class="trait-tag">罕有</span><span class="trait-tag">惑控系</span><span class="trait-tag">情緒</span><span class="trait-tag">心靈</span>
+        </div>
+        <div class="spell-meta">
+            <b>根源</b> 神術，異能<br>
+            <b>施法</b> ◆◆ 語言，姿勢<br>
+            <b>射程</b> 60尺；<b>目標</b> 1 個生物<br>
+            <b>防禦</b> 意志；<b>持續時間</b> 維持，至多1分鐘
+        </div>
+        <div class="spell-desc">
+            你揮手進行短暫的祈禱，讓目標生物的腦海中產生倦怠感，目睹自己迫在眉睫的厄運，目標生物必須進行意志豁免。<br><br>
+
+            <b>大成功：</b>目標不受影響。<br>
+            <b>成功：</b>目標產生了一時的倦怠。其思想在無意義的存在中掙扎，使其陷入 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('ennui-slowed-info-5'); event.stopPropagation();">緩慢 1</span>，但下一輪目標的回合結束時，法術效果也隨之結束。<br>
+            <b>失敗：</b>目標產生倦怠的感覺，陷入 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('ennui-slowed-info-5'); event.stopPropagation();">緩慢 1</span> 和 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('ennui-frightened-info-5'); event.stopPropagation();">驚懼 1</span>，並且保持緩慢狀態，只要法術繼續維持，目標的驚懼狀態就無法降低到1以下。在目標的回合開始時，選擇距離目標30尺內的一個生物嘗試意志豁免，如果失敗，該生物陷入緩慢1。無論豁免成功與否，該生物都會臨時免疫本次施展的倦怠傳染效果（次要目標不會持續傳播倦怠）。<br>
+            <b>大失敗：</b>類似失敗，但主要目標陷入 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('ennui-slowed-info-5'); event.stopPropagation();">緩慢 2</span> 和 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('ennui-frightened-info-5'); event.stopPropagation();">驚懼 2</span>。<br><br>
+
+            <div style="border-top:1px dashed #666; padding-top:6px; color:#ffb74d;">
+                <b>升階（5環）：</b>如果次要目標陷入緩慢，只要法術繼續維持，其緩慢效果就會持續存在。
+            </div><br>
+
+            <!-- 緩慢狀態說明 -->
+            <div id="ennui-slowed-info-5" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                    <span>緩慢 SLOWED</span>
+                    <span>狀態</span>
+                </div>
+                <div style="margin-bottom: 8px;">你的動作變少了。緩慢狀態擁有狀態值。當你在自己回合開始時恢復動作時，恢復的動作數量會減少緩慢值的數量。因緩慢狀態的效果在你自己回合開始時生效，因此若你在自己回合獲得緩慢狀態，你不會立刻失去動作。</div>
+                <div style="border-top: 1px dashed #555; padding-top: 6px; margin-top: 6px;">
+                    <div style="font-weight:bold; color:#ffb74d; margin-bottom:2px;">獲得與失去動作 GAINING AND LOSING ACTIONS</div>
+                    <div>迅捷、緩慢和震懼是回合內主要獲得和失去動作的來源。具體運作規則在462頁。一言以蔽之，這些狀態都是在影響你在自己回合開始時恢復的動作數；因此，在自己的回合獲得這些狀態，並不會影響當回合的動作數。如果衝突的狀態讓你同時獲得和失去動作，你可以選擇失去哪個動作。例如，同時迅捷和緩慢1中的你，因為迅捷來自加速術，只允許你進行打擊或行走，所以你可以選擇因緩慢1而失去的動作是迅捷給予的這個動作，這樣你剩下的三個完整的動作組合起來更為靈活。</div>
+                    <div style="margin-top: 4px;">某些狀態阻止你進行某些特定的動作，例如反應動作。也有一些狀態只是說「你無法行動」。若你無法行動，你不能使用任何動作。與緩慢或震懼不同。這不會改變你恢復的動作數；它們只是阻止你使用動作。這意味著若你在自己回合被治療好了麻痺，你就可以立刻行動。</div>
+                </div>
+            </div>
+
+            <!-- 驚懼狀態說明 -->
+            <div id="ennui-frightened-info-5" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                    <span>驚懼 FRIGHTENED</span>
+                    <span>狀態</span>
+                </div>
+                <div>你被恐懼擷緊，必須努力控制自己的情緒。驚懼狀態擁有狀態值。你的所有檢定和DC獲得等於驚懼狀態值的狀態減值。除非另有說明，否則你在自己回合結束時，已有的驚懼值會降低1。</div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+<div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('synesthesia-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">通感超載 Synesthesia</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>意志</span><span>1 個生物</span>
+                </div>
+                <div id="synesthesia-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>通感超載 SYNESTHESIA</span>
+                        <span>法術 5</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物<br>
+                        <b>防禦</b> 意志；<b>持續</b> 可變
+                    </div>
+                    <div class="spell-desc">
+                        目標的感官突然被難以意料的方式重新連接，它將噪音認知為瀰漫的色彩，將氣味認知為聲音，如是種種。此法術有三種效果，目標必須進行一次意志豁免。<br><br>
+                        這種幹擾導致目標每次使用具有專注特徵的動作時都必須成功通過DC5的 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('flat-check-info'); event.stopPropagation();">純骰檢定</span>，否則動作失敗並被浪費。<br>
+                        
+                        <div id="flat-check-info" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>純骰檢定 FLAT CHECK</span>
+                                <span>規則</span>
+                            </div>
+                            <div>當你進行純骰檢定時，擲一枚 d20 且不加上任何調整值、獎勵或減值。唯有當 d20 的結果大於或等於指定目標值（如 DC5 則需擲出 5 或以上）時才算成功。</div>
+                        </div>
+
+                        目標難以處理視覺訊息，使得所有生物和物體對其 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('concealed-info'); event.stopPropagation();">隱蔽</span>。<br>
+                        
+                        <div id="concealed-info" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>隱蔽 CONCEALED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div>當你對擁有隱蔽狀態的目標發動攻擊、施法或使用影響目標的動作時，你必須先通過一次 DC 5 的純骰檢定，否則該動作將無法影響該目標。</div>
+                        </div>
+
+                        該生物移動困難，獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('clumsy-status-info'); event.stopPropagation();">笨拙 3</span>，並且速度獲得-10尺狀態減值。<br><br>
+                        
+                        <div id="clumsy-status-info" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>笨拙 CLUMSY</span>
+                                <span>狀態</span>
+                            </div>
+                            <div>你的移動變得笨拙而無章。笨拙狀態擁有狀態值。你基於敏捷的擲骰和DC會獲得等同於笨拙狀態值的狀態減值，包括AC、反射豁免、遠程攻擊骰、特技、隱密、賊活等技能檢定。</div>
+                        </div>
+
+                        <b>大成功：</b>目標不受影響。<br>
+                        <b>成功：</b>目標受到影響1回合。<br>
+                        <b>失敗：</b>目標受到影響1分鐘。<br>
+                        <b>大失敗：</b>如同失敗，並且目標為了處理混亂的感官訊息而獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('frightened-status-info'); event.stopPropagation();">震懼 2</span> 或 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('stunned-status-info'); event.stopPropagation();">震懾</span>。
+                        
+                        <div id="frightened-status-info" class="inline-status-card" style="display:none; margin-top:10px; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>震懼 FRIGHTENED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div>你感到極度恐懼。你所有的檢定與 DC 都會受到等同於震懼數值的狀態減值。在你的回合結束時，震懼數值會自動減少 1。</div>
+                        </div>
+
+                        <div id="stunned-status-info" class="inline-status-card" style="display:none; margin-top:10px; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>震懾 STUNNED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div>你無法進行任何動作或反應。震懾狀態通常帶有數值，代表你失去的動作總數（如震懾1代表失去下一個動作）。</div>
+                        </div>
+
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (9環)</b> 你能以至多五個生物為目標。
+                    </div>
+                </div>
+            </div>
+
+<div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('stagnate-time-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+<div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">時間遲滯 Stagnate Time</span><span>◆◆</span><span>1 分鐘</span><span>120 呎</span><span>意志</span><span>20尺爆發</span>
+                </div>
+                <div id="stagnate-time-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>時間遲滯 STAGNATE TIME</span>
+                        <span>法術 5</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺；<b>區域</b> 20尺爆發<br>
+                        <b>防禦</b> 意志；<b>持續</b> 1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你遲滯一處區域的時間流，在它上面釘幾根比喻性質的大頭針，讓時間變厚、變慢，變得如同泥漿般緩慢。區域內的任何生物在回合開始時都必須嘗試進行一次意志豁免。<br><br>
+                        
+                        <b>成功：</b>該生物不受影響。<br>
+                        <b>失敗：</b>該生物本輪獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('slowed-status-info'); event.stopPropagation();">緩慢 1</span> 狀態。<br>
+                        <b>大失敗：</b>該生物本輪獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('slowed-status-info'); event.stopPropagation();">緩慢 2</span> 狀態。<br><br>
+
+                        <div id="slowed-status-info" class="inline-status-card" style="display:none; margin-bottom:10px;">
+                            <div style="font-weight:bold; color:#ffb74d; margin-bottom:4px; border-bottom:1px solid #444; padding-bottom:2px; display:flex; justify-content:space-between;">
+                                <span>緩慢 SLOWED</span>
+                                <span>狀態</span>
+                            </div>
+                            <div style="margin-bottom: 8px;">你的動作變少了。緩慢狀態擁有狀態值。當你在自己回合開始時恢復動作時，恢復的動作數量會減少緩慢值的數量。因緩慢狀態的效果在你自己回合開始時生效，因此若你在自己回合獲得緩慢狀態，你不會立刻失去動作。</div>
+                            
+                            <div style="border-top: 1px dashed #555; padding-top: 6px; margin-top: 6px;">
+                                <div style="font-weight:bold; color:#ffb74d; margin-bottom:2px;">獲得與失去動作 GAINING AND LOSING ACTIONS</div>
+                                <div>迅捷、緩慢和震懼是回合內主要獲得和失去動作的來源。具體運作規則在462頁。一言以蔽之，這些狀態都是在影響你在自己回合開始時恢復的動作數；因此，在自己的回合獲得這些狀態，並不會影響當回合的動作數。如果衝突的狀態讓你同時獲得和失去動作，你可以選擇失去哪個動作。例如，同時迅捷和緩慢1中的你，因為迅捷來自加速術，隻允許你進行打擊或行走，所以你可以選擇因緩慢1而失去的動作是迅捷給予的這個動作，這樣你剩下的三個完整的動作組合起來更為靈活。</div>
+                                <div style="margin-top: 4px;">某些狀態阻止你進行某些特定的動作，例如反應動作。也有一些狀態只是說「你無法行動」。若你無法行動，你不能使用任何動作。與緩慢或震懼不同。這不會改變你恢復的動作數；它們只是阻止你使用動作。這意味著若你在自己回合被治療好了麻痺，你就可以立刻行動。</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let profBonusMultiplier = 4;
+
+    function setProf(bonus, el) {
+        profBonusMultiplier = bonus;
+        document.querySelectorAll('.teml-btn').forEach(btn => btn.classList.remove('active'));
+        el.classList.add('active');
+        calculateSpells();
+    }
+
+    function calculateSpells() {
+        const level = parseInt(document.getElementById('char-level').value) || 0;
+        const intMod = parseInt(document.getElementById('stat-int').value) || 0;
+        const itemBonus = parseInt(document.getElementById('item-bonus').value) || 0;
+
+        const profBonus = level + profBonusMultiplier;
+        const atk = intMod + profBonus + itemBonus;
+        const dc = 10 + intMod + profBonus;
+
+        document.getElementById('atk-val').innerText = (atk >= 0 ? '+' : '') + atk;
+        document.getElementById('atk-int').innerText = intMod;
+        document.getElementById('atk-prof').innerText = profBonus;
+
+        document.getElementById('dc-val').innerText = dc;
+        document.getElementById('dc-int').innerText = intMod;
+        document.getElementById('dc-prof').innerText = profBonus;
+    }
+
+    function toggleDetail(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+    }
+
+    function toggleCastRow(chk, evt) {
+        evt.stopPropagation();
+        const row = chk.closest('.spell-row');
+        if (chk.checked) {
+            row.classList.add('cast-used');
+        } else {
+            row.classList.remove('cast-used');
+        }
+    }
+
+    function resetCastSlots() {
+        document.querySelectorAll('.spell-chk-cast').forEach(chk => {
+            chk.checked = false;
+            const row = chk.closest('.spell-row');
+            if (row) row.classList.remove('cast-used');
+        });
+    }
+
+    document.querySelectorAll('.spell-chk-cast:checked').forEach(chk => {
+        const row = chk.closest('.spell-row');
+        if (row) row.classList.add('cast-used');
+    });
+
+    calculateSpells();
+</script>
+<script>
+    // 切換聚能池圓點的填滿/空白狀態
+    function toggleFocusPip(pip) {
+        pip.classList.toggle('filled');
+    }
+
+    // 展開/收合細節區塊的函數（若原本無定義也可一併補上）
+    function toggleDetail(id) {
+        const detail = document.getElementById(id);
+        if (detail) {
+            detail.style.display = (detail.style.display === 'block') ? 'none' : 'block';
+        }
+    }
+
+    // 標記消耗/未消耗列（若原本無定義可補充）
+    function toggleCastRow(checkbox, event) {
+        event.stopPropagation();
+        const row = checkbox.closest('.spell-row');
+        if (row) {
+            row.classList.toggle('cast-used', checkbox.checked);
+        }
+    }
+</script>
+</body>
+</html>
