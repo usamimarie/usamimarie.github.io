@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>哈羅牌辭義速查與設定網站</title>
+  <style>
+    :root {
+      --bg-main: #13171e;
+      --bg-card: #1c212d;
+      --bg-item: #242b3a;
+      --bg-input: #12151c;
+      --accent-orange: #ff5722;
+      --accent-blue: #3b82f6;
+      --text-main: #e2e8f0;
+      --text-sub: #94a3b8;
+      --border-color: #2e374a;
+      
+      /* 特定區域色票 */
+      --trait-tag-bg: #800000;
+      --trait-tag-border: #ff7b72;
+      --spell-heightened: #f59e0b;
+      --spell-link: #ffb74d;
+      --detail-header: #2d1818;
+      --hover-bg: #1e2534;
+      --consumed-bg: #181111;
+      --consumed-text: #888888;
+      --detail-bg: #181d28;
+      --btn-rest: #10121A;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    h1 {
+      color: var(--accent-orange);
+      font-size: 1.8rem;
+    }
+
+    .btn-nav {
+      background-color: var(--btn-rest);
+      color: var(--accent-orange);
+      border: 1px solid var(--accent-orange);
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover {
+      background-color: var(--hover-bg);
+      color: var(--spell-link);
+      border-color: var(--spell-link);
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .search-section {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .filter-select {
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .suit-section {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .suit-title {
+      color: var(--accent-orange);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .suit-desc {
+      color: var(--text-sub);
+      margin-bottom: 15px;
+      white-space: pre-line;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 15px;
+    }
+
+    .card-item {
+      background-color: var(--bg-item);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 15px;
+      transition: background-color 0.2s;
+    }
+
+    .card-item:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-weight: bold;
+      color: var(--spell-link);
+      font-size: 1.1rem;
+    }
+
+    .trait-tag {
+      background-color: var(--trait-tag-bg);
+      border: 1px solid var(--trait-tag-border);
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .card-body {
+      color: var(--text-main);
+      font-size: 0.95rem;
+      white-space: pre-line;
+    }
+
+    .settings-page {
+      display: none;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 25px;
+    }
+
+    .settings-section {
+      margin-bottom: 30px;
+      background-color: var(--detail-bg);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 4px;
+    }
+
+    .settings-section-title {
+      background-color: var(--detail-header);
+      color: var(--spell-heightened);
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      border-left: 4px solid var(--accent-orange);
+    }
+
+    .settings-text {
+      color: var(--text-main);
+      white-space: pre-line;
+    }
+
+    .settings-quote {
+      color: var(--text-sub);
+      font-style: italic;
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 10px;
+      margin: 10px 0;
+      white-space: pre-line;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container">
+    <h1 id="page-title">哈羅牌辭義速查</h1>
+    <button class="btn-nav" id="toggle-btn" onclick="togglePage()">跳轉至哈羅牌設定頁</button>
+  </div>
+
+  <div class="main-container">
+    <!-- 主頁：哈羅牌辭義與速查 -->
+    <div id="main-page">
+      <div class="search-section">
+        <input type="text" id="search-bar" class="search-input" placeholder="搜尋卡牌名稱、特質、花色或內文..." oninput="filterCards()">
+        <select id="suit-filter" class="filter-select" onchange="filterCards()">
+          <option value="ALL">所有牌組花色</option>
+          <option value="HAMMERS">槌之牌組 (力量)</option>
+          <option value="KEYS">鑰之牌組 (敏捷)</option>
+          <option value="SHIELDS">盾之牌組 (體質)</option>
+          <option value="BOOKS">書之牌組 (智力)</option>
+          <option value="STARS">星之牌組 (感知)</option>
+          <option value="CROWNS">冠之牌組 (魅力)</option>
+        </select>
+      </div>
+
+      <div id="cards-container">
+        <!-- 卡牌內容由 JS 自動載入渲染 -->
+      </div>
+    </div>
+
+    <!-- 設定頁：哈羅牌背景設定全文 -->
+    <div id="settings-page" class="settings-page">
+      <div id="settings-container">
+        <!-- 設定全文內容由 JS 自動載入渲染 -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 修正譯名後的哈羅牌完整資料庫
+    const harrowData = {
+      suits: [
+        {
+          id: "HAMMERS",
+          title: "槌之牌組（The Suit of Hammers - 力量 / Strength）",
+          desc: "與農夫或戰士、優勝者與奴隸乃至於自然災害相關，錘之牌組代表著暴躁不可控的力量。許多阿維斯坦北方的戰士與傳統社會，會將財產上標註上哈羅之錘，或是在秘密集會的場所與成員身上。\n\n一名與錘之牌組相符的對象更傾向於主動將自己應用於世界而非相反，他們可能是笨重的戰士，精明的獵人，振奮人心的運動員，或集中破壞者，他們總是利用自己的肉體和本質來實現他們的目標。\n\n錘之牌組是騎士、戰士、聖武士與游俠的牌組，也適用於專精於塑能、變化、咒法系的法師與召喚師等倚賴粗野力量大於機智聰敏的人。\n\n哈羅之槌出現在Janderhoff的門扉與銀飾上，儘管矮人們堅持是托拉格的標誌激發了哈羅之錘的靈感。一些切利亞斯的半身人奴隸──尤其是來自北地的──會在服裝縫上錘子作為團結與靜默抵抗的記號。",
+          cards: [
+            { name: "聖武士 (The Paladin)", alignment: "守序善良，力量", text: "代表了堅強地面對困境。 聖武士在任何情況下都絕不放棄。 這張卡通常表示需要堅持到底或是做一個人認為是正確的事，即使這需要付出沉重的代價。 如果這張卡牌在偏移位置，這樣的行動可能是有勇無謀。" },
+            { name: "要塞 (The Keep)", alignment: "中立善良，力量", text: "是寧靜力量的象徵，在必要時可以移動，但在最大的困境中依舊屹立不倒。 那些被要塞卡代表的人不會因任何力量動搖。 如果堡壘卡出現在偏移位置，它可能意味著在誘惑面前讓步或為更強的力量屈服。" },
+            { name: "大空 (The Big Sky)", alignment: "混亂善良，力量", text: "展現了一個國家的奴隸被釋放的史詩時刻。 奴隸的自由代表了重大的，有力的變化，如同舊的枷鎖在陽光下被解除一般。 如果這張卡牌在偏移位置，這些被解除的枷鎖可能被更糟糕的所取代。" },
+            { name: "熔爐 (The Forge)", alignment: "守序中立，力量", text: "通過偉大的多樣性喚起力量。 鐵匠代表了那些在魔蝠的火焰審判下生存下來的人，但熔爐的火焰如此強烈，將無數人燒成灰燼。 這張卡通常代表著需要多種來源的力量來克服的危險事件。" },
+            { name: "熊 (The Bear)", alignment: "絕對中立，力量", text: "是純粹的力量。 人們經常錯誤的認為熊可以被馴服或訓練。 當某人相信他已經控制了熊時，他終將意識到他道路的錯誤之處。 這裡可能需要蠻力，但使用它的後果也可能十分嚴重。" },
+            { name: "起義 (The Uprising)", alignment: "混亂中立，力量", text: "代表了被某些遠比你強大的力量所控制。 這種無法抵擋的力量通常會碾碎一切與它接觸的東西。 高舉的王冠象徵著推翻某種領袖。 在牌陣中，它表示了一種比接受解讀的人強大得多的力量。" },
+            { name: "煉獄 (The Fiend)", alignment: "守序邪惡，力量", text: "描繪了吞噬無辜者的魔鬼。 它可以表示一場巨大災難中無數的死亡。 或是在偏移下表示同一災難中的救星。 煉獄也可以表示區域中某種黑暗的智慧生物正在危害群眾。" },
+            { name: "痛擊 (The Beating)", alignment: "中立邪惡，力量", text: "表示了受到各個方面的攻擊，但也可以表明自我心靈的崩潰。 無論這一力量是在肉體還是精神方面，它都會在無情的攻擊下崩潰。 偏移下，這一卡牌表示了在突襲中能找到未被發掘的力量。" },
+            { name: "旋風 (The Cyclone)", alignment: "混亂邪惡，力量", text: "是一種毀滅所見一切的力量。 這一災難的來源不是自然規律，而是某種智慧存在的陰謀。 旋風象徵了戰爭，縱火，或其他摧毀接觸到一切事物的事件。 偏移下，這一卡牌可以預示狂風般審判后的新生。" }
+          ]
+        },
+        {
+          id: "KEYS",
+          title: "鑰之牌組（The Suit of Keys - 敏捷 / Dexterity）",
+          desc: "有些人畏懼未來，憂心哈羅牌將知識追尋者禁錮於注定的命運中。\n\n鑰之牌組代表了心靈與行動上的自由，出現在牌陣的明顯度暗示著它將對一個人未來的命運造成多大的影響。掌握了小偷和孩童、工匠與藝人，鑰之牌組是優雅、技術與聲勢的牌組。熟練於引用瓦瑞西安文化的冒險者與英雄候補會將鑰之牌組與卡牌應用於他們的器械、流行甚至是刺青上，希望能藉此駕馭兔王子或優雅舞者的機巧。Sczarni與其他一些較小的盜賊公會視鑰之牌組為他們的主卡牌，擁抱牌組所強調的技藝、隱匿與不實。\n\n在正位的鑰之牌組通常是謹慎的但不因此而遲緩。\n\n不管是靜默的刺客、繽紛的表演者或賭徒，他們都需要不斷練習技巧與對整個世界做出衡量反應。不意外地鑰之牌組是盜賊的牌組，同時也屬於輕捷的戰士、無影腳武僧與穩重的槍手。鑰之牌組也是屬於瓦瑞西安商隊與他們在開放之路的重要徽記，年輕的吟遊詩人獨自啟程時會收到一張此牌組的卡牌或是含有鑰匙形象的珠寶，讓他們能迅速逃離危險。",
+          cards: [
+            { name: "舞蹈 (The Dance)", alignment: "守序善良，敏捷", text: "如同宇宙本身，舞蹈是一種豐富細膩的體系，需要其中的每個人遵守它的規則，以免其整個結構坍塌。 它建議保持完美的步伐，瞭解你在更偉大善良中所處的位置。 那些退出這一模式的人將處於危險之中。 偏移下，這一模式可能有催眠性，但不是為了所有人的良善。" },
+            { name: "蟋蟀 (The Cricket)", alignment: "中立善良，敏捷", text: "是個樂天派，一種思維和身體一樣敏捷的生物。 它代表了速度和快速通道。 雖然蟋蟀通常與旅行相關，它身邊的桃子代表了旅行終點的財寶。 如果偏移，旅途將會十分糟糕，最終的財寶也將得不償失。" },
+            { name: "雜耍者 (The Juggler)", alignment: "混亂善良，敏捷", text: "代表了命運，神明，或者那些玩弄他人生命與命運的人。 如果這位巨人雜耍者保持著他的節奏，他終將實現目標。 但在偏移位置下，他開始顫抖，悲劇與失敗就將降臨在他所干涉的生命中。" },
+            { name: "鎖匠 (The Locksmith)", alignment: "守序中立，敏捷", text: "鎖匠表示主體擁有她所需要解鎖命運的鑰匙。 他授予通向新的地點、線索或寶藏的鑰匙。 他不會給予這些工具應該怎樣使用或在何處使用的提示。 這一卡牌通常代表了奇怪的、古老的、或魔法的物品。" },
+            { name: "孔雀 (The Peacock)", alignment: "絕對中立，敏捷", text: "孔雀是一種擁有驚人美貌的生物，但它的美只有如被雞蛇獸的視線石化時才能保存下來。 聰明的人會接受時間的流逝，舞出孔雀的道路。 它的出現總是象徵著態度上突然發生的人格轉換或社會的變化。" },
+            { name: "兔王子 (The Rabbit Prince)", alignment: "混亂中立，敏捷", text: "兔王子是一個狡猾的傢伙，代表了難以預料的肉搏戰。 王子是戰鬥的化身，是完全的變幻無常。 如他斷裂的寶劍所象徵的，任何戰士都可能在戰爭中倒下，無論多麼勇猛或訓練有素也是一樣。 這張卡有時候代表了皇室或者其他有勢力的家族的年輕成員。" },
+            { name: "山崩 (The Avalanche)", alignment: "守序邪惡，敏捷", text: "是一場災難。 它毫無理智，毫無理由的漫過前進道路上的一切。 它可以代表物理上的災難或者由於恐慌的人群或其他無理智的集群或團體引發的災難。 如果偏移，災難可能可以避免，但不會沒有結果。" },
+            { name: "鴉群 (The Crows)", alignment: "中立邪惡，敏捷", text: "是一群危險的人，象徵著以暴力奪取人所愛之物。 當鴉群出現時，謀殺、盜竊、或其他令人震驚的損失將會發生。 如果此卡偏移，類似的情形可以避免，或者盜竊的損失不大。" },
+            { name: "惡魔之燈 (The Demon's Lantern)", alignment: "混亂邪惡，敏捷", text: "惡魔之燈是陷阱與詭計、手上功夫與心計之卡。 這些鬼火和追求它們的男人代表了不可能的或是十分棘手的情況。 如果偏移，惡魔之燈代表了在完美時機到來的機會或指引，指示出了道路。" }
+          ]
+        },
+        {
+          id: "SHIELDS",
+          title: "盾之牌組（The Suit of Shields - 體質 / Constitution）",
+          desc: "盾之牌組代表了歷史與傳統。它也代表了安全、保護，並警告瓦瑞西安人們即將到來的危險。這是耐力、自傲與防範準備的牌組，為旅人、守衛及治療者所鍾愛。迷信的旅行者會在硬幣上刻下徽記作為到達目的的花費。\n\n盾之牌組是戰士、傭兵、士兵與騎士的牌組，他們會將不同的盾之牌組卡牌放進他們的盔甲、盾牌、武器與紋章中做使用。一名與盾之牌組一致的人，是健壯堅定且無可動搖的，他們選定方向並賣力向前，不被世界所阻攔。他是野蠻人、審判者、聖騎士與防護系法師的牌組，同時也屬於奮力抵抗、以純粹固執在世界中向著自己道路邁進的人。盾之牌組也代表著人類，一個以他們的適應能力與抗性聞名的種族。\n\n塔爾多學者們爭辯於他們紋章中的盾牌是否來自於哈羅牌，矮人與鼠人這些以強韌聞名的種族鏤刻於盾之牌組中，在牌組出現之時，可能顯現了他們對未來的影響。",
+          cards: [
+            { name: "號角 (The Trumpet)", alignment: "守序善良，體質", text: "號角是力量的聲明。 這名神使是一種積極的力量，正義指引他毫不遲疑地涉身於各種可怕的情況。 如果偏移，它表示動機並不高尚，會帶來傷害和破壞性的力量。 這張卡牌預示了一切或一無所有。" },
+            { name: "倖存者 (The Survivor)", alignment: "中立善良，體質", text: "倖存者代表了一名曾通過嚴峻考驗的人。 這個人被他倒下的同伴所包圍，代表了曾經被認為永遠遺失，卻再次被找到的某個人或某樣東西。 它也可以代表重生。 如果偏移，倖存者可能喚起糟糕的消息或重大的損失。" },
+            { name: "沙漠 (The Desert)", alignment: "混亂善良，體質", text: "沙漠的環境如此慘烈，無人可以在沒有援助的條件下於此生還。 在那些找到援助的人看來，通過這片廢土的旅程可以帶來偉大的事物。 如果偏移，它表示主體無法依靠他人的説明且必定迷失。 這張卡片上的斯芬克斯可能代表了一名神秘主義者或醫生在瘟疫或疾病期間帶來拯救。" },
+            { name: "黃銅矮人 (The Brass Dwarf)", alignment: "守序中立，體質", text: "黃銅矮人展現了一名代表了危險中屹立不倒之物的火矮人。 雖然其他人可能倒下，他依然保持著強健與硬朗。 黃銅矮人也可能預示了一個人的一場失敗或黑暗的命運，但這反過來也可能將它周邊的人從更大的危險中拯救出來。" },
+            { name: "馭手 (The Teamster)", alignment: "絕對中立，體質", text: "無論本體是什麼，馭手代表了一種讓主體前進的驅使性的外力。 這股力量可以是物理的也可以是心靈的，比如一個在別人沒有更多力量可以付出時全套他們前進的人。 這股力量可以是好是壞，但不能被忽略。 圖上的半獸人過著辛勞的生活，但這是為了他的自我改善。" },
+            { name: "巨人 (The Mountain Man)", alignment: "混亂中立，體質", text: "巨人代表了一次與超越某人控制的物理力量的遭遇。 這名巨人可能是權力、軍隊、地震、甚至是炎熱的土地上一場急需的暴雨。 加入這股力量可能是明智的，但從中生存才是首要任務。" },
+            { name: "糾纏荊棘 (The Tangled Briar)", alignment: "守序邪惡，體質", text: "糾纏荊棘是一張代表古代事蹟的卡。 它表明瞭一個很久以前的人或物講某種程度上對問卜的情況產生很大影響。 這件物品或這個人曾因某些骯髒的手段被遺失或謀殺。 偏移下，棘手的過去帶來的不只是痛苦，還有對未來的希望。" },
+            { name: "疾病 (The Sickness)", alignment: "中立邪惡，體質", text: "代表了瘟疫、鼠疫、饑荒、與疾病。 它也可以表明靈魂的腐化或是墮落。 偏移下，疾病代表了極大的健康或是一個阻止這類災難的機會。" },
+            { name: "蠟像館 (The Waxworks)", alignment: "混亂邪惡，體質", text: "是一個充滿無助和物理熵的地方。 心靈也許願意，但肉體被凍結在了這個恐怖的地方。 這也是代表了折磨與監禁的卡牌，代表了字面意義上的無法移動或是更樸實的麻痹。 偏移下，這張卡牌表示一股充沛的能量在關鍵的時改變了一切。" }
+          ]
+        },
+        {
+          id: "BOOKS",
+          title: "書之牌組（The Suit of Books - 智力 / Intelligence）",
+          desc: "書之牌組代表了知識、學習、傳統與編碼，當它大量出現於牌陣中時，代表對於即將到來的事件，需要從長計議、仔細計畫準備。書之牌組是學者、詐欺師、奧能師與金融家──任何需要細膩縝密的心思來累積財富者的牌組。\n\n一名與書之牌組一致的人，會受影響於好學、富好奇心與創造力上。他們的定位並不在於行動或反應，而是從過去學習並且塑造未來的方向，就像抄寫員提供資訊與閱讀者並點醒他們的知覺一樣。\n\n阿維斯坦北部迷信的學者們，包括伊利森血石學院的申請者與終焉之牆警醒城戰鬥法師學院的學員，有時會將卡牌放入課本中，促進其中的文字能夠自頁面流動至自己心中。\n\n書之牌組是煉金術士與法師的牌組，同時也對其他人有重要意義，如召喚師、女巫，以及博學的詩人跟希望能夠領導偉大軍隊的騎士。\n\n雖然在人類所迷信的範圍內，傳統精靈文化所佔的空間極少，但構成書之牌組的寓言中有許多是可回溯至古老的精靈童話的，而這些來自人類的新見解，是奇奧尼的民俗學者們研究的主題之一。\n\n在索西斯與艾巴薩羅姆，哈羅牌與奧斯里昂命理學的詭異混合，讓其中幾張牌（隱藏真相、審判者、羅剎）在牌陣中的順序擁有了極高的價值。",
+          cards: [
+            { name: "隱藏的真相 (The Hidden Truth)", alignment: "守序善良，智力", text: "代表了看穿樸實平庸之物得到其中更偉大的真實的能力。 有時這一發現十分難以理解，有時則顯而易見，就像是找到房間里的一樣物品。 無論如何，這是一張有能力發現秘密的卡。 偏移下，它可能表示一個對主體有害的秘密受到揭示。" },
+            { name: "流浪者 (The Wanderer)", alignment: "中立善良，智力", text: "是一名收藏家。 這隻半人馬欣賞那些別人視為垃圾的物品。 流浪者代表了那些足夠聰明，可以發現那些別人忽略或視為一文不值之物的真正價值的人。 偏移下，流浪者代表了價值的失去，或者無法看出一個人或處境的真正價值。" },
+            { name: "笑話 (The Joke)", alignment: "混亂善良，智力", text: "展現了必須克服的恐怖——但不是通過物理方式來克服。 這隻怪獸只能通過欺騙或詭計擊敗。 這張卡代表了幽默在尋找道路通過困難的人或任務時的價值。 偏移下，這通常表示你將是那個鬧笑話的人。" },
+            { name: "審判者 (The Inquisitor)", alignment: "守序中立，智力", text: "除了真相不接受任何東西。 他代表了不可改變的現實，無法以任何方式愚弄或動搖。 若要嘗試違背這一不可改變的物、人、或想法，就會招致災禍。" },
+            { name: "異域商人 (The Trader)", alignment: "絕對中立，智力", text: "是代表了間諜和小販之類人的卡牌。 任何從事資訊交易的人都是這張卡影響的主體。 這張卡預示的交易永遠是真實的，但這一協議的結果可能令那些不瞭解它意義的人感到震驚。" },
+            { name: "視界 (The Vision)", alignment: "混亂中立，智力", text: "代表了奧術知識。 這類知識的形式可能是瘋狂或神秘的言語。 這張卡牌通常預示了與一個瘋子相遇，但也可能象徵與天才的接觸。" },
+            { name: "羅剎 (The Rakshasa)", alignment: "守序邪惡，智力", text: "是一張代表主宰與心靈控制的卡牌。 這隻沉靜的坐在奴隸背上的生物預示了一股外部力量強加在另一個生物的心靈之上。 有時「奴役」是字面上的，但更多情況下它代表了對一股力量或思想的心靈奴役。 偏移下，這一奴役可能在面對新信息的情況下得到解除。" },
+            { name: "白痴 (The Fool)", alignment: "中立邪惡，智力", text: "是一張代表嚴重愚蠢與貪婪的卡。 它可以意味著賄賂、勒索、或看不見任何邪惡的傻天真。 地精抓住了一個有勇無謀的人，代表了失去生命之前可能先失去了尊嚴。 偏移下，這張卡牌可能表示假裝白癡來偽裝一個人的天分。" },
+            { name: "蛇咬 (The Snakebite)", alignment: "混亂邪惡，智力", text: "是一件卑鄙的，淬毒的武器。 毒藥有很多種形式——不全是物理上的。 刺客刀刃上的毒藥代表了思想與自由的死亡，以及讓朋友反目成仇的能力，或者荼毒善良心靈的能力。 偏移下，這張卡可以表示精神上的飛躍，新的友誼，或是一次發現。" }
+          ]
+        },
+        {
+          id: "STARS",
+          title: "星之牌組（The Suit of Stars - 感知 / Wisdom）",
+          desc: "星之牌組被眾多人視為是哈羅牌的靈魂，掌管了洞見、預言與眾神；許多哈羅牌大師將出現於牌陣中的星之牌組闡述為一個人信仰的重要象徵，或是克服挑戰的本能。\n\n星星不僅指哈羅牌大師，也算入祭司、治療者、歷史學者與農奴。那些人們的命運與星之牌組交纏，體現於他們所仰賴於自身與比己身更加偉大的力量上面。\n\n星之牌組是牧師、德魯伊、審判者、先知與苦行僧的排組，以及所有將自己放置於神祇或未知力量下的人們。哈羅牌非常適合於他們預言時，用來作為強化他們預測與古怪洞見的工具。\n\n雖然許多使用哈羅牌的先知耽溺於先祖、蒼天與知識的秘示域，也有部分人則汲取星之牌組中的故事做為靈感。有些人說卡牌上描繪的星星是格拉里昂的太陽，其他人則說那是偉大的北極星，黛絲娜指向北天，天空中永遠可見的永恆宮殿。無論哪種，先知們都從星之牌組中所昭示的天空裡永恆之光與堅定不移的洞見中汲取力量。",
+          cards: [
+            { name: "羽蛇 (The Winged Serpent)", alignment: "守序善良，感知", text: "是一個強大的存在。 知識與謹慎是相互獨立的存在，通過理解保持橋接。 羽蛇就代表了這座橋樑，知道現在是否是出擊之時。 偏移下，這張卡意味著沒有抓住一刻或者作出不明智之事。" },
+            { name: "助產士 (The Midwife)", alignment: "中立善良，感知", text: "是創造的管道，雖然她本身並不進行創造。 這位半身人是讓新的生命或信息來到世界的鑰匙。 她的內心即使在最糟糕的情況下也能看到好的一面。 她可以看到任何新到來事物的輸入，但如果這張卡處於偏移，新到來的這一事物可能不會帶來多少歡樂。" },
+            { name: "酒館老闆 (The Publican)", alignment: "混亂善良，感知", text: "代表了友誼、交情，以及一個讓需要之人避難的地方。 大多數人可能認為獨眼巨人無足輕重，但他有著與解讀或任務相關的洞察力。 偏移下，酒館老闆代表了未發現避難所或者關鍵時刻給出的虛假資訊。" },
+            { name: "女王母親 (The Queen Mother)", alignment: "守序中立，感知", text: "是人格化的知識。女王母親知道一切，但從不向任何不給予她適當的崇拜的人揭示任何事。 她喜歡無能者與下層社會的人，因為更強大的力量會拒絕服務於她，而他們不會。 她代表了成為社會一部分的需要，或者在那些比你瞭解更多的人面前低下頭顱。" },
+            { name: "貓頭鷹 (The Owl)", alignment: "絕對中立，感知", text: "代表了自然秩序的永恆智慧。 這是導致狼群殺滅獸群中最弱者的嚴酷現實。 對於被殺的鹿來說這很悲劇，但通過這種行動獸群會成長的更加強壯。 貓頭鷹持有的針講生命連結在一起，但同樣的可以讓生命分離。" },
+            { name: "狂歡節 (The Carnival)", alignment: "混亂中立，感知", text: "是代表幻象與虛假夢境的卡牌。 這張卡來可以強化奧術的力量，但依賴於這種反覆無常的力量可能十分危險。 對其他人來說，這張卡描繪了輕率的計劃或是不切實際的野心。" },
+            { name: "日蝕 (The Eclipse)", alignment: "守序邪惡，感知", text: "代表了自我懷疑，與失去目的。 這張卡牌折磨那些信仰神力之人，因為他們的天賦將在這種情況下變得衰弱。 它也可以代表迷失了所沿循的道路。 如果偏移，它可以預示一種被掩埋的天分脫穎而出，或是一個被隱瞞的地點得到揭示。" },
+            { name: "啞鬼婆 (The Silent Hag)", alignment: "中立邪惡，感知", text: "可能沉默，但她的所帶著的眼睛讓她能看穿人心。 鬼婆祈求鮮血契約與惡毒的秘密，可以讓兄弟反目，父子成仇。 這是一張表演者憎恨的卡牌，因為它會讓他們在文字與歌曲上受到束縛。 偏移下，它表示了不可動搖的忠誠和清澈的言語。" },
+            { name: "迷失 (The Lost)", alignment: "混亂邪惡，感知", text: "是空虛與身份喪失的卡牌。 所示的波達屍陷入了永恆的瘋狂，迷失於瘋子、精神病院、以及連環殺手的世界。 對那些受它影響的人來說，這世界沒有任何意義。 它喚起的世界中，一切都是胡言亂語，如同與只說另一種語言的一個人相遇。 偏移下，它可能表示了在脅迫下清晰的頭腦。" }
+          ]
+        },
+        {
+          id: "CROWNS",
+          title: "冠之牌組（The Suit of Crowns - 魅力 / Charisma）",
+          desc: "圈外人時常認為哈囉牌的力量是它受到重視的主要原因。然而儘管哈羅牌大師們重視卡牌所提供的神祕能力，但是哈羅牌在各商隊間的交流中所代表的共同文化傳承與團隊意識，才是其對瓦瑞西安人的真正價值。\n\n冠之牌組是牌組中的王與女王，同時也是父母、子女與愛人，它標誌了一種對於社區、政治、領導力與同情心的影響。\n\n它是吟遊詩人、聖騎士、術士與惑控系法師的牌組，當牌陣中具有相當比重的冠之牌時，暗示了家族或堅定領導關係的重要性，而當牌陣中缺乏之，則建議自立自強。那些冠之牌組所指的人是天生的領袖與浪漫主義者，他們的命運與性命與他人緊密糾纏，並很難獨自影響世界。\n\n此牌組也與夢有關，哈羅牌大師可能會從中抽出一張牌用以協助他們解讀反覆出現的夢境。\n\n也因為此牌組經常連結激情和異想天開，冠之牌組視為與精類及侏儒有強烈的關聯性，也可能預示著他們的干擾。\n\n在瓦瑞西安，哈羅之冠是信任權威的重要象徵。商隊的領導者會向他同行旅伴所認可的冠之牌組中的卡牌之一宣示忠誠，而許多安頓於瓦瑞西安與烏斯塔拉夫的南方人都以市長和政府為對象，承襲了這項傳統。許多艾巴薩羅姆的秘密組織沿用了始於斯克扎尼的常時慣例，用哈羅冠作為傳遞訊息或警告的象徵標記。",
+          cards: [
+            { name: "空王座 (The Empty Throne)", alignment: "守序善良，魅力", text: "有一種明顯的失落感。 鬼魂代表了那些已逝之人將永遠陪伴我們。 他們曾經教給我們重要的課程，只要我們選擇傾聽。 這張卡牌能從遙遠的或古代的來源帶來資訊。 偏移下，過去的鬼魂是不安寧的，可能需要努力來讓他們安息。" },
+            { name: "劇場 (The Theater)", alignment: "中立善良，魅力", text: "是真實預言之卡。 木偶在場景中表演，正如同預言者在她不參與的場景中演出。 預言者就是觀眾，預言就是表演本身。 她不會影響她所見的東西，它的重要性通常到為時已晚才被承認。 如果偏移，預言本身就只是作秀而已。" },
+            { name: "獨角獸 (The Unicorn)", alignment: "混亂善良，魅力", text: "是一張慷慨地提供了主體探尋之物的卡，正如同圖中的戰馬提供了它的水果一般。 偏移下，這張卡牌代表了背叛、下毒、或虛假的朋友。" },
+            { name: "婚姻 (The Marriage)", alignment: "守序中立，魅力", text: "可以是人、思想、王國、或其他截然不同之物的結合。 水精與火蜥蜴的後代表示了聯合可能會為兩方都帶來新的力量，或者它可能是一場本來永遠不該發生的毀滅性結合。 一旦結婚，兩人就無法被分開。 這張卡代表了永恆的改變。" },
+            { name: "雙子 (The Twin)", alignment: "絕對中立，魅力", text: "表示了目的或身份的雙重性。 這面貌相似的兩個人也可能意味著優柔寡斷，比如一個人或組織在兩個截然不同的選擇中搖擺不定。 它也可以表示比比皆是的被切裂的忠誠。 這張卡讓一名哈羅師變得謹慎，因為它也可以代表整個牌陣有著隱藏的或相反的含義。" },
+            { name: "交際花 (The Courtesan)", alignment: "混亂中立，魅力", text: "是一張政治陰謀的卡。 她的面具體現了必須遵循的社會禮節。 如果面具滑落，談判可能會有意想不到的轉折。 這張卡也可以表示一個擁有權力的女人塑造了事件。 如何對待她需要根據局勢的結果而定。" },
+            { name: "暴君 (The Tyrant)", alignment: "守序邪惡，魅力", text: "代表了一名對被統治之人來說是一種衰退的統治者。 這條龍可能代表了一名王族，監視者，或是戶主。 不管這個人是誰，他都會對他所統治的人有害，不管他自己是否意識到這一點。 偏移下，它可能表示一名暴君受到揭發或廢黜。" },
+            { name: "背叛 (The Betrayal)", alignment: "中立邪惡，魅力", text: "是自私的化身。 極度扭曲了精神，並最終導致毀滅。 它也可以表示一個人的美麗之下隱藏著一顆邪惡的心。 偏移下，這張卡表示自我犧牲或遠離物質世界和它的誘惑。" },
+            { name: "騙子 (The Liar)", alignment: "混亂邪惡，魅力", text: "是最為不忠的愛。 這並不是能金石為開的真愛，而是撕心裂肺，讓戀人雙雙躍向死亡的愛。 可能意味著佔有、不求回報的熱情、或毀滅的愛。 偏移下，這張卡可能表示了新關係的開始，雖然可能偽裝成不那麼美麗之事。" }
+          ]
+        }
+      ],
+      settings: [
+        {
+          title: "哈羅牌手冊（The Harrow Handbook）",
+          text: `哈羅牌牌組（The Harrow Deck）\n寫給你的角色（For Your Character）\n介紹（Introduction）\n哈羅牌的歷史（History of The Harrow）\n用哈羅牌占卜（Divining with the Harrow）\n哈羅牌的背景（Harrow Backgrounds）\n哈羅牌遊戲與賭博（Harrow Games and Gambling）\n其他使用哈羅牌的方式（Other Ways to Use The Harrow）\n不同的哈羅牌牌陣（Alternate Harrow Spreads）\n哈羅牌具（Harrow Equipment）\n創造哈羅牌盤庫（Creating Harrow Decks）`
+        },
+        {
+          title: "瑞安娜，瓦瑞西亞命運女巫 引言",
+          quote: `「你覺得它們不過是些卡片？只是些適合拿來賭博和拿來誆騙鎮民銅板的圖案文字？好啊，那就繼續這樣想吧，我不在乎。我的牌知道你從何而來並且將行至何處。它不漂亮，一點兒也不。所以，走開吧。或是停下來並學習將自己剩餘的生命故事化為值得訴說的小說。當然，也可以不要，畢竟它們不過只是些卡片罷了。」\n—瑞安娜，瓦瑞西亞命運女巫\n\n「許多人們宣稱知道如何讀取這古老的卡牌，但他們大部分只是為了敲鎮民竹槓。剩下的則浪費時間在拿牌來賭博。只有極少數被選上的人真正知道解讀哈羅牌組的藝術。而對於那些掌握訣竅的人來說，哈羅牌能夠展現任何人生命中每一條命運之絲的脈絡，無論過去、現在或未來。」\n—瑞安娜，瓦瑞西亞命運女巫`
+        },
+        {
+          title: "介紹（Introduction）",
+          text: `哈羅牌古老而雄偉，擁有濃郁的地方傳統，並且象徵深遠。在阿維斯坦文化中，很少有像哈羅牌這樣富有神秘感的文物。瓦瑞西亞的流浪人民自古以來就使用著這套54張的哈羅牌，用來預測他們的未來，洞察他們的過去，並尋求建議，時間甚至早在現代人類國家興起之前。\n\n懷疑論者認為哈羅牌不過是瓦瑞西亞人的另一種騙局，是設計來欺騙那些廣受不信任的人，只不過是要從他們手中騙取金利的一部分。但那些與瓦瑞西亞當地人有密切關係的人，從這些哈羅牌感受到了一絲魔法的氣息。 熟練閱讀哈羅牌的人，適當地被稱為哈羅牌占卜師（harrowers），是瓦瑞西亞遊牧部落中的核心人物-很少是領導者，但始終是值得信賴的顧問和受尊敬的長者。 大多數人聲稱這些哈羅牌擁有強大的意志和知識：一種將瓦瑞西亞人、哈羅牌和多元宇宙的魔法細絲連接在一起的魔法聯繫。\n\n即使是最不擅長魔法的塔羅牌占卜師也可以閱讀這些牌，並在它們隨機但有意義的次序中看到宇宙的意志。 最有力的塔羅卜可以從哈羅牌中獲得超自然的聰明才智和奧妙的力量，增強他們的魔法，並對命運擁有難以置信的掌控力量。\n\n瓦瑞西亞的哈羅卜師對於艾巴薩羅姆的情況幾乎無法認識。斯卡尼樂意利用這些對艾巴薩羅姆的突破，他們的影響力幫助哈羅牌在艾巴薩羅姆贏得了一個雙重聲譽，一方面是一種貴族娛樂，另一方面是一種廉利欺詐。一些學者甚至聲稱，哈羅牌實際上起源於艾巴薩羅姆，與她的創望者奧羅登有關，並指出哈羅牌與阿茲蘭提紋章之間的許多聯繫。\n\n奧斯里昂同樣聲稱是哈羅牌的真正發源地。古怪的奧斯里昂學者堅持認為，god Nex在統治沙漠國家的時期贈送了哈羅牌給法老之地。瓦瑞西亞人認為這樣的主張是可笑的；同樣地，在最近的幾個世紀裡，這些卡牌在奧斯里昂和圖維亞找到了一個舒適的家，當地的巫師和召喚師將它們用作召喚和束縛異界生物的焦點。\n\n更西方，哈羅牌最近也傳入了Rahadoum。對於一個背棄了眾神的國家來說，世俗的占卜填補了一個重要的空缺。由於這些卡牌是基於寓言而不是聖經，哈羅牌在拉哈杜姆的吟遊詩人中很受歡迎，他們將這些故事作為自己表演的靈感，也受到教師的青睞，他們利用卡牌的象徵意義來教導孩子們重要的道德。\n\n對哈羅牌的看法：\n在瓦瑞西亞、終焉之牆、涅馬薩斯和烏斯塔拉夫，哈羅牌是司空見慣的景象-那裡是瓦瑞西亞的遊牧隊經常穿越的地方。自從哈羅牌的發明以來的千年裡，瓦瑞西亞的遊牧民族已經將哈羅牌傳播到了阿維斯坦的大部分地區。隨著瓦瑞西亞作為一個大膽的新經濟前沿的聲譽日益增力，其土著傳統已經滲透到了甚至超出遊牧隊的觸及範圍的世界中。如今，整個內海地區的大多數文化都聽說過神秘的瓦瑞西亞人和他們的魔法牌的故事。`
+        },
+        {
+          title: "哈羅牌的歷史（History of The Harrow）",
+          text: `史瓦蒂人傳說一位被烏鴉所包裹的男子將預言之禮帶給了瓦瑞西亞，作為交換，要求首位薩滿的舌頭。瓦瑞西亞人聲稱黛絲娜為創造他們的民族而流淚，她閃閃發光的眼淚滴入了瓦瑞西亞人的眼中，教導他們閱讀星辰。斯卡爾尼有他們自己的神話：一位著名的斯卡爾尼犯罪首領通過在一場機遇遊戲中擊敗黛絲娜贏得了第一副哈羅牌。哈羅的傳奇源自於這些故事以及更多，而哈羅牌的歷史可以像卡牌本身一樣有多種解釋。在城市點綴大地之前，遊牧者的隊伍在瓦瑞西亞的四季中穿梭，他們的故事為聽眾提供了指導、歷史和道德。像大多數無文字的民族一樣，古代瓦瑞西亞人雕刻了神符並發明了符號來記錄他們的民間傳說細節。他們豐富的神話學導致一些哈羅學者推測Sonnorae的哈羅故事牌組的卡片曾經數量為63，包括一個現已失去的第七種花色。\n\n失落的哈羅牌（Lost Harrow Cards）：\n大夢想家（The Great Dreamer）、狼之王子（The Prince of Wolves）、夏至（The Solstice）、無盡之路（The Wending Way）、黃色先知（The Yellow Prophet）。`
+        },
+        {
+          title: "用哈羅牌占卜（Divining with the Harrow）",
+          text: `哈羅牌占卜的核心主要是關於抽牌，並根據每張牌的花色、排列和位置來確定它們的含義。\n傳統上，占卜師將九張牌排列成一個三乘三的矩陣，位於讀者左側的牌代表過去，而位於右側的代表未來。離讀者最遠的牌代表正面影響，而最接近的代表負面影響。隨著哈羅牌歷史的演變，不同的排列方式和卡牌的獨特含義已經出現，甚至一些卡牌可能完全不同，但每個占卜的目標始終保持一致：通過隨機選擇的熟悉故事和符號來獲得對一個主題的洞察。`
+        },
+        {
+          title: "哈羅牌的背景（Harrow Backgrounds）",
+          text: `對於瓦瑞西亞人來說，通過儀式不僅是進行儀式或慶祝的藉口；它們也是占卜的有利時機。一個人的未來從來不像在她從一個生命階段過渡到下一個階段時那樣多變，因此在這些關鍵時刻，人們通常尋求指導。`
+        },
+        {
+          title: "哈羅牌遊戲與賭博（Harrow Games and Gambling）",
+          text: `並非每個使用哈羅牌的人都是占卜或算命的實踐者。許多哈羅牌的擁有者使用這些卡片來進行技巧和機會的遊戲。通常將斯卡尼人歸功於最早將卡片用於運動的人，但這一做法很快就在整個內海地區傳播開來。最著名的哈羅遊戲被稱為「塔樓」。`
+        },
+        {
+          title: "其他使用哈羅牌的方式（Other Ways to Use The Harrow）",
+          text: `哈羅牌已被瓦瑞西亞以外的文化所接受，其用途已擴力到不僅僅是占卜和賭博。哈羅牌在整個阿維斯坦的公眾房屋和舞廳的命名中都很受歡迎。召喚者們也推斷，如果哈羅牌可以用來引導偉大力量的智慧，那麼可以使用它們來召喚和控制外部平面的生物。`
+        },
+        {
+          title: "不同的哈羅牌牌陣（Alternate Harrow Spreads）",
+          text: `除了標準哈羅牌陣（通常稱為掛毯式），還有其它各式各樣的方式來解讀哈羅牌：\n1. 橋形陣（The Bridge）：為受術者特定的行動過程提供指導。\n2. 十字陣（The Cross）：為了預言一個人的過去和未來。\n3. 倒三角陣（The Path）：藉助了受術者自身的洞察力。\n4. 劍形陣（The Sword）：幫助受術者面對生活的新篇章。`
+        },
+        {
+          title: "哈羅牌具與創造哈羅牌盤庫（Harrow Equipment & Creating Harrow Decks）",
+          text: `包含特別打造的靈牌（Spell Deck）、防護護符、卡牌盒以及專門用於戰鬥與魔法溝通的各種道具。`
+        }
+      ]
+    };
+
+    // 渲染卡牌
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+
+      harrowData.suits.forEach(suit => {
+        const suitDiv = document.createElement('div');
+        suitDiv.className = 'suit-section';
+        suitDiv.dataset.suit = suit.id;
+
+        let cardsHTML = '';
+        suit.cards.forEach(card => {
+          cardsHTML += `
+            <div class="card-item" data-name="${card.name}" data-text="${card.text}" data-align="${card.alignment}">
+              <div class="card-header">
+                <span class="card-title">${card.name}</span>
+                <span class="trait-tag">${card.alignment}</span>
+              </div>
+              <div class="card-body">${card.text}</div>
+            </div>
+          `;
+        });
+
+        suitDiv.innerHTML = `
+          <h2 class="suit-title">${suit.title}</h2>
+          <div class="suit-desc">${suit.desc}</div>
+          <div class="cards-grid">
+            ${cardsHTML}
+          </div>
+        `;
+        container.appendChild(suitDiv);
+      });
+    }
+
+    // 渲染設定頁
+    function renderSettings() {
+      const container = document.getElementById('settings-container');
+      container.innerHTML = '';
+
+      harrowData.settings.forEach(item => {
+        const sec = document.createElement('div');
+        sec.className = 'settings-section';
+        
+        let content = `<h2 class="settings-section-title">${item.title}</h2>`;
+        if (item.quote) {
+          content += `<div class="settings-quote">${item.quote}</div>`;
+        }
+        if (item.text) {
+          content += `<div class="settings-text">${item.text}</div>`;
+        }
+
+        sec.innerHTML = content;
+        container.appendChild(sec);
+      });
+    }
+
+    // 搜尋與篩選
+    function filterCards() {
+      const searchVal = document.getElementById('search-bar').value.toLowerCase();
+      const suitVal = document.getElementById('suit-filter').value;
+
+      const suitSections = document.querySelectorAll('.suit-section');
+
+      suitSections.forEach(section => {
+        const suitId = section.dataset.suit;
+        const suitMatches = (suitVal === 'ALL' || suitVal === suitId);
+
+        let visibleCardsCount = 0;
+        const cardItems = section.querySelectorAll('.card-item');
+
+        cardItems.forEach(card => {
+          const name = card.dataset.name.toLowerCase();
+          const text = card.dataset.text.toLowerCase();
+          const align = card.dataset.align.toLowerCase();
+
+          const matchesSearch = name.includes(searchVal) || text.includes(searchVal) || align.includes(searchVal);
+
+          if (suitMatches && matchesSearch) {
+            card.classList.remove('hidden');
+            visibleCardsCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (visibleCardsCount > 0 && suitMatches) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    }
+
+    // 切換頁面
+    function togglePage() {
+      const mainPage = document.getElementById('main-page');
+      const settingsPage = document.getElementById('settings-page');
+      const toggleBtn = document.getElementById('toggle-btn');
+      const pageTitle = document.getElementById('page-title');
+
+      if (mainPage.style.display === 'none') {
+        mainPage.style.display = 'block';
+        settingsPage.style.display = 'none';
+        toggleBtn.textContent = '跳轉至哈羅牌設定頁';
+        pageTitle.textContent = '哈羅牌辭義速查';
+      } else {
+        mainPage.style.display = 'none';
+        settingsPage.style.display = 'block';
+        toggleBtn.textContent = '返回哈羅牌速查主頁';
+        pageTitle.textContent = '哈羅牌設定頁';
+      }
+    }
+
+    // 初始化
+    window.onload = function() {
+      renderCards();
+      renderSettings();
+    };
+  </script>
+</body>
+</html>
