@@ -85,8 +85,8 @@
         .inner-table th { background: #004d25; color: #fff; }
         .inner-table td { background: #12151c; }
 
-        .btn-rest { background: #2e8b57; color: white; border: none; padding: 8px 16px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 10px; width: 100%; }
-        .btn-rest:hover { background: #246b43; }
+        .btn-rest { background: #10121A; color: white; border: none; padding: 8px 16px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 10px; width: 100%; }
+        .btn-rest:hover { background: #10121A; }
 
         /* 聚能池樣式 */
         .focus-pool-container { display: flex; align-items: center; justify-content: space-between; background: var(--bg-input); border: 1px solid var(--accent-orange); border-radius: 6px; padding: 10px 15px; margin-bottom: 15px; }
@@ -102,7 +102,7 @@
     <div class="char-header">
         <div style="flex:2;"><label>角色名稱</label><input type="text" value="蘿賽緹雅"></div>
         <div style="flex:1;"><label>職業</label><input type="text" value="女巫"></div>
-        <div style="flex:1;"><label>等級</label><input id="char-level" type="number" value="10" onchange="calculateSpells()"></div>
+        <div style="flex:1;"><label>等級</label><input id="char-level" type="number" value="11" onchange="calculateSpells()"></div>
     </div>
 
     <div class="grid">
@@ -111,7 +111,7 @@
             <h2>狀態與屬性</h2>
             <div style="margin-bottom:10px;">
                 <label style="font-size:12px; color:var(--text-sub);">生命值 (HP)</label>
-                <input type="text" value="88 / 88" style="width:100%; background:var(--bg-input); border:1px solid var(--border-color); color:#fff; padding:5px; border-radius:4px;">
+                <input type="text" value="96 / 96" style="width:100%; background:var(--bg-input); border:1px solid var(--border-color); color:#fff; padding:5px; border-radius:4px;">
             </div>
             
             <h2>屬性調整值</h2>
@@ -126,6 +126,25 @@
 
 <!-- 專長區塊 -->
             <div class="feat-section-title">專長</div>
+            <div class="spell-row">
+                <div class="feat-row-summary" onclick="toggleDetail('feat-Called')">
+                    <span class="spell-name">受呼喚者　Called</span>
+                    <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+                </div>
+                <div id="feat-Called" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>受呼喚者　Called</span>
+                        <span>族裔5</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">替換兒</span>
+                    </div>
+                    <div class="spell-desc">
+                        你已經聽見了來自內心深處的呼喚，而你選擇不斷抵擋這永不止息的蠱惑與強求，久而久之你建起了一座心志的壁壘。你在對抗心靈效果的意志豁免上獲得 +1環境加值 。<br>
+                        在對抗會使你陷入被控制狀態的心靈效果時，如果你在豁免檢定中成功，將結果改為大成功。<br><br>
+                    </div>
+                </div>
+            </div>
             <div class="spell-row">
                 <div class="feat-row-summary" onclick="toggleDetail('feat-cauldron')">
                     <span class="spell-name">大釜 Cauldron</span>
@@ -206,7 +225,7 @@ Avoid Dire Fate 避開厄運<br>
                         <span class="trait-tag">技能</span>
                     </div>
                     <div class="spell-desc">
-                        你的護身符能抵禦污穢的魔力。當你進行每日準備時，你可以縫合好一個裝有香草、頭髮、聖油和其它儀式材料的香囊，並將其給與一位盟友；該盟友不能是你自己。該盟友當天第一次對法術或作祟進行豁免檢定時，獲得+1環境加值。若你的神秘技能為專家，環境加值為+2，若你的神秘技能為傳奇，環境加值為+3。</p>
+                        你的護身符能抵禦污穢的魔力。當你進行每日準備時，你可以縫合好一個裝有香草、頭髮、聖油和其它儀式材料的香囊，並將其給與一位盟友；該盟友不能是你自己。該盟友當天第一次對法術或作祟進行豁免檢定時，獲得+1環境加值。若你的神秘技能為專家，環境加值為+2，若你的神秘技能為傳奇，環境加值為+3。
                     </div>
                 </div>
             </div>
@@ -321,6 +340,37 @@ Avoid Dire Fate 避開厄運<br>
         </div>
     </div>
 </div>
+
+<!-- 道具區塊 -->
+<div class="feat-section-title">道具</div>
+
+<!-- 天氣製造器 -->
+<div class="spell-row">
+    <div class="feat-row-summary" onclick="toggleDetail('Weather Machine')">
+        <span class="spell-name">天氣製造器</span>
+        <span style="font-size: 11px; color: var(--text-sub);">▼</span>
+    </div>
+    <div id="Weather Machine" class="spell-detail">
+        <div class="spell-detail-header">
+            <span>天氣製造器</span>
+        </div>
+        <div style="margin-bottom: 6px;">
+            <span class="trait-tag">鍊金</span>
+        </div>
+        <div class="spell-desc">
+一台天氣製造機，上面有紅藍綠三色不同的燈管以及監測數據的儀表板，往前的方向左右各有一台噴管，能製造大霧。持續啟用可以持續發煙到鋼瓶用完。雲霧會完全阻擋視線。按下按鈕可以點燃那些霧。這些霧氣是非常穩定的煉金物質構成，只有在接觸按鈕時，雲霧才會燒起來。<br><br>
+
+<b>範圍：</b>　自身瀰漫10呎或是錐形15呎<br>
+<b>持續時間：</b>1分鐘<br>
+<b>豁免：</b>基礎反射豁免，傷害6d6<br>
+<b>存量：<br>
+<b>雲霧：<br>2動作：9發<br>
+<b>點燃：<br>1動作：3發<br>
+        </div>
+    </div>
+</div>
+
+
 <!-- 動作區塊 -->
 <div class="feat-section-title">動作</div>
 <div class="spell-row">
@@ -382,7 +432,7 @@ Avoid Dire Fate 避開厄運<br>
                 </div>
             </div>
 
-            <button class="btn-rest" onclick="resetCastSlots()">🟢 長休 (恢復所有施放消耗欄位與聚能點數)</button>
+            <button class="btn-rest" onclick="resetCastSlots()">◆ 長休 (恢復所有施放消耗欄位與聚能點數)</button>
 
             <!-- 巫術 (Hexes) -->
             <div class="section-title">Hexes (巫術)</div>
@@ -869,7 +919,7 @@ Avoid Dire Fate 避開厄運<br>
                 <div id="harrowing-detail" class="spell-detail">
                     <div class="spell-detail-header">
                         <span>哈羅牌占卜 HARROWING</span>
-                        <span>DC：Lv10：25，算命+16 儀式 1</span>
+                        <span>DC：Lv10：26，算命+19 儀式 1</span>
                     </div>
                     <div style="margin-bottom: 6px;">
                         <span class="trait-tag">罕見</span><span class="trait-tag">預言系</span><span class="trait-tag">幸運</span>
@@ -1165,18 +1215,201 @@ Avoid Dire Fate 避開厄運<br>
                 </div>
             </div>
 
-            <!-- 戲法 (Cantrips) -->
+<!-- 訂製法杖（魅惑） -->
+            <div class="sub-section-title">不帶刺的玫瑰 魅惑術法杖</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域/效果</span>
+            </div>
+
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('staff-charm-5')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">魅惑術 Charm (五環)</span><span>◆◆</span><span>至下次每日準備</span><span>30 呎</span><span>意志 (DC 30)</span><span>1 個生物</span>
+                </div>
+                <div id="staff-charm-5" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>魅惑術 CHARM</span>
+                        <span>法術 5 (升階)</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">情緒</span><span class="trait-tag">失能</span><span class="trait-tag">操作</span><span class="trait-tag">心靈</span><span class="trait-tag">晦匿</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個生物；<b>防禦</b> 意志 (DC 30)<br>
+                        <b>持續</b> 直到你的下次每日準備
+                    </div>
+                    <div class="spell-desc">
+                        在目標看來，你的言語甜蜜動聽，你的形象籠罩在夢幻般的光暈中。目標必須嘗試一次意志豁免（DC 30），如果你或你的盟友最近威脅它或對它進行了敵對行為，會獲得+4環境加值。你可以解消該法術。如果你對目標使用任何敵對動作，法術就會終止。當法術結束時，目標不一定會意識到自己被魅惑了，除非它和你的友好關係，或者你說服它去做的事情與其期望發生衝突。這也就是說你可以透過常規的方法說服目標繼續成為你的朋友。<br>
+                        <b>大成功：</b>目標不受影響，並且意識到你嘗試魅惑它。<br>
+                        <b>成功：</b>這個目標不受影響，但是認為你的法術是某種無害的東西，而不是魅惑術，除非它能辨識該法術。<br>
+                        <b>失敗：</b>目標對你的態度變成友好（friendly）。如果已經是友好，則變成樂於幫助（helpful）。它不能對你做出敵對行為。<br>
+                        <b>大失敗：</b>目標態度變成樂於幫助（helpful）並且不能對你做出敵對行為。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 該持續時間增加到直到你的下次每日準備。<br>
+                        <b>升階 (8環級)</b> 該法術持續時間為持續到下次你進行你的每日準備，並且你能以至多10個生物作為目標。
+                    </div>
+                </div>
+            </div>
+
+<!-- 戲法 (Cantrips) -->
             <div class="section-title">Cantrips (戲法)</div>
             <div class="spell-table-header">
                 <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
             </div>
 
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">偵測魔法 Detect Magic</span><span>◆◆</span><span>立即</span><span>30 呎脈衝</span><span>—</span><span>區域</span></div></div>
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">指路術 Know Direction</span><span>◆◆</span><span>立即</span><span>—</span><span>—</span><span>自己</span></div></div>
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">閱讀靈光 Read Aura</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>1 個物品</span></div></div>
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">光亮術 Light</span><span>◆◆</span><span>1 小時</span><span>接觸</span><span>—</span><span>1 個物件</span></div></div>
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">傳訊術 Message</span><span>◆</span><span>120 呎</span><span>—</span><span>—</span><span>1 個生物</span></div></div>
+            <!-- 偵測魔法 -->
             <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-detect-magic')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">偵測魔法 Detect Magic</span><span>◆◆</span><span>立即</span><span>30 呎脈衝</span><span>—</span><span>區域</span>
+                </div>
+                <div id="cantrip-detect-magic" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>偵測魔法 DETECT MAGIC</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">偵測</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>區域</b> 30尺瀰漫
+                    </div>
+                    <div class="spell-desc">
+                        你發出一股標記魔法存在的脈衝。你不會獲得魔法存在或不存在以外的任何資訊。你可以選擇忽略你完全知曉的魔法，例如你或你盟友的魔法物品以及持續法術。<br>
+                        只有當幻術魔法的環級低於你的偵測魔法環級時，你才能偵測到幻術魔法。但是，具有幻術靈光但是沒有在外表上做偽裝的物品（例如一瓶隱形藥水），通常能夠正常偵測。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (3環級)</b> 你會了解法術偵測到的最強的魔法效果的環級或等級，由GM決定。<br>
+                        <b>升階 (4環級)</b> 如3環級，你也能指出最高環級魔法的來源。如同一種模糊感官，你不會了解具體的位置，但是可以將來源鎖定到5尺立方（或最近的那個五尺立方，如果來源體積比這個區域更大）。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 指路術 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-know-direction')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">指路術 Know Direction</span><span>◆◆</span><span>立即</span><span>—</span><span>—</span><span>自己</span>
+                </div>
+                <div id="cantrip-know-direction" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>指路術 KNOW DIRECTION</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">偵測</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>目標</b> 自己
+                    </div>
+                    <div class="spell-desc">
+                        在你的心智中展開心靈心智的羅盤。你立刻得知正北方向的位置。如果你處於沒有正北方向的環境（例如某些外層位面），該法術失敗。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (7環級)</b> 你可以選擇一個你非常熟悉的地點，並得知該地點相對於你的方向與大概距離，而非正北方向。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 閱讀靈光 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-read-aura')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">閱讀靈光 Read Aura</span><span>◆◆</span><span>1 分鐘</span><span>30 呎</span><span>—</span><span>1 個物品</span>
+                </div>
+                <div id="cantrip-read-aura" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>閱讀靈光 READ AURA</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">偵測</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> 1分鐘<br>
+                        <b>射程</b> 30尺；<b>目標</b> 1個物體
+                    </div>
+                    <div class="spell-desc">
+                        你專注於目標物體，拓展神智，以感受魔法靈光。當你完成施法後，你得知該物品是否具有魔法。你以及任何你告知了靈光資訊的人在對該物品的辨識魔法檢定上獲得+2環境加值。如果該物體是幻象，僅當該效果的環級低於你的閱讀靈光環級時你才能發現此事實。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (3環級)</b> 你能以至多10個物體為目標。<br>
+                        <b>升階 (6環級)</b> 你能以任意數量物體為目標。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 光亮術 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-light')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">光亮術 Light</span><span>◆◆</span><span>1 小時</span><span>接觸</span><span>—</span><span>1 個物件</span>
+                </div>
+                <div id="cantrip-light" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>光亮術 LIGHT</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">光亮</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 120尺；<b>持續</b> 直到你下次進行每日準備
+                    </div>
+                    <div class="spell-desc">
+                        你創造一團球形光亮，在20尺半徑內產生明亮光照（以及接下來的20尺產生昏暗光照）。如果你在一個自願生物的同一空間內創造光亮，你可以將此光亮附加到該生物上，讓它隨著該生物移動漂浮在周圍。你可以維持該法術，移動此光亮至多60尺；你可以在其移動中將它附加到1個生物或離開。<br>
+                        你可以解消該法術。如果你施放法術時你已經有四個生效的光亮術，你必須選擇一個存在的法術結束。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (4環級)</b> 此球體在60尺半徑內產生明亮光照（並在接下來的60尺產生昏暗光照）。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 傳訊術 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-message')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">傳訊術 Message</span><span>◆</span><span>120 呎</span><span>—</span><span>—</span><span>1 個生物</span>
+                </div>
+                <div id="cantrip-message" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>傳訊術 MESSAGE</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">聽覺</span><span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">幻術</span><span class="trait-tag">語言</span><span class="trait-tag">心靈</span><span class="trait-tag">晦匿</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能<br>
+                        <b>施法</b> ◆<br>
+                        <b>射程</b> 120尺；<b>目標</b> 1個生物<br>
+                        <b>持續</b> 見下文
+                    </div>
+                    <div class="spell-desc">
+                        你無聲地念出言語，這段言語會直接送到目標耳中，而不是從你的嘴中念出。其他人聽起來頂多是你與它們正常說話，但法術目標會如同正站在你身邊一般聽到你的言語。目標可以透過一個反應動作做出一段簡要回應，或者根據其意願，也可以透過其下個回合的自由動作來回應，但它如此做時必須能看見你，並且在射程內。如果它做出回應，它的回應會直接送達你的耳中，如同最初的信息一般。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (3環級)</b> 法術的射程增加到500尺。
+                    </div>
+                </div>
+            </div>            <div class="spell-row">
                 <div class="spell-row-summary" onclick="toggleDetail('needle-darts-detail')">
                     <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
                     <div class="chk-container"></div>
@@ -1208,7 +1441,36 @@ Avoid Dire Fate 避開厄運<br>
             </div>
             <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">暈眩術 Daze</span><span>◆◆</span><span>2 回合</span><span>60 呎</span><span>意志</span><span>1 個生物</span></div></div>
             <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">法師之手 Mage Hand</span><span>◆◆</span><span>專注</span><span>30 呎</span><span>—</span><span>1 個物品</span></div></div>
-            <div class="spell-row"><div class="spell-row-summary"><div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div><div class="chk-container"></div><span class="spell-name">魔法伎倆 Prestidigitation</span><span>◆◆</span><span>1 小時</span><span>10 呎</span><span>—</span><span>1 個物件</span></div></div>
+<!-- 魔法伎倆 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('cantrip-prestidigitation')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" checked onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"></div>
+                    <span class="spell-name">魔法伎倆 Prestidigitation</span><span>◆◆</span><span>維持</span><span>10 呎</span><span>—</span><span>1 個物件</span>
+                </div>
+                <div id="cantrip-prestidigitation" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>魔法伎倆 PRESTIDIGITATION</span>
+                        <span>戲法 1</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">戲法</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆<br>
+                        <b>射程</b> 10尺；<b>目標</b> 1個物體（僅對烹飪，抬起，或整理）；<br>
+                        <b>持續</b> 維持
+                    </div>
+                    <div class="spell-desc">
+                        最簡單的魔法幫你完成雜事。只要維持該法術，你就可以產生簡單的魔法效果。每當你維持該法術時，你可以選擇四個選項中的一個。<br>
+                        • <b>烹調</b>為1磅非活物材料冷卻，加熱，或調味。<br>
+                        • <b>抬起</b>將一件輕負載或更低的無主物品緩慢抬離地面。<br>
+                        • <b>創造</b>創造一個負載可忽略的暫時物體，它由凝結的魔法物質組成。該物體看起來粗糙且非常脆弱——它無法被用作工具、武器、作為法術器材或開銷。<br>
+                        • <b>整理</b>為一件輕負載或更低的物體染色，清潔，或弄髒它。你可以透過10輪專注來影響一件1負載的物體，對於更大的物體為每負載1分鐘。魔法伎倆無法造成傷害或負面效果。對一件物體的任何改變（在上述內容之外的）只會在你看維持該法術時持續。
+                    </div>
+                </div>
+            </div>
 
             <!-- 1 環法術 -->
             <div class="section-title">Spell Rank 1 (一環)</div>
@@ -1603,6 +1865,7 @@ Avoid Dire Fate 避開厄運<br>
                         <b>射程</b> 接觸；<b>目標</b> 1個生物
                     </div>
                     <div class="spell-desc">
+溫和的恢復魔法消除毒素和更糟糕的疾害。選擇目標的一個苦難，例如詛咒、疾病、或毒素。如果它已經超過階段1，減少階段1。直到某一次苦難被完全治癒之前，對於這次苦難，這種減少只能生效一次。儘管這種減少不能再發生，升階版本的該法術每次施法都能嘗試反制它。<br>
                         你的魔法驅散傷害目標身體或心靈的<a href="https://pf2.huijiwiki.com/wiki/%E8%8B%A6%E9%9A%BE" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">苦難</a>。嘗試一次反制檢定，對抗目標身上的一種<a href="https://pf2.huijiwiki.com/wiki/%E7%96%BE%E7%97%85" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">疾病</a>或<a href="https://pf2.huijiwiki.com/wiki/%E6%AF%92%E7%B4%A0" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: underline;">毒素</a>；若成功，該苦難會被掃除。這無法修復苦難已經造成的傷害。
                     </div>
                     <div class="spell-heightened">
@@ -1981,7 +2244,6 @@ Avoid Dire Fate 避開厄運<br>
                     </div>
                     <div class="spell-desc">
                         你遲滯一處區域的時間流，在它上面釘幾根比喻性質的大頭針，讓時間變厚、變慢，變得如同泥漿般緩慢。區域內的任何生物在回合開始時都必須嘗試進行一次意志豁免。<br><br>
-                        
                         <b>成功：</b>該生物不受影響。<br>
                         <b>失敗：</b>該生物本輪獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('slowed-status-info'); event.stopPropagation();">緩慢 1</span> 狀態。<br>
                         <b>大失敗：</b>該生物本輪獲得 <span class="inline-link" style="color:#f59e0b; font-weight:bold; cursor:pointer;" onclick="toggleDetail('slowed-status-info'); event.stopPropagation();">緩慢 2</span> 狀態。<br><br>
@@ -1999,7 +2261,76 @@ Avoid Dire Fate 避開厄運<br>
                                 <div style="margin-top: 4px;">某些狀態阻止你進行某些特定的動作，例如反應動作。也有一些狀態只是說「你無法行動」。若你無法行動，你不能使用任何動作。與緩慢或震懼不同。這不會改變你恢復的動作數；它們只是阻止你使用動作。這意味著若你在自己回合被治療好了麻痺，你就可以立刻行動。</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
+<!-- 6 環法術 -->
+            <div class="section-title">Spell Rank 6 (六環)</div>
+            <div class="spell-table-header">
+                <span>準備</span><span>消耗</span><span style="text-align:left;">名稱</span><span>動作</span><span>持續時間</span><span>距離</span><span>豁免</span><span>目標/區域</span>
+            </div>
+
+            <!-- 庇主的守護獸 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('patrons-protector-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">庇主的守護獸 Patron's Protector</span><span>◆◆◆</span><span>維持至多 1 分鐘</span><span>30 呎</span><span>強韌</span><span>你的魔寵</span>
+                </div>
+                <div id="patrons-protector-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>庇主的守護獸 PATRON'S PROTECTOR</span>
+                        <span>法術 6</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">變形</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，神術，異能，原能<br>
+                        <b>施法</b> ◆◆◆<br>
+                        <b>射程</b> 30尺；<b>目標</b> 你的魔寵<br>
+                        <b>持續時間</b> 維持至多1分鐘
+                    </div>
+                    <div class="spell-desc">
+                        你將魔力注入魔寵，使其體內充盈令人畏懼的能量，將其化為強大的守護之力。你能以施放或維持法術的一部分來對目標使用指揮動物動作。你的魔寵AC變成28；它變成大型，獲得20點臨時生命值。若你的魔寵在生命值降為0點時正處於該法術的效果影響下，該法術會立即結束，而你的魔寵會改為生命值降低至1點。每回合1次，你的魔寵能夠使用挺身阻擋或守護獸推撞動作。<br><br>
+                        <b>挺身阻擋 Body Check ◆</b> 你的魔寵使用剛獲得的體格和存在感來壓制一個相鄰生物，造成4d10點鈍擊傷害（基礎強韌豁免）。豁免失敗時，目標還會被擊退10尺（大失敗為20尺）。<br><br>
+                        <b>守護獸推撞 Protector's Shove ◆</b> 你的魔寵把盟友從危境中推開。你的盟友推離一個相鄰且自願的盟友，將其推離至多20尺遠，並且使其AC獲得+2點狀態加值，持續1輪。這是強迫移動。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (9環)</b> 魔寵的AC變成36，獲得30點臨時生命值，並且傷害增加2d10點。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 傳送術 -->
+            <div class="spell-row">
+                <div class="spell-row-summary" onclick="toggleDetail('teleport-detail')">
+                    <div class="chk-container"><input type="checkbox" class="spell-chk" onclick="event.stopPropagation()"></div>
+                    <div class="chk-container"><input type="checkbox" class="spell-chk spell-chk-cast" onclick="toggleCastRow(this, event)"></div>
+                    <span class="spell-name">傳送術 Teleport</span><span>10 分鐘</span><span>立即</span><span>100 英里</span><span>—</span><span>你和至多 4 個接觸到的目標</span>
+                </div>
+                <div id="teleport-detail" class="spell-detail">
+                    <div class="spell-detail-header">
+                        <span>傳送術 TELEPORT</span>
+                        <span>法術 6</span>
+                    </div>
+                    <div style="margin-bottom: 6px;">
+                        <span class="trait-tag">罕見</span><span class="trait-tag">專注</span><span class="trait-tag">操作</span><span class="trait-tag">傳送</span>
+                    </div>
+                    <div class="spell-meta">
+                        <b>根源</b> 奧術，異能<br>
+                        <b>施法</b> 10分鐘<br>
+                        <b>射程</b> 100英里；<b>目標</b> 你和至多4個接觸到的目標，它們是自願生物或生物大小的物體
+                    </div>
+                    <div class="spell-desc">
+                        你和目標會立即傳送到射程內的任何位置，只要你能通過該地點到你起始地點的相對位置，以及其外觀（或典型特徵）來精確定位該地點。關於該地點外觀的錯誤的知識會令法術失敗，但它也可能導致傳送到非預想地點或造成其他由GM決定的事故。傳送在距離很遠時難以精確。目標會在距離目的地大約總旅行距離1%的地方出現，其偏移方向由GM決定。對於短途旅行，這種誤差可以忽略，但是對於長距旅行這可能達到1英里。
+                    </div>
+                    <div class="spell-heightened">
+                        <b>升階 (7環級)</b> 你和其他目標可以傳送到1000英里內的任何地點。<br>
+                        <b>升階 (8環級)</b> 你和其他目標可以傳送到同一星球上的任何地點。如果你旅行超過1000英里，你只會偏移目標10英里。<br>
+                        <b>升階 (9環級)</b> 你和其他目標可以傳送到同一行星系中任何其他行星上的任意地點。如果你對該地點的位置和外觀有準確的知識，你會到達該星球上偏移目標100英里的位置。<br>
+                        <b>升階 (10環級)</b> 如9環級版本，但你和其他目標可以旅行到同一恆星系中的任何行星上。
                     </div>
                 </div>
             </div>
