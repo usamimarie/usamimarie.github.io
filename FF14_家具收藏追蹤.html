@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FF14 家具收藏追蹤</title>
+<style>
+:root{--bg-main:#000;--bg-card:#000;--border-muted:#948979;--border-highlight:#DFD0B8;--text-main:#fff;--text-muted:#948979}
+*{box-sizing:border-box}body{margin:0;background:var(--bg-main);color:var(--text-main);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC","Noto Sans JP",sans-serif}
+.app{width:min(1500px,94vw);margin:auto;padding:32px 0 55px}header{border-bottom:1px solid var(--border-muted);padding-bottom:20px;margin-bottom:20px}
+h1{margin:0 0 5px;letter-spacing:.04em}.sub,footer,.jp,.en{color:var(--text-muted)}
+.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin-bottom:12px}
+input,.btn{background:#000;color:#fff;border:1px solid var(--border-muted);padding:10px 12px}.search{width:100%}
+input:focus{outline:0;border-color:var(--border-highlight)}.btn{cursor:pointer}.btn:hover{border-color:var(--border-highlight)}
+.stats{display:flex;gap:20px;flex-wrap:wrap;color:var(--text-muted);margin:12px 0 18px}.stats b{color:#fff}
+.table-wrap{overflow:auto;border:1px solid var(--border-muted)}table{width:100%;min-width:1080px;border-collapse:collapse}
+th,td{border-bottom:1px solid #514b43;padding:11px 10px;text-align:left;vertical-align:middle}th{color:var(--border-highlight);background:#050505;position:sticky;top:0}
+tr.done{opacity:.58}tr.done .name{text-decoration:line-through}.check{width:19px;height:19px;accent-color:#DFD0B8}.qty{width:75px;text-align:center}.color{width:155px}
+a{color:var(--border-highlight)}.empty{text-align:center;padding:40px;color:var(--text-muted)}
+footer{border-top:1px solid var(--border-muted);margin-top:18px;padding-top:14px;font-size:13px}
+@media(max-width:800px){.toolbar{grid-template-columns:1fr}.app{width:96vw}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><h1>FF14 家具收藏追蹤</h1><p class="sub">多語言搜尋・收藏狀態・持有數量・顏色／備註</p></header>
+<div class="toolbar">
+<input id="search" class="search" type="search" placeholder="搜尋中文、日文或英文名稱……">
+<button class="btn" id="clear">清除搜尋</button><button class="btn" id="reset">重設本機資料</button>
+</div>
+<div class="stats">
+<span>顯示 <b id="shown">0</b> 件</span><span>已收集 <b id="done">0</b> / <b id="total">0</b></span><span>總持有數量 <b id="sum">0</b></span>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>✓</th><th>數量</th><th>中文名稱</th><th>日文名稱</th><th>英文名稱</th><th>顏色／備註</th><th>介紹網站</th></tr></thead>
+<tbody id="list"></tbody>
+</table></div>
+<footer>勾選、數量與顏色／備註會自動儲存在此瀏覽器的 localStorage。搜尋會同時比對中文、日文、英文。</footer>
+</div>
+<script>
+const KEY="ff14-furniture-tracker-v1";
+const items=[
+{id:"moon",zh:"仿製月光窗",ja:"イミテーション・ムーンライトウィンドウ",en:"Imitation Moonlit Window",url:"https://housing-collection-ff14.com/?p=16878"},
+{id:"bookshelf",zh:"神學院書櫃",ja:"神学院の本棚",en:"Scholasticate Bookshelf",url:"https://housing-collection-ff14.com/?p=9436"},
+{id:"starry",zh:"魔法景觀：漫天星空",ja:"マジックスカイスケープ:スターリースカイ",en:"Starry Sky Phasmascape",url:"https://housing-collection-ff14.com/?p=16729"}];
+let state={};try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const S=id=>state[id]||{checked:false,qty:0,color:""};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function render(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const rows=items.filter(x=>[x.zh,x.ja,x.en].some(v=>v.toLowerCase().includes(q)));
+ const list=document.getElementById("list");list.innerHTML="";
+ if(!rows.length){list.innerHTML='<tr><td colspan="7" class="empty">找不到符合的家具。</td></tr>'}
+ rows.forEach(x=>{
+  const s=S(x.id),tr=document.createElement("tr");if(s.checked)tr.className="done";
+  tr.innerHTML=`<td><input class="check" type="checkbox" ${s.checked?"checked":""}></td>
+  <td><input class="qty" type="number" min="0" step="1" value="${Number(s.qty)||0}"></td>
+  <td class="name"><b>${esc(x.zh)}</b></td><td class="jp">${esc(x.ja)}</td><td class="en">${esc(x.en)}</td>
+  <td><input class="color" type="text" value="${esc(s.color)}" placeholder="未染色／顏色／備註"></td>
+  <td><a href="${x.url}" target="_blank" rel="noopener">HOUSING COLLECTION ↗</a></td>`;
+  tr.querySelector(".check").onchange=e=>{state[x.id]={...S(x.id),checked:e.target.checked};save();render()};
+  tr.querySelector(".qty").oninput=e=>{state[x.id]={...S(x.id),qty:Math.max(0,parseInt(e.target.value)||0)};save();stats()};
+  tr.querySelector(".color").oninput=e=>{state[x.id]={...S(x.id),color:e.target.value};save()};
+  list.appendChild(tr);
+ });
+ document.getElementById("shown").textContent=rows.length;stats();
+}
+function stats(){
+ document.getElementById("done").textContent=items.filter(x=>S(x.id).checked).length;
+ document.getElementById("total").textContent=items.length;
+ document.getElementById("sum").textContent=items.reduce((n,x)=>n+(Number(S(x.id).qty)||0),0);
+}
+document.getElementById("search").oninput=render;
+document.getElementById("clear").onclick=()=>{document.getElementById("search").value="";render()};
+document.getElementById("reset").onclick=()=>{if(confirm("確定清除所有勾選、數量與備註？")){state={};save();render()}};
+render();
+</script>
+</body></html>
