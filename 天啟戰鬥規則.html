@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0c">
+<title>戰鬥流程｜規則手冊</title>
+<style>
+:root{
+  color-scheme:dark; --bg:#090a0b; --panel:#141516; --panel2:#1b1c1e;
+  --line:#393633; --gold:#e7bd78; --cream:#f2e7d5; --muted:#b6aa98;
+  --red:#c9785d; --green:#a7b79a; --shadow:0 16px 40px #0008;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -15%,#30271e 0,#111112 42%,var(--bg) 78%);color:var(--cream);
+ font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}
+header{max-width:1200px;margin:auto;padding:48px 28px 24px}
+.eyebrow{color:var(--gold);font-size:.76rem;letter-spacing:.22em;text-transform:uppercase}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;margin:10px 0;color:#fff0d8;letter-spacing:.06em}
+header p{color:var(--muted);max-width:720px;margin:14px 0 0}
+.layout{max-width:1200px;margin:auto;padding:20px 28px 64px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:28px;align-items:start}
+.flow-panel,.detail-panel{background:linear-gradient(145deg,#171819,#101112);border:1px solid #37332e;border-radius:18px;box-shadow:var(--shadow)}
+.flow-panel{padding:26px 22px}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.panel-heading h2{font-size:1rem;letter-spacing:.12em;color:var(--gold);margin:0}
+.hint{font-size:.76rem;color:#918779}
+.flow{max-width:590px;margin:auto;position:relative}
+.node-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+.node{width:min(100%,440px);text-align:left;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;
+ padding:13px 16px;border:1px solid #51483d;border-radius:11px;background:linear-gradient(110deg,#282725,#191a1b);
+ color:var(--cream);cursor:pointer;transition:.18s ease;position:relative}
+.node:hover{border-color:var(--gold);transform:translateY(-2px);background:#302b24}
+.node[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 1px #e7bd7844,0 8px 24px #0008;background:linear-gradient(110deg,#3b3022,#202020)}
+.num{width:36px;height:36px;border:1px solid #8b7557;border-radius:9px;display:grid;place-items:center;color:var(--gold);font-weight:750;font-size:.9rem}
+.node strong{display:block;font-size:.98rem;letter-spacing:.03em}
+.node small{display:block;color:#b8ad9d;font-size:.77rem;margin-top:2px}
+.chev{color:#9a8b76;font-size:1.2rem}
+.connector{height:28px;width:2px;background:linear-gradient(var(--gold),#76644b);position:relative}
+.connector:after{content:"";position:absolute;bottom:0;left:-4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #b79a6b}
+.branch{width:min(100%,440px);margin:10px auto 12px;padding:12px 14px;border:1px dashed #66543e;border-radius:10px;color:var(--muted);font-size:.8rem;background:#171615}
+.branch b{color:var(--gold);font-weight:650}
+.loop-note{margin:18px auto 0;max-width:440px;border-left:2px solid var(--red);padding:8px 12px;color:#c9b9a5;font-size:.8rem;background:#24191666}
+.detail-panel{position:sticky;top:20px;min-height:520px;overflow:hidden}
+.detail-top{padding:25px 26px 20px;border-bottom:1px solid #39332c;background:radial-gradient(circle at 100% 0,#4a3520aa,transparent 48%)}
+.detail-kicker{font-size:.72rem;letter-spacing:.18em;color:var(--gold)}
+.detail-top h2{font-size:1.65rem;margin:8px 0 4px;color:#fff0d8}
+.detail-top p{color:var(--muted);font-size:.9rem;margin:0}
+.detail-body{padding:22px 26px 28px}
+.detail-body h3{font-size:.9rem;color:var(--gold);letter-spacing:.08em;margin:20px 0 8px}
+.detail-body h3:first-child{margin-top:0}
+.detail-body p,.detail-body li{font-size:.91rem;color:#e0d5c5}
+.detail-body ul{padding-left:1.2rem;margin:8px 0}
+.detail-body li{margin:6px 0}
+.callout{border-left:3px solid var(--gold);padding:10px 13px;margin:14px 0;background:#272116;color:#f0dfc4;border-radius:0 8px 8px 0;font-size:.88rem}
+.tag{display:inline-block;border:1px solid #6a5740;color:var(--gold);border-radius:99px;padding:2px 9px;font-size:.72rem;margin:0 5px 5px 0}
+.empty{padding:50px 28px;text-align:center;color:var(--muted)}
+.empty .symbol{font-size:2.2rem;color:var(--gold)}
+footer{max-width:1200px;margin:auto;padding:0 28px 36px;color:#81796e;font-size:.75rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.detail-panel{position:relative;top:auto;min-height:0}.flow-panel{padding:20px 14px}header{padding:34px 20px 16px}.layout{padding:16px 16px 44px}footer{padding:0 20px 28px}}
+@media(max-width:430px){.node{grid-template-columns:36px 1fr auto;padding:11px 10px;gap:9px}.node strong{font-size:.9rem}.node small{font-size:.72rem}.detail-top,.detail-body{padding-left:19px;padding-right:19px}}
+
+/* Toolbar, search popover, glossary drawer */
+input[type=search]::-webkit-search-cancel-button{display:none}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.toolbar{position:sticky;top:0;z-index:30;background:#0b0b0cdd;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #2b2824}
+.toolbar-inner{max-width:1200px;margin:auto;padding:12px 28px;display:flex;gap:10px;align-items:center}
+.search-box{position:relative;flex:1;min-width:0}
+.s-icon{position:absolute;left:13px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:#9a8b76;pointer-events:none}
+.search-input{width:100%;background:#0d0e0f;border:1px solid #5a4b38;border-radius:10px;padding:11px 44px 11px 40px;color:var(--cream);font:inherit;outline:none}
+.search-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px #e7bd7830}
+.kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:1px solid #5a4b38;border-radius:5px;padding:0 7px;font-size:.75rem;color:#9a8b76;pointer-events:none}
+.search-box.has-q .kbd{display:none}
+.clear-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;border-radius:8px;background:none;color:var(--gold);font-size:1.3rem;cursor:pointer}
+.clear-x[hidden]{display:none}
+.ghost-btn,.tool-btn,.search-tab,.chip,.cat-tab,.term-row,.goto,.result-item{font:inherit;cursor:pointer}
+.tool-btn{display:flex;align-items:center;gap:8px;white-space:nowrap;border:1px solid #65543e;background:#26221c;color:var(--gold);border-radius:10px;padding:10px 14px}
+.tool-btn[aria-expanded=true]{background:#3a2e1d;border-color:var(--gold)}
+.badge{background:#3a2e1d;border-radius:99px;padding:0 8px;font-size:.74rem;color:var(--cream)}
+.ghost-btn{border:1px solid #51483d;background:#1c1d1e;color:#cdbfa9;border-radius:8px;padding:6px 12px;font-size:.8rem;white-space:nowrap;max-width:46%;overflow:hidden;text-overflow:ellipsis}
+.ghost-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.ghost-btn:disabled{opacity:.35;cursor:default}
+.search-pop{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);flex-direction:column;max-height:min(64vh,500px);background:#141516;border:1px solid #6a5740;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.search-pop.open{display:flex}
+.pop-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid #2f2b26}
+.pop-head[hidden]{display:none}
+.search-tabs{display:flex;gap:6px}
+.search-tab{border:1px solid #51483d;border-radius:99px;padding:3px 11px;background:#1c1d1e;color:#bdb09d;font-size:.78rem}
+.search-tab[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:#30271d}
+.search-meta{color:#9c9182;font-size:.76rem}
+.pop-list{overflow:auto;padding:6px;overscroll-behavior:contain}
+.result-item{display:block;width:100%;text-align:left;border:1px solid transparent;border-radius:8px;background:none;color:var(--cream);padding:9px 11px}
+.result-item:hover,.result-item.active{background:#28241e;border-color:#5a4b38}
+.result-type{display:block;color:var(--gold);font-size:.7rem;margin-bottom:2px}
+.result-title{display:block;font-weight:700;font-size:.92rem}
+.result-snippet{display:block;color:#b9ad9d;font-size:.78rem;margin-top:3px;line-height:1.5}
+mark{background:#e7bd7833;color:#ffe2ae;border-radius:3px;padding:0 1px}
+.search-empty{color:#a99d8c;font-size:.86rem;padding:14px 8px}
+.suggest{padding:10px 8px 6px}
+.suggest p{margin:0 0 8px;color:#9c9182;font-size:.78rem}
+.chip{border:1px solid #51483d;border-radius:99px;background:#1c1d1e;color:#cdbfa9;padding:4px 12px;font-size:.82rem;margin:0 6px 6px 0}
+.chip:hover,.chip[aria-pressed=true]{border-color:var(--gold);color:var(--gold)}
+.chip[aria-pressed=true]{background:#30271d}
+/* drawer */
+.scrim{position:fixed;inset:0;z-index:40;background:#000a;display:none}
+.scrim.show{display:block}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:50;width:min(400px,100%);display:flex;flex-direction:column;background:#121314;border-left:1px solid #4a4034;box-shadow:-16px 0 40px #0008;transform:translateX(105%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.drawer.open{transform:none;visibility:visible}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px}
+.drawer-head h2{margin:0;font-size:1rem;letter-spacing:.12em;color:var(--gold)}
+.cat-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 18px 12px;border-bottom:1px solid #2f2b26;scrollbar-width:none}
+.cat-tab{flex:none;border:1px solid #51483d;border-radius:99px;background:#1c1d1e;color:#bdb09d;padding:4px 12px;font-size:.8rem}
+.cat-tab span{margin-left:6px;color:#8d8272;font-size:.72rem}
+.cat-tab[aria-pressed=true]{border-color:var(--gold);color:var(--gold);background:#30271d}
+.drawer-list{flex:1;overflow:auto;padding:8px 12px 24px;overscroll-behavior:contain}
+.term{border-bottom:1px solid #26231f}
+.term-row{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;color:#e8ddce;padding:11px 6px}
+.term-row span{flex:1;font-size:.92rem}
+.term-row small{color:#8d8272;font-size:.72rem}
+.term-row i{font-style:normal;color:#9a8b76;transition:transform .2s}
+.term-row:hover span{color:var(--gold)}
+.term.open .term-row i{transform:rotate(90deg)}
+.term.open .term-row span{color:var(--gold);font-weight:700}
+.term-body{display:none;margin:0 6px 12px;padding:11px 14px;border-left:3px solid var(--gold);background:#211d17;border-radius:0 8px 8px 0}
+.term.open .term-body{display:block}
+.term-body p{margin:0 0 8px;color:#d7cbbb;font-size:.86rem}
+.goto{border:0;background:none;color:var(--gold);padding:0;font-size:.8rem;text-decoration:underline}
+/* flow collapse, detail scroll, step nav */
+.flow-hint{flex:1;text-align:right}
+.step-strip{display:none;flex-wrap:wrap}
+.layout.flow-collapsed{grid-template-columns:minmax(0,860px);justify-content:center}
+.flow-collapsed .flow,.flow-collapsed .flow-hint{display:none}
+.flow-collapsed .step-strip{display:flex}
+.flow-collapsed .flow-panel{padding:16px 20px 10px}
+.flow-collapsed .panel-heading{margin-bottom:12px}
+.step-strip .chip{min-width:44px;text-align:center}
+.detail-panel{display:flex;flex-direction:column;top:84px;max-height:calc(100vh - 104px);scroll-margin-top:76px}
+.detail-body{position:relative;flex:1;overflow:auto;overscroll-behavior:contain}
+.detail-nav{display:flex;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid #39332c;background:#111213}
+.flow-collapsed .detail-panel{position:relative;top:auto;max-height:none}
+.flow-collapsed .detail-body{overflow:visible}
+@media(max-width:850px){.toolbar-inner{padding:10px 16px}.detail-panel{position:relative;top:auto;max-height:none}.detail-body{overflow:visible}.layout.flow-collapsed{grid-template-columns:1fr}
+.drawer{top:auto;left:0;width:auto;height:78vh;border-left:0;border-top:1px solid #4a4034;border-radius:18px 18px 0 0;box-shadow:0 -16px 40px #0008;transform:translateY(105%)}.drawer.open{transform:none}}
+@media(max-width:430px){.tool-btn .badge{display:none}.kbd{display:none}}
+@media(prefers-reduced-motion:reduce){.drawer,.term-row i{transition:none}}
+
+
+/* action accordion */
+.action-menu{margin:0 0 8px 22px;padding:2px 0 2px 16px;border-left:2px dashed #6a5740;display:grid;gap:8px}
+.menu-label{font-size:.76rem;color:#9c9182}
+.acc-item{border:1px solid #3a342c;border-radius:10px;background:#17181a;overflow:hidden}
+.acc-item.open{border-color:var(--gold)}
+.acc-head{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:none;color:var(--cream);padding:10px 12px;font:inherit;cursor:pointer}
+.acc-head:hover .acc-name{color:var(--gold)}
+.acc-ico{flex:none;width:28px;height:28px;border-radius:8px;background:#30271d;color:var(--gold);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+.acc-text{flex:1;min-width:0}
+.acc-name{display:block;font-weight:700;font-size:.93rem}
+.acc-sub{display:block;color:#a99d8c;font-size:.76rem;margin-top:1px}
+.acc-chev{color:#9a8b76;transition:transform .2s}
+.acc-item.open .acc-chev{transform:rotate(90deg)}
+.acc-body{display:none;padding:0 14px 14px;font-size:.88rem;line-height:1.75;color:#d7cbbb}
+.acc-item.open .acc-body{display:block}
+.acc-body h4{margin:12px 0 4px;color:var(--gold);font-size:.86rem}
+.acc-body p{margin:4px 0}.acc-body ul{margin:4px 0;padding-left:1.2em}.acc-body li{margin:3px 0}
+.acc-body .callout{margin:10px 0 4px;padding:9px 12px;border-left:3px solid var(--gold);background:#211d17;border-radius:0 8px 8px 0}
+.ap-table{display:grid;grid-template-columns:1fr auto;gap:1px;margin:6px 0 4px;background:#3a342c;border:1px solid #3a342c;border-radius:8px;overflow:hidden;font-size:.84rem}
+.ap-table span{background:#1b1c1e;padding:6px 10px}.ap-table .r{text-align:right;color:var(--gold);white-space:nowrap}
+.acc-tools{display:flex;justify-content:flex-end;margin:6px 0 10px}
+.detail-body .acc{display:grid;gap:8px}
+@media(prefers-reduced-motion:reduce){.acc-chev{transition:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">Combat reference · tabletop rules</div>
+ <h1>戰鬥流程</h1>
+ <p>點選左側任一階段，即可查看對應的戰鬥流程、判定方式、行動力用途、傷害處理與戰場單位規則。</p>
+</header>
+
+<div class="toolbar" role="search">
+ <div class="toolbar-inner">
+  <div class="search-box" id="searchBox">
+   <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+   <input id="ruleSearch" class="search-input" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="searchResults" placeholder="搜尋規則或詞條，例如：爆擊、待機、終極傷害">
+   <kbd class="kbd">/</kbd>
+   <button id="clearSearch" class="clear-x" type="button" aria-label="清除搜尋" hidden>×</button>
+   <div id="searchPop" class="search-pop">
+    <div id="popHead" class="pop-head" hidden>
+     <div class="search-tabs" role="group" aria-label="搜尋範圍">
+      <button class="search-tab" data-filter="all" data-label="全部" aria-pressed="true" type="button">全部</button>
+      <button class="search-tab" data-filter="rules" data-label="規則" aria-pressed="false" type="button">規則</button>
+      <button class="search-tab" data-filter="glossary" data-label="詞條" aria-pressed="false" type="button">詞條</button>
+     </div>
+     <span id="searchMeta" class="search-meta" aria-live="polite"></span>
+    </div>
+    <div id="searchResults" class="pop-list" role="listbox"></div>
+   </div>
+  </div>
+  <button id="glossaryToggle" class="tool-btn" type="button" aria-expanded="false" aria-controls="glossaryDrawer">詞條索引 <span class="badge" id="termCount"></span></button>
+ </div>
+</div>
+<div id="scrim" class="scrim"></div>
+<aside id="glossaryDrawer" class="drawer" aria-label="規則詞條索引" aria-hidden="true">
+ <div class="drawer-head"><h2>規則詞條索引</h2><button id="drawerClose" class="ghost-btn" type="button">關閉</button></div>
+ <div id="catTabs" class="cat-tabs" role="group" aria-label="詞條分類"></div>
+ <div id="glossaryList" class="drawer-list"></div>
+</aside>
+
+<main class="layout">
+ <section class="flow-panel" aria-label="戰鬥流程圖">
+  <div class="panel-heading"><h2>流程節點</h2><span class="hint flow-hint">選取節點以檢視規則</span><button id="flowToggle" class="ghost-btn" type="button" aria-expanded="true" aria-controls="flow">收合流程圖</button></div>
+  <div id="stepStrip" class="step-strip" aria-label="快速切換階段"></div>
+  <div class="flow" id="flow">
+   <div class="node-wrap"><button class="node" data-step="1" aria-pressed="true"><span class="num">01</span><span><strong>GM 宣告戰鬥開始</strong><small>所有參戰角色取得起始行動力</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="2" aria-pressed="false"><span class="num">02</span><span><strong>參戰者作先制判定</strong><small>2D6＋反應，決定行動順序</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="3" aria-pressed="false"><span class="num">03</span><span><strong>戰鬥輪開始</strong><small>新戰鬥輪開始，處理開幕攻擊</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="4" aria-pressed="false"><span class="num">04</span><span><strong>開幕攻擊</strong><small>BOSS 巨獸於每輪開始時發動</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="5" aria-pressed="false"><span class="num">05</span><span><strong>確認行動順位</strong><small>選擇尚未行動且順位最高者</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="6" aria-pressed="false"><span class="num">06</span><span><strong>角色的回合開始</strong><small>清除剩餘 AP，重新取得 3 AP</small></span><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="7" aria-pressed="false"><span class="num">07</span><span><strong>行動階段</strong><small>攻擊、移動、紋章與 AP 用途</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="action-menu acc" id="actionMenu" data-single="1"></div>
+   <div class="node-wrap"><button class="node" data-step="8" aria-pressed="false"><span class="num">08</span><span><strong>角色的回合結束</strong><small>該角色完成行動，換下一順位</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="node-wrap"><button class="node" data-step="9" aria-pressed="false"><span class="num">09</span><span><strong>戰鬥輪結束</strong><small>君主權能檢查、一般人移動</small></span><span class="chev">›</span></button><div class="connector"></div></div>
+   <div class="branch"><b>判斷是否結束</b>　仍有角色未行動 → 回到順位確認；戰鬥未結束 → 開始下一輪。</div>
+   <div class="node-wrap"><button class="node" data-step="10" aria-pressed="false"><span class="num">10</span><span><strong>戰鬥結束</strong><small>其中一方全員失去行為能力</small></span><span class="chev">›</span></button></div>
+   <div class="loop-note">循環提示：每輪從「戰鬥輪開始」重新進行；所有角色完成回合後才進入「戰鬥輪結束」檢查。</div>
+  </div>
+ </section>
+ <aside class="detail-panel" aria-live="polite" id="detail">
+  <div class="detail-top"><div class="detail-kicker" id="kicker">PHASE 01 / COMBAT SETUP</div><h2 id="title">GM 宣告戰鬥開始</h2><p id="summary">戰鬥場景開啟，所有參戰角色獲得起始行動力。</p></div>
+  <div class="detail-body" id="body"><h3>階段規則</h3><p>所有參戰角色即刻獲得各自的<strong>起始行動力</strong>。</p><div class="callout">角色每次開始自己的回合時，重新獲得 3 AP；起始行動力依角色規則決定。</div></div>
+  <div class="detail-nav"><button id="navPrev" class="ghost-btn" type="button">‹ 上一階段</button><button id="navNext" class="ghost-btn" type="button">下一階段 ›</button></div>
+ </aside>
+</main>
+<footer>戰鬥規則互動手冊 · 點選流程節點切換內容</footer>
+<script>
+const rules = {
+ 1:{en:"COMBAT SETUP",summary:"GM 宣告戰鬥開始，所有參戰角色立即取得各自的起始行動力。",html:`<h3>戰鬥開始</h3><p>當君主與騎士遭遇巨獸，或為阻止巨獸行動而與之交戰時，GM 可以宣告戰鬥開始。戰鬥開始時，所有參戰角色立即獲得其<strong>起始行動力</strong>。</p><div class="callout">起始行動力依角色資料或相關規則決定；本規則並未規定所有角色一律以 3 AP 入場。角色每次開始自己的回合時，才會重新獲得 3 AP。</div><h3>參戰單位</h3><ul><li>戰鬥通常由玩家角色、敵方角色、BOSS 巨獸及其呼喚的從獸構成。</li><li>若君主或一般人身處戰場，也須將其配置在戰鬥地圖上；兩者均沒有一般角色的行動順位。</li></ul>`},
+ 2:{en:"INITIATIVE",summary:"所有參戰角色擲 2D6＋反應，結果由高至低決定行動順序。",html:`<h3>先制判定</h3><ul><li>在戰鬥輪開始前，所有參戰角色分別擲 <strong>2D6＋反應</strong>，所得結果即為先制值。</li><li>先制判定視同行為判定。</li><li>先制值較高者先行動，並依此排列整場戰鬥的行動順序。</li></ul><div class="callout"><strong>先制值＝2D6＋反應</strong><br>原檔所列「（反應＋心智）÷2」並非本規則的先制公式，應予移除。</div><p>若角色之後宣告待機並改變先制值，該角色在本場戰鬥後續輪次也會沿用新的先制值。</p>`},
+ 3:{en:"ROUND START",summary:"新戰鬥輪開始；此階段會先處理 BOSS 巨獸的開幕攻擊。",html:`<h3>戰鬥輪開始</h3><p>此階段宣告上一個戰鬥輪結束，並開始新的戰鬥輪。接著處理 BOSS 巨獸的<strong>開幕攻擊</strong>，之後才確認角色行動順位。</p><div class="callout">每輪順序：戰鬥輪開始 → BOSS 開幕攻擊 → 確認行動順位 → 各角色回合。</div><h3>輪次循環</h3><p>所有參戰角色都完成自己的回合後，才進入戰鬥輪結束階段。若戰鬥尚未結束，便開始下一個戰鬥輪。</p>`},
+ 4:{en:"BOSS SPECIAL ATTACKS",summary:"BOSS 巨獸每輪開始時發動開幕攻擊；累積受到 100 點傷害時觸發狂亂攻擊。",html:`<h3>開幕攻擊</h3><p>BOSS 巨獸在<strong>每個戰鬥輪開始階段</strong>自動發動一次攻擊。通常具有大範圍、較高命中加值、較低傷害，並可能附加其他效果。</p><h3>狂亂攻擊</h3><p>每當 BOSS 巨獸累積受到 <strong>100 點傷害</strong>，便會在目前行動者的回合結束後、下一名行動者回合開始前，插入一次狂亂攻擊。狂亂攻擊通常是大範圍、高傷害的強力攻擊。</p><div class="callout">狂亂攻擊的插入時點：當前角色回合結束 → 狂亂攻擊 → 下一名角色回合開始。</div><h3>BOSS 的一般行動</h3><p>除開幕攻擊與狂亂攻擊外，BOSS 巨獸在自己的回合中，移動、攻擊、使用紋章及待機等流程均與玩家角色相同。BOSS 的行動力等同於其階級。</p>`},
+ 5:{en:"TURN ORDER & WAIT",summary:"依先制值選擇尚未行動的角色；角色可待機並永久調整本場戰鬥的先制值。",html:`<h3>行動順位確認</h3><ul><li>確認尚未行動的角色中，先制值最高者，並開始該角色的回合。</li><li>先制值相同時，依 <strong>PC ＞ 敵人 ＞ 玩家方 NPC</strong> 的順序行動。</li><li>同為 PC 時，由玩家自行決定行動順序。</li></ul><h3>待機</h3><p>角色輪到自己開始行動時，可以宣告待機，將本回合延後至指定的先制值再行動。角色不能藉此移到更早的先制值。</p><p>待機後，角色在這場戰鬥中的先制值會改為自己宣告的數字，往後每個戰鬥輪都使用新先制值。</p><div class="callout">例：PC1 原先制值 15，選擇待機至 9，則本回合改在先制值 9 行動；從下一戰鬥輪起，也固定以 9 作為先制值。</div><p>角色完成回合後，回到順位確認，選擇下一名尚未行動者。</p>`},
+ 6:{en:"CHARACTER TURN START",summary:"角色失去尚未使用的行動力，重新獲得 3 AP，並結束指定的持續效果。",html:`<h3>回合開始處理</h3><ul><li>角色失去所有尚未使用的行動力。</li><li>角色重新獲得 <strong>3 點行動力（AP）</strong>。</li><li>上一戰鬥輪中所有標示為「持續到角色下回合開始」的效果，在此時結束。</li></ul><div class="callout">回合開始時不是保留剩餘 AP，而是先清除，再取得新的 3 AP。</div><h3>角色行動順位</h3><p>角色完成回合開始處理後，進入行動階段。待機角色則在其指定先制值到達時才進行這些回合處理。</p>`},
+ 7:{en:"ACTION PHASE",summary:"角色每回合可攻擊、移動各一次，並依使用時機啟動紋章或消耗 AP。",html:`<h3>基本行動</h3><p>角色在自己的回合中，可進行<strong>攻擊一次、移動一次</strong>。兩者順序可以調換，但不能把移動拆開，在移動途中先攻擊、再繼續移動。</p><h3>攻擊與命中</h3><ul><li>使用自己的武裝，攻擊射程內的一個目標。</li><li>命中判定：擲 <strong>2D6＋命中值</strong>；結果必須<strong>超過</strong>目標迴避值才算命中（不是大於或等於）。</li><li>命中後依武裝傷害值擲傷害骰，決定目標受到的傷害。</li></ul><h3>強擊與爆擊</h3><ul><li><strong>強擊：</strong>命中判定中任一顆骰子擲出 6，即觸發強擊，可發動角色的戰鬥特技效果。一個判定不論出現幾個 6，都只觸發一次。</li><li><strong>爆擊：</strong>命中判定擲出 6、6 時觸發。該次攻擊傷害直接取可能的最大值，不需擲傷害骰；同時也會觸發強擊。</li></ul><div class="callout">例：傷害值為 2D6＋5，爆擊時直接造成 17 點傷害。</div><h3>多次攻擊與範圍攻擊</h3><ul><li><strong>多次攻擊：</strong>每次攻擊可分別選擇目標，並分別進行命中判定。</li><li><strong>範圍攻擊：</strong>一次攻擊只進行一次命中判定，再分別對照範圍內各目標的迴避值，判斷命中對象。</li><li>若範圍攻擊對不同目標具有不同程度的優勢、劣勢，取所有目標中最高的優勢與最高的劣勢合計後，套用於該次命中判定。</li></ul><h3>移動</h3><ul><li>每回合可免費移動 <strong>1 個區域</strong>。</li><li>每額外移動 1 個區域，消耗 <strong>1 AP</strong>。</li></ul><h3>主動移動與被動移動</h3><p>角色自行移動，或因自己使用的效果而移動，稱為<strong>主動移動</strong>；角色因他人的效果而非自主移動，稱為<strong>被動移動</strong>。部分效果會特別區分這兩種移動。</p><h3>使用紋章</h3><p>紋章效果各自標示使用時機；符合時機時，即可消耗該紋章的使用次數發動。使用次數依紋章本身的記載，不可一概視為每場戰鬥限用一次。</p><h3>行動力的其他用途</h3><ul><li><strong>額外移動：</strong>移動時每消耗 1 AP，額外移動 1 區域。</li><li><strong>專注迴避：</strong>角色回合中，每消耗 1 AP，直到該角色下回合開始前迴避 +2；可重複使用，效果累加。</li><li><strong>攻擊強化：</strong>攻擊時每消耗 2 AP，下次攻擊傷害 +1D6。</li><li><strong>支援命中：</strong>同區域隊友完成命中判定後，角色可消耗 1 AP，將自己的支援值加到隊友的命中判定。</li><li><strong>支援傷害：</strong>同區域隊友完成傷害擲骰後，角色可消耗 1 AP，將支援值加到隊友傷害上；此加值屬於<strong>終極傷害</strong>。</li></ul><p>支援對同一判定只能使用一次，但可分別支援同一目標的命中判定與傷害擲骰。角色不能支援自己的攻擊。</p><div class="callout">支援只能由同區域隊友提供；命中與傷害是兩個不同判定，可各接受一次支援。</div>`},
+ 8:{en:"CHARACTER TURN END",summary:"角色完成移動與攻擊等行動後結束回合，換下一名角色行動。",html:`<h3>回合結束</h3><p>角色完成本回合的移動、攻擊及其他行動後，宣告回合結束，接著輪到行動順序中的下一名角色。</p><h3>狂亂攻擊檢查</h3><p>若 BOSS 巨獸在累積傷害上達到狂亂攻擊條件，則在目前行動者回合結束後、下一名行動者回合開始前，先插入狂亂攻擊。</p><div class="callout">若仍有參戰角色尚未行動，回到「確認行動順位」；所有角色都行動過後，才進入戰鬥輪結束。</div>`},
+ 9:{en:"ROUND END & SUPPORT UNITS",summary:"所有角色完成回合後，處理君主自動權能及戰場上一般人、君主的移動。",html:`<h3>君主權能的自動使用</h3><p>每個戰鬥輪結束時，GM 檢查場上所有騎士的狀態。若符合君主權能列表上的自動使用條件，君主會將<strong>所有符合條件的權能全部啟動</strong>，並累積相應喪失度。當 PC 的命中判定觸發強擊時，也會同時觸發君主權能中的強擊效果。</p><h3>君主在戰場上</h3><ul><li>君主不直接參與戰鬥，沒有自己的行動、先制值或行動順位，只以權能支援 PC。</li><li>君主不會成為敵人攻擊目標，也不會受到傷害，除非敵人具有能攻擊君主的特殊能力。</li><li>若敵人以特殊能力攻擊君主且命中，君主必須累積 1 點喪失度使該次傷害無效；君主不能選擇不累積喪失度而承受傷害。</li><li>君主迴避為<strong>反應或心智 +7</strong>。</li><li>PC 可在任何時候向 GM 提出請求，讓君主支付相應消耗主動使用權能。</li><li>與君主同區域的 PC 移動時，可選擇帶君主一起移動；否則君主每個戰鬥輪結束時可自行移動 1 區域。</li></ul><h3>一般人</h3><ul><li>一般人沒有耐久值，受到傷害時直接扣減基本能力值；其迴避為<strong>反應或心智 +7</strong>。</li><li>一般人沒有自己的行動、先制值或行動順位，通常無法進行有意義的戰鬥行動，也無法對巨獸或騎士造成傷害。</li><li>與一般人同區域的 PC 移動時，可選擇帶一般人一起移動；此外，一般人每個戰鬥輪結束時可移動 1 區域，通常試圖遠離戰場。</li></ul><h3>從獸</h3><p>從獸在自己的回合中，行動選項與流程均與玩家角色相同；通常只擁有 <strong>2 點行動力</strong>。</p><div class="callout">輪末檢查完成後，若戰鬥仍持續，開始下一戰鬥輪。</div>`},
+ 10:{en:"DAMAGE & COMBAT END",summary:"處理傷害、失去行為能力與回復；任一方全員失去行為能力時戰鬥結束。",html:`<h3>傷害與減傷</h3><ul><li>角色受到傷害時，扣減等同傷害值的耐久值。</li><li><strong>減傷：</strong>實際傷害減少等同減傷值的點數。</li><li><strong>格檔：</strong>實際傷害減少等同格檔值的點數，之後格檔狀態消失。</li><li><strong>易傷：</strong>受到的實際傷害增加等同易傷值的點數。</li><li>扣除減傷與格檔後，實際加諸角色身上的傷害稱為<strong>實際傷害</strong>；部分效果只有受到實際傷害時才會生效。</li></ul><h3>終極傷害</h3><p>終極傷害是在其他傷害計算（包含攻擊者特殊效果、紋章及君主權能等）全部結算後，才額外加上的傷害。它無視減傷與格檔，無法被任何手段防止；也不能被加成或增倍。</p><h3>耐久值歸 0</h3><ul><li>若一次傷害超過角色剩餘耐久，耐久降至 0 後的剩餘傷害不會繼續作用。</li><li>騎士耐久值歸 0 時仍可行動並繼續作戰。</li><li>巨獸耐久值歸 0 時會被打倒並失去行為能力；失去行為能力的巨獸無法恢復，並會在戰鬥結束後死亡。</li></ul><h3>耐久值為 0 後再次受傷</h3><p>耐久值為 0 的角色再次受到傷害時，每 1 點傷害扣減 1 點基本能力值，扣減哪些能力值由該角色自行決定。只要任何一項能力值降至 0，角色便昏迷並失去行為能力；若所有能力值都降至 0，角色當場死亡。</p><h3>受傷與失能的回復</h3><ul><li>角色回復耐久值時，將回復值加到目前耐久值上。</li><li>若基本能力值曾因受傷而扣減，每回復 1 點耐久值，也可回復 1 點被扣減的基本能力值。</li><li>失去行為能力的角色只要所有基本能力值都恢復至 1 以上，即解除失能並立刻重返戰線。</li><li>巨獸無法從失去行為能力中回復。</li></ul><h3>死亡與復活</h3><p>騎士角色死亡時，可由君主權能使其復活；非騎士角色死亡後無法回復。</p><h3>戰鬥結束條件</h3><p>當戰鬥雙方其中一方的全體成員都失去行為能力時，戰鬥結束。騎士耐久值歸 0 並不代表失去行為能力；巨獸耐久值歸 0 則會失去行為能力。</p><div class="callout">所有敵人被打倒時戰鬥結束</div>`}
+};
+const buttons=[...document.querySelectorAll(".node")];
+function showStep(n){
+ const r=rules[n]; if(!r)return;
+ buttons.forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.step)===n)));
+ document.getElementById("kicker").textContent=`PHASE ${String(n).padStart(2,"0")} / ${r.en}`;
+ document.getElementById("title").textContent=buttons.find(b=>Number(b.dataset.step)===n).querySelector("strong").textContent;
+ document.getElementById("summary").textContent=r.summary;
+ document.getElementById("body").innerHTML=r.html;
+}
+buttons.forEach(b=>b.addEventListener("click",()=>showStep(Number(b.dataset.step))));
+</script>
+
+<script>
+const glossaryEntries = [
+ {term:"戰鬥輪",keys:"輪次 戰鬥輪開始 戰鬥輪結束",step:3,desc:"從「戰鬥輪開始」到所有參戰角色都完成自己的回合，再進入「戰鬥輪結束」的完整循環。戰鬥尚未結束時，會開始下一個戰鬥輪。"},
+ {term:"先制判定",keys:"先制 先制值 行動順序 2D6 反應",step:2,desc:"戰鬥輪開始前，所有參戰角色擲 2D6＋反應，結果作為先制值；先制值較高者先行動。先制判定視同行為判定。"},
+ {term:"先制值",keys:"先制判定 行動順位 待機",step:5,desc:"由先制判定得出的數字，用來決定角色行動順序。角色宣告待機後，先制值會改成宣告的數字，並沿用於本場戰鬥後續輪次。"},
+ {term:"待機",keys:"延遲行動 指定先制值",step:5,desc:"輪到角色開始行動時，可以宣告待機，延後到指定的先制值再行動；調整後的先制值會固定沿用至本場戰鬥後續輪次。"},
+ {term:"起始行動力",keys:"AP 戰鬥開始 行動力",step:1,desc:"戰鬥開始時，所有參戰角色即刻獲得的行動力。原文未在此處指定所有角色共通的固定數值。"},
+ {term:"行動力",keys:"AP 額外移動 專注迴避 支援 攻擊強化",step:7,desc:"角色可用來啟動天啟武裝效果，也可在戰鬥中用於額外移動、專注迴避、支援及攻擊強化等用途。"},
+ {term:"攻擊",keys:"命中判定 傷害擲骰 武裝 射程",step:7,desc:"角色使用自己的武裝，對射程內一個目標進行攻擊。命中判定擲 2D6＋命中值，結果超過目標迴避值才命中。"},
+ {term:"強擊",keys:"擲出6 戰鬥特技",step:7,desc:"命中判定中只要任一顆骰子擲出 6，就觸發強擊，可發動角色的戰鬥特技效果。同一判定最多觸發一次。"},
+ {term:"爆擊",keys:"6、6 最大傷害 傷害骰",step:7,desc:"命中判定擲出 6、6 時觸發。該次攻擊傷害不必擲傷害骰，直接取可能的最大值；同時也會觸發強擊。"},
+ {term:"多次攻擊",keys:"多段攻擊 多個目標 命中判定",step:7,desc:"具有多次攻擊效果時，每次攻擊都可以分別選定目標，並分別進行命中判定。"},
+ {term:"範圍攻擊",keys:"群體攻擊 優勢 劣勢 迴避值",step:7,desc:"一次攻擊對一定範圍內的目標造成傷害時，只進行一次命中判定，再分別對照各目標的迴避值。不同目標的優勢與劣勢，取最高優勢及最高劣勢合計。"},
+ {term:"移動",keys:"免費移動 額外移動 區域",step:7,desc:"角色每回合可免費移動一個區域；每多移動一個區域，需消耗一點行動力。"},
+ {term:"主動移動",keys:"自主移動 自己使用的效果",step:7,desc:"角色自己進行移動，或因自己使用的效果而移動，稱為主動移動。"},
+ {term:"被動移動",keys:"非自主移動 他人效果",step:7,desc:"角色因非自主原因移動，通常是受到其他人的效果而移動，稱為被動移動。"},
+ {term:"使用紋章",keys:"紋章 使用時機 使用次數",step:7,desc:"紋章上的效果會標示使用時機；符合時機時，可以消耗使用次數發動。"},
+ {term:"專注迴避",keys:"迴避 +2 行動力 AP",step:7,desc:"角色回合中，每消耗一點行動力，直到該角色下回合開始，其迴避值增加 2；可重複使用，增加值會累加。"},
+ {term:"支援",keys:"支援值 命中判定 傷害擲骰 同區域隊友",step:7,desc:"同區域隊友完成命中判定後，可消耗 1 點行動力將支援值加到命中判定；完成傷害擲骰後，也可另消耗 1 點行動力將支援值加到傷害值，該加值屬於終極傷害。不能支援自己的攻擊。"},
+ {term:"攻擊強化",keys:"傷害 +1D6 2點行動力",step:7,desc:"角色攻擊時，每消耗 2 點行動力，下次攻擊的傷害增加 1D6。"},
+ {term:"開幕攻擊",keys:"BOSS 巨獸 戰鬥輪開始 自動攻擊",step:4,desc:"BOSS 巨獸在每個戰鬥輪開始時自動發動一次攻擊，通常範圍大、命中加值較高、傷害較低，並可能附帶效果。"},
+ {term:"狂亂攻擊",keys:"BOSS 巨獸 累積100點傷害 插入攻擊",step:4,desc:"BOSS 巨獸每累積受到 100 點傷害，就會在目前行動者回合結束後、下一名行動者回合開始前，插入一次特殊攻擊。"},
+ {term:"BOSS 巨獸",keys:"開幕攻擊 狂亂攻擊 階級 行動力",step:4,desc:"BOSS 巨獸除一般回合行動外，還有開幕攻擊與狂亂攻擊；其行動力等同於巨獸階級。"},
+ {term:"從獸",keys:"行動力 2點",step:9,desc:"從獸的行動選項與流程和玩家角色相同；通常只擁有 2 點行動力。"},
+ {term:"一般人",keys:"戰場 耐久值 基本能力值 迴避",step:9,desc:"一般人沒有耐久值，受到傷害時直接扣減基本能力值；沒有自己的行動、先制值或行動順位。其迴避為反應或心智 +7。"},
+ {term:"君主",keys:"權能 喪失度 迴避 移動",step:9,desc:"君主不直接參與戰鬥，沒有自己的行動、先制值或行動順位，主要以權能支援 PC；在戰場上時須配置於戰鬥地圖。"},
+ {term:"權能",keys:"君主 主動使用 自動使用 強擊",step:9,desc:"君主可主動依 PC 請求支付相應消耗使用權能；每個戰鬥輪結束時，GM 也須檢查並啟動所有符合自動使用條件的權能。"},
+ {term:"喪失度",keys:"君主 權能 傷害無效化",step:9,desc:"君主使用權能時會付出相應消耗並累積喪失度；敵人以特殊能力攻擊君主且命中時，君主須累積 1 點喪失度使傷害無效化。"},
+ {term:"減傷",keys:"實際傷害 傷害值",step:10,desc:"角色受到的實際傷害減少等同減傷值的點數。"},
+ {term:"格檔",keys:"實際傷害 狀態 消失",step:10,desc:"角色受到的實際傷害減少等同格檔值的點數，之後格檔狀態消失。"},
+ {term:"易傷",keys:"實際傷害 增加傷害",step:10,desc:"角色受到的實際傷害增加等同易傷值的點數。"},
+ {term:"實際傷害",keys:"減傷 格檔 易傷",step:10,desc:"扣除減傷與格檔後，實際加諸於角色身上的傷害。部分效果只有角色受到實際傷害時才會生效。"},
+ {term:"終極傷害",keys:"無視減傷 格檔 無法防止 加成 增倍",step:10,desc:"在其他傷害計算全部結算後才加諸的額外傷害。無視減傷與格檔，無法防止；也不能被加成或增倍。"},
+ {term:"耐久值歸 0",keys:"騎士 巨獸 剩餘傷害",step:10,desc:"一次傷害使耐久值降至 0 後，超過剩餘耐久值的傷害不再作用。騎士仍可繼續作戰；巨獸則會被打倒並失去行為能力。"},
+ {term:"失去行為能力",keys:"昏迷 基本能力值 0 回復",step:10,desc:"角色任一基本能力值扣減至 0 時，會昏迷並失去行為能力。當所有能力值都回復到 1 以上，即解除失能並可立刻重返戰線。"},
+ {term:"死亡與復活",keys:"騎士 君主權能 非騎士",step:10,desc:"騎士角色死亡時，君主權能可以使其復活；非騎士角色死亡無法回復。"}
+];
+
+const actionGroups=[
+{ico:"移",name:"移動",sub:"每回合免費 1 區域；額外移動 1 AP／區域",html:`<h4>每回合移動</h4><p>角色在自己的回合中可移動一次。移動與攻擊的順序可以調換，但不能把移動拆開，在移動途中先攻擊、再繼續移動。</p><ul><li>每回合可免費移動 <strong>1 個區域</strong>。</li><li>每額外移動 1 個區域，消耗 <strong>1 AP</strong>。</li></ul><h4>主動移動與被動移動</h4><p>角色自行移動，或因自己使用的效果而移動，稱為<strong>主動移動</strong>；角色因他人的效果而非自主移動，稱為<strong>被動移動</strong>。部分效果會特別區分這兩種移動。</p>`},
+{ico:"攻",name:"攻擊",sub:"命中判定、強擊、爆擊、多次與範圍攻擊",html:`<h4>攻擊與命中</h4><ul><li>每回合可攻擊一次：使用自己的武裝，攻擊射程內的一個目標。</li><li>命中判定：擲 <strong>2D6＋命中值</strong>；結果必須<strong>超過</strong>目標迴避值才算命中（不是大於或等於）。</li><li>命中後依武裝傷害值擲傷害骰，決定目標受到的傷害。</li></ul><h4>強擊與爆擊</h4><ul><li><strong>強擊：</strong>命中判定中任一顆骰子擲出 6，即觸發強擊，可發動角色的戰鬥特技效果。一個判定不論出現幾個 6，都只觸發一次。</li><li><strong>爆擊：</strong>命中判定擲出 6、6 時觸發。該次攻擊傷害直接取可能的最大值，不需擲傷害骰；同時也會觸發強擊。</li></ul><div class="callout">例：傷害值為 2D6＋5，爆擊時直接造成 17 點傷害。</div><h4>多次攻擊與範圍攻擊</h4><ul><li><strong>多次攻擊：</strong>每次攻擊可分別選擇目標，並分別進行命中判定。</li><li><strong>範圍攻擊：</strong>一次攻擊只進行一次命中判定，再分別對照範圍內各目標的迴避值，判斷命中對象。</li><li>若範圍攻擊對不同目標具有不同程度的優勢、劣勢，取所有目標中最高的優勢與最高的劣勢合計後，套用於該次命中判定。</li></ul>`},
+{ico:"紋",name:"紋章",sub:"依各紋章標示的使用時機與次數發動",html:`<h4>使用紋章</h4><p>紋章效果各自標示使用時機；符合時機時，即可消耗該紋章的使用次數發動。使用次數依紋章本身的記載，不可一概視為每場戰鬥限用一次。</p>`},
+{ico:"AP",name:"行動力用途",sub:"額外移動、專注迴避、攻擊強化、支援命中／傷害",html:`<h4>AP 費用速查</h4><div class="ap-table"><span>額外移動</span><span class="r">1 AP ／ +1 區域</span><span>專注迴避</span><span class="r">1 AP ／ 迴避 +2</span><span>攻擊強化</span><span class="r">2 AP ／ +1D6</span><span>支援命中</span><span class="r">1 AP</span><span>支援傷害</span><span class="r">1 AP</span></div><h4>詳細說明</h4><ul><li><strong>額外移動：</strong>移動時每消耗 1 AP，額外移動 1 區域。</li><li><strong>專注迴避：</strong>角色回合中，每消耗 1 AP，直到該角色下回合開始前迴避 +2；可重複使用，效果累加。</li><li><strong>攻擊強化：</strong>攻擊時每消耗 2 AP，下次攻擊傷害 +1D6。</li><li><strong>支援命中：</strong>同區域隊友完成命中判定後，角色可消耗 1 AP，將自己的支援值加到隊友的命中判定。</li><li><strong>支援傷害：</strong>同區域隊友完成傷害擲骰後，角色可消耗 1 AP，將支援值加到隊友傷害上；此加值屬於<strong>終極傷害</strong>。</li></ul><p>支援對同一判定只能使用一次，但可分別支援同一目標的命中判定與傷害擲骰。角色不能支援自己的攻擊。</p><div class="callout">支援只能由同區域隊友提供；命中與傷害是兩個不同判定，可各接受一次支援。</div>`}];
+const accHtml=g=>`<div class="acc-item"><button type="button" class="acc-head" aria-expanded="false"><span class="acc-ico">${g.ico}</span><span class="acc-text"><span class="acc-name">${g.name}</span><span class="acc-sub">${g.sub}</span></span><span class="acc-chev">›</span></button><div class="acc-body">${g.html}</div></div>`;
+rules[7].html=`<h3>基本行動</h3><p>角色在自己的回合中，可進行<strong>攻擊一次、移動一次</strong>。兩者順序可以調換，但不能把移動拆開，在移動途中先攻擊、再繼續移動。</p><h3>行動分類</h3><div class="acc-tools"><button type="button" class="ghost-btn acc-all">全部展開</button></div><div class="acc">${actionGroups.map(accHtml).join("")}</div>`;
+document.getElementById("actionMenu").innerHTML=`<div class="menu-label">行動選項　點選分類展開詳細規則</div>`+actionGroups.map(accHtml).join("");
+document.addEventListener("click",e=>{
+ const h=e.target.closest(".acc-head");
+ if(h){const it=h.parentElement,c=it.closest(".acc"),was=it.classList.contains("open");
+  if(c.dataset.single)c.querySelectorAll(".acc-item.open").forEach(x=>{x.classList.remove("open");x.firstChild.setAttribute("aria-expanded","false");});
+  it.classList.toggle("open",!was);h.setAttribute("aria-expanded",String(!was));}
+ const a=e.target.closest(".acc-all");
+ if(a){const items=[...a.closest(".detail-body").querySelectorAll(".acc-item")],all=items.every(i=>i.classList.contains("open"));
+  items.forEach(i=>{i.classList.toggle("open",!all);i.firstChild.setAttribute("aria-expanded",String(!all));});a.textContent=all?"全部展開":"全部收合";}
+});
+function plainText(html){const d=document.createElement("div");d.innerHTML=html;return d.textContent.replace(/\s+/g," ").trim();}
+const ruleIndex=Object.entries(rules).map(([step,r])=>{
+ const t=document.createElement("div");t.innerHTML=r.html;
+ return {step:Number(step),title:buttons.find(b=>Number(b.dataset.step)===Number(step)).querySelector("strong").textContent,
+  summary:r.summary,blocks:[...t.querySelectorAll("h3,h4,p,li,.callout,.acc-name")].map(el=>({text:el.textContent.trim()}))};
+});
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0");
+const stepTitle=n=>buttons.find(b=>+b.dataset.step===n).querySelector("strong").textContent;
+const mobile=()=>matchMedia("(max-width:850px)").matches;
+const esc=t=>t.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const mark=(t,q)=>{const i=t.toLowerCase().indexOf(q);return i<0?esc(t):esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length));};
+const cats={"回合流程":["戰鬥輪","先制判定","先制值","待機","起始行動力"],
+ "行動與判定":["行動力","攻擊","強擊","爆擊","多次攻擊","範圍攻擊","移動","主動移動","被動移動","使用紋章","專注迴避","支援","攻擊強化"],
+ "BOSS 與單位":["開幕攻擊","狂亂攻擊","BOSS 巨獸","從獸","一般人","君主","權能","喪失度"],
+ "傷害與失能":["減傷","格檔","易傷","實際傷害","終極傷害","耐久值歸 0","失去行為能力","死亡與復活"]};
+glossaryEntries.forEach(e=>{e.cat=Object.keys(cats).find(c=>cats[c].includes(e.term))||"其他";});
+$("termCount").textContent=glossaryEntries.length;
+
+/* ---- flow: collapse, step strip, prev/next ---- */
+const layout=document.querySelector(".layout"), strip=$("stepStrip"), flowToggle=$("flowToggle");
+strip.innerHTML=buttons.map(b=>`<button type="button" class="chip" data-step="${b.dataset.step}" title="${stepTitle(+b.dataset.step)}">${pad(b.dataset.step)}</button>`).join("");
+function setCollapsed(c){layout.classList.toggle("flow-collapsed",c);flowToggle.textContent=c?"展開流程圖":"收合流程圖";flowToggle.setAttribute("aria-expanded",String(!c));try{localStorage.setItem("flowCollapsed",c?"1":"0")}catch(e){}}
+flowToggle.addEventListener("click",()=>setCollapsed(!layout.classList.contains("flow-collapsed")));
+let cur=1;const baseShow=showStep;
+showStep=function(n){baseShow(n);cur=n;$("body").scrollTop=0;
+ strip.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(+c.dataset.step===n)));
+ $("navPrev").disabled=n<=1;$("navNext").disabled=n>=buttons.length;
+ $("navPrev").textContent=n>1?`‹ ${pad(n-1)} ${stepTitle(n-1)}`:"‹ 上一階段";
+ $("navNext").textContent=n<buttons.length?`${pad(n+1)} ${stepTitle(n+1)} ›`:"下一階段 ›";};
+const toDetail=()=>{if(mobile())$("detail").scrollIntoView({behavior:"smooth",block:"start"});};
+strip.addEventListener("click",e=>{const c=e.target.closest(".chip");if(c){showStep(+c.dataset.step);toDetail();}});
+buttons.forEach(b=>b.addEventListener("click",toDetail));
+$("navPrev").addEventListener("click",()=>{showStep(cur-1);toDetail();});
+$("navNext").addEventListener("click",()=>{showStep(cur+1);toDetail();});
+try{setCollapsed(localStorage.getItem("flowCollapsed")==="1")}catch(e){}
+showStep(1);
+
+function navigateToRule(step,term){
+ showStep(step);
+ const body=$("body");
+ const cand=[...body.querySelectorAll("h3,h4,p,li,.callout,.acc-name")];
+ const t=cand.find(el=>el.textContent.toLowerCase().includes(term.toLowerCase()))||cand[0];
+ if(!t)return;
+ const it=t.closest(".acc-item");if(it){it.classList.add("open");it.firstChild.setAttribute("aria-expanded","true");}
+ t.classList.add("rule-hit");
+ if(body.scrollHeight>body.clientHeight+2&&getComputedStyle(body).overflowY!=="visible"){
+  body.scrollTo({top:Math.max(0,t.offsetTop-16),behavior:"smooth"});
+  $("detail").scrollIntoView({behavior:"smooth",block:"start"});
+ }else t.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+/* ---- search popover ---- */
+const input=$("ruleSearch"), pop=$("searchPop"), list=$("searchResults"), box=$("searchBox");
+let filter="all", hits=[], act=-1;
+const openPop=()=>{pop.classList.add("open");input.setAttribute("aria-expanded","true");};
+const closePop=()=>{pop.classList.remove("open");input.setAttribute("aria-expanded","false");act=-1;};
+const snip=(t,q)=>{const i=t.toLowerCase().indexOf(q),s=i>40?i-30:0;return(s?"…":"")+t.slice(s,s+110)+(s+110<t.length?"…":"");};
+function collect(q){
+ const out=[];
+ ruleIndex.forEach(r=>{
+  const m=r.blocks.filter(b=>b.text.toLowerCase().includes(q));
+  if(r.title.toLowerCase().includes(q)||r.summary.toLowerCase().includes(q)||m.length)
+   out.push({type:"規則",title:r.title,step:r.step,snippet:m.length?m[0].text:r.summary,rank:m.length?2:1});
+ });
+ glossaryEntries.forEach(e=>{
+  if((e.term+" "+e.keys+" "+e.desc).toLowerCase().includes(q))
+   out.push({type:"詞條",title:e.term,entry:e,snippet:e.desc,rank:3});
+ });
+ return out.sort((a,b)=>b.rank-a.rank);
+}
+function renderSearch(){
+ const q=input.value.trim().toLowerCase();
+ box.classList.toggle("has-q",!!input.value);$("clearSearch").hidden=!input.value;
+ $("popHead").hidden=!q;act=-1;
+ if(!q){hits=[];list.innerHTML=`<div class="suggest"><p>常用搜尋</p>${["爆擊","待機","終極傷害","君主權能","支援","專注迴避"].map(t=>`<button type="button" class="chip" data-q="${t}">${t}</button>`).join("")}</div>`;return;}
+ const all=collect(q),nR=all.filter(h=>h.type==="規則").length;
+ document.querySelectorAll(".search-tab").forEach(t=>{const f=t.dataset.filter;t.textContent=`${t.dataset.label} ${f==="all"?all.length:f==="rules"?nR:all.length-nR}`;});
+ hits=all.filter(h=>filter==="all"||(filter==="rules")===(h.type==="規則"));
+ $("searchMeta").textContent=hits.length>30?"顯示前 30 筆":"";
+ list.innerHTML=hits.length?hits.slice(0,30).map((h,i)=>`<button type="button" class="result-item" role="option" data-i="${i}"><span class="result-type">${h.type} · ${h.step?"流程 "+pad(h.step):h.entry.cat}</span><span class="result-title">${mark(h.title,q)}</span><span class="result-snippet">${mark(snip(h.snippet,q),q)}</span></button>`).join(""):`<div class="search-empty">沒有找到「${esc(q)}」，試試其他關鍵字或詞條名稱。</div>`;
+}
+function pick(h){if(!h)return;closePop();input.blur();h.type==="詞條"?openDrawer(h.entry):navigateToRule(h.step,input.value.trim());}
+input.addEventListener("focus",()=>{openPop();renderSearch();});
+input.addEventListener("input",()=>{openPop();renderSearch();});
+input.addEventListener("keydown",e=>{
+ const items=[...list.querySelectorAll(".result-item")];
+ if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+  if(!items.length)return;e.preventDefault();
+  act=(act+(e.key==="ArrowDown"?1:-1)+items.length)%items.length;
+  items.forEach((el,i)=>el.classList.toggle("active",i===act));items[act].scrollIntoView({block:"nearest"});
+ }else if(e.key==="Enter"&&hits.length){e.preventDefault();pick(hits[act>=0?act:0]);}
+ else if(e.key==="Escape"){closePop();input.blur();}
+});
+list.addEventListener("click",e=>{
+ const r=e.target.closest(".result-item"),c=e.target.closest("[data-q]");
+ if(r)pick(hits[+r.dataset.i]);
+ else if(c){input.value=c.dataset.q;renderSearch();input.focus();}
+});
+$("clearSearch").addEventListener("click",()=>{input.value="";renderSearch();input.focus();});
+document.querySelectorAll(".search-tab").forEach(t=>t.addEventListener("click",()=>{
+ filter=t.dataset.filter;document.querySelectorAll(".search-tab").forEach(x=>x.setAttribute("aria-pressed",String(x===t)));renderSearch();
+}));
+document.addEventListener("mousedown",e=>{if(!box.contains(e.target))closePop();});
+document.addEventListener("keydown",e=>{
+ const typing=/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+ if((e.key==="/"&&!typing)||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k")){e.preventDefault();input.focus();input.select();}
+ if(e.key==="Escape"&&drawer.classList.contains("open"))closeDrawer();
+});
+
+/* ---- glossary drawer ---- */
+const drawer=$("glossaryDrawer"), gList=$("glossaryList"), gBtn=$("glossaryToggle"), scrim=$("scrim");
+let cat="全部", openTerm=null;
+function renderCats(){$("catTabs").innerHTML=["全部",...Object.keys(cats)].map(c=>`<button type="button" class="cat-tab" data-cat="${c}" aria-pressed="${c===cat}">${c}<span>${c==="全部"?glossaryEntries.length:glossaryEntries.filter(e=>e.cat===c).length}</span></button>`).join("");}
+function renderTerms(){gList.innerHTML=glossaryEntries.filter(e=>cat==="全部"||e.cat===cat).map(e=>{const o=e.term===openTerm;return `<div class="term${o?" open":""}"><button type="button" class="term-row" data-term="${e.term}" aria-expanded="${o}"><span>${e.term}</span><small>${e.cat}</small><i>›</i></button><div class="term-body"><p>${e.desc}</p><button type="button" class="goto" data-goto="${e.term}">前往「${stepTitle(e.step)}」→</button></div></div>`;}).join("");gList.scrollTop=0;}
+function openDrawer(entry){
+ if(entry){cat=entry.cat;openTerm=entry.term;}
+ renderCats();renderTerms();
+ drawer.classList.add("open");drawer.setAttribute("aria-hidden","false");gBtn.setAttribute("aria-expanded","true");
+ if(mobile())scrim.classList.add("show");
+ if(entry){const el=gList.querySelector(`[data-term="${entry.term}"]`);if(el)el.scrollIntoView({block:"center"});}
+}
+function closeDrawer(){drawer.classList.remove("open");drawer.setAttribute("aria-hidden","true");gBtn.setAttribute("aria-expanded","false");scrim.classList.remove("show");}
+gBtn.addEventListener("click",()=>drawer.classList.contains("open")?closeDrawer():openDrawer());
+$("drawerClose").addEventListener("click",closeDrawer);
+scrim.addEventListener("click",closeDrawer);
+$("catTabs").addEventListener("click",e=>{const c=e.target.closest(".cat-tab");if(c){cat=c.dataset.cat;openTerm=null;renderCats();renderTerms();}});
+gList.addEventListener("click",e=>{
+ const g=e.target.closest(".goto"),r=e.target.closest(".term-row");
+ if(g){const en=glossaryEntries.find(x=>x.term===g.dataset.goto);navigateToRule(en.step,en.term);if(mobile())closeDrawer();}
+ else if(r){
+  const t=r.parentElement,was=t.classList.contains("open");
+  gList.querySelectorAll(".term.open").forEach(x=>{x.classList.remove("open");x.firstChild.setAttribute("aria-expanded","false");});
+  if(!was){t.classList.add("open");r.setAttribute("aria-expanded","true");openTerm=r.dataset.term;}else openTerm=null;
+ }
+});
+renderSearch();
+</script>
+
+</body>
+</html>
