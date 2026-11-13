@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>天啟症候群 2.0｜巨獸・從獸・君主 戰鬥面板</title>
+<style>
+:root{--bg:#f4f1ea;--sf:#fffdf8;--tx:#2a2622;--mu:#7a7167;--ac:#b4412b;--ac2:#2f6b5e;--bd:#ddd5c8;--hl:#fbe9e3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1917;--sf:#26231f;--tx:#ece6dc;--mu:#a0968a;--ac:#e2705a;--ac2:#5fb3a0;--bd:#3b362f;--hl:#3a2621}}
+:root[data-theme="dark"]{--bg:#1b1917;--sf:#26231f;--tx:#ece6dc;--mu:#a0968a;--ac:#e2705a;--ac2:#5fb3a0;--bd:#3b362f;--hl:#3a2621}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.55}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 12px}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tabs button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:10px;font-size:15px;cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:var(--bg);border-radius:8px;padding:8px;text-align:center}
+.stat small{display:block;color:var(--mu);font-size:12px}.stat b{font-size:22px}
+.stat.up b{color:var(--ac)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px dashed var(--bd);flex-wrap:wrap}
+.row:first-of-type{border-top:0}
+.ctr{display:flex;align-items:center;gap:8px}
+.ctr button,.btn{min-width:40px;height:40px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:8px;font-size:18px;cursor:pointer}
+.btn{padding:0 14px;font-size:14px}.btn.pri{background:var(--ac2);color:#fff;border-color:var(--ac2)}
+.ctr span{min-width:34px;text-align:center;font-size:20px;font-weight:700}
+.mu{color:var(--mu);font-size:13px}
+.sw{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:15px}
+.sw input{width:22px;height:22px;accent-color:var(--ac)}
+.atk{border-left:4px solid var(--ac)}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--hl);color:var(--ac);margin-right:6px}
+.res{display:flex;gap:10px;margin:8px 0}
+.res div{flex:1;background:var(--hl);border-radius:8px;padding:8px;text-align:center}
+.res small{display:block;color:var(--mu);font-size:12px}.res b{font-size:20px;color:var(--ac)}
+.fm{font-size:12px;color:var(--mu)}
+.bar{height:10px;background:var(--bg);border-radius:6px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--ac2);transition:width .2s}
+.warn{color:var(--ac);font-weight:600}
+.term{color:var(--ac2);border-bottom:1px dashed var(--ac2);cursor:pointer;font-weight:600}
+.def{margin:8px 0 4px;padding:8px 10px;background:var(--bg);border-left:3px solid var(--ac2);border-radius:6px;font-size:13px;color:var(--tx);font-weight:400}
+.def b{color:var(--ac2)}
+.def .x{float:right;color:var(--mu);cursor:pointer;font-size:12px}
+.num{width:84px;height:40px;font-size:20px;font-weight:700;text-align:center;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx)}
+.big{display:flex;gap:12px;flex-wrap:wrap}.big .card{flex:1;min-width:240px;margin:0}
+.big .ctr{justify-content:center;margin-top:8px}
+.big .ctr button{min-width:48px;height:48px;font-size:22px}
+.pw{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.pw th,.pw td{border:1px solid var(--bd);padding:6px 8px;text-align:left;vertical-align:top}
+.pw th{background:var(--bg);color:var(--mu);font-weight:600;white-space:nowrap}
+.pw td.c{text-align:center;white-space:nowrap;font-weight:700;color:var(--ac)}
+.pw div+div{margin-top:4px}
+.ul{margin:6px 0 0;padding-left:20px;font-size:14px}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style></head><body><main>
+<h1>天啟症候群 2.0｜巨獸・從獸・君主 戰鬥面板</h1>
+<div class="tabs"><button id="t1" class="on" onclick="tab(1)">巨獸</button><button id="t2" onclick="tab(2)">從獸</button><button id="t3" onclick="tab(3)">君主</button></div>
+<div id="v1"></div><div id="v2" hidden></div><div id="v3" hidden></div>
+<script>
+const R=5; // 階級
+const S={ap:5,apMax:5,n:0,m:0,round蓄:0,low:false,rr:3,sel:0,beast:{},hp:440,cum:0,done:0,amt:'',emb:[false,false,false],polNow:false,open:{},glory:0,loss:0};
+const EMB=[['攻擊極化','你的回合','你下一次攻擊傷害值加倍。'],['迅擊','任意','使用後你可以立刻進行一次攻擊。'],['永恆之槍','命中判定前','取代你本回合的攻擊，你選擇任一個區域，對該區域所有敵人造成 4D6 點傷害。那些敵人直到你下回合開始為止無法移動。']];
+const B={hit:8,dod:14,ini:8,hp:440};
+const ATK=[
+ {name:'咆哮：風王鐵槌',tag:'開幕攻擊・範圍攻擊',mod:3,dice:1,flat:R,fl:'1D6＋階級(5)',rng:'0~3',fx:'範圍攻擊，對射程內的全體敵人造成傷害，並讓他們獲得【易傷 4】狀態。即使攻擊沒有命中，依然會獲得【易傷 2】狀態。'},
+ {name:'毀滅噴吐：終焉之槍',tag:'狂亂攻擊・範圍攻擊',mod:2,dice:R,flat:0,fl:'階級D6 ＝ 5D6',rng:'特殊',fx:'範圍攻擊，選擇一個你的鄰接區域視作你面對的方向，並對該方向的一直線上的全部敵人造成傷害，並讓他們獲得【重創】狀態。依然會受到一半的傷害。'},
+ {name:'刀劍：聖劍',tag:'攻擊・可蓄力',chg:true,mod:2,dice:1,flat:R,fl:'1D6＋階級(5)',rng:'0~1',fx:'鋒銳：攻擊觸發強擊則視為暴擊'}
+];
+const PASS=[
+ {name:'蓄力',tag:'非攻擊',fx:'BOSS專用，攻擊前消耗一點行動力，你使用該部位攻擊的傷害追加【階級】點。只要你還有行動力就能重複使用，一回合最多使用3次。'},
+ {name:'第二型態',tag:'常駐',fx:'因傷害導致hp低於100時，命中迴避各+1，得到減傷2，你的攻擊傷害+3'},
+ {name:'時空干涉',tag:'常駐',fx:'你的回合可以使用，消耗一點行動力，瞬間改變位置到距離三以內的任意區域，這個移動不視為移動，不觸發任何與移動有關的效果'}
+];
+const FEAT=[['BOSS 特性','你擁有【開幕攻擊】和【狂亂攻擊】。'],['穹頂守護者','每當你的回合結束時，回復 20 點耐久並解除兩個你身上的負面狀態。如果創世主態度是「迷惘」，改為回復 10 耐久並解除一個負面狀態。如果創世主態度是「接受現實」，失去上列能力。'],['騎士','你的命中 +1、迴避 +1、先制 +3。當你的命中判定失敗時，可以重丟該次命中判定，此效果每場戰鬥只能使用 3 次。（面板數值已含此加成）'],['能力強化','攻擊前消耗一點行動力，你的命中和傷害+1，此效果只要你還有行動力就可以多次使用。']];
+const SOLD=[
+ {k:'士兵',nm:'憧憬',r:2,hit:8,dod:10,ini:3,hp:20,note:'X4　面貌與玩家如出一轍（數量 5）',
+  eff:[['猛擊','消耗一點行動力，下一次攻擊傷害+1D6。']],
+  parts:[['狩獵眼','非攻擊','你的命中+1，此部位可複數裝備，最多可以裝備3個。'],['刀劍','攻擊','鋒銳：攻擊觸發強擊則視為暴擊',{mod:2,dice:1,flat:2,rng:'0~1',smash:1}]]},
+ {k:'爆彈',nm:'太陽',r:4,hit:6,dod:9,ini:1,hp:5,note:'兩顆',
+  eff:[['死亡報復','當你的耐久歸0時，給予射程3以內的一個目標2D6的傷害。當計算你能使用的從獸數量時，每一隻從獸的數量額度可以使用兩隻爆彈。']],
+  parts:[['閃光殼','非攻擊','自己的回合可以使用，消耗一點行動力，你所在的區域和鄰接區域的敵人的下一次攻擊受到【目盲】狀態。'],['噴吐','攻擊','爆發：消耗一點行動力，你的攻擊目標變為射程範圍內一個區域的全體。',{mod:0,dice:2,flat:4,rng:'1~3'}]]}
+];
+function tab(i){v1.hidden=i!=1;v2.hidden=i!=2;v3.hidden=i!=3;t1.className=i==1?'on':'';t2.className=i==2?'on':'';t3.className=i==3?'on':''}
+const $=id=>document.getElementById(id);
+const v1=$('v1'),v2=$('v2'),v3=$('v3'),t1=$('t1'),t2=$('t2'),t3=$('t3');
+const clampN=()=>{ // 當次消耗不得超過剩餘行動力；蓄力不得超過本回合剩餘次數
+ S.m=Math.max(0,Math.min(S.m,3-S.round蓄));
+ S.n=Math.max(0,S.n);
+ while(S.n+S.m>S.ap){ if(S.m>0)S.m--; else S.n--; }
+};
+function adj(k,d){S[k]+=d;clampN();draw()}
+function commit(){S.ap-=S.n+S.m;S.round蓄+=S.m;S.n=0;S.m=0;if(S.polNow){S.emb[0]=true;S.polNow=false}draw()}
+function newRound(){S.ap=S.apMax;S.round蓄=0;S.n=0;S.m=0;draw()}
+function rr(d){S.rr=Math.max(0,Math.min(3,S.rr+d));draw()}
+function dmgStr(a){
+ const flat=a.flat+S.n+(a.chg?S.m*R:0)+(S.low?3:0);
+ const s=a.dice+'D6'+(flat?'＋'+flat:'');
+ return (S.polNow&&!S.emb[0])?'('+s+')×2':s}
+function hp(sign){const v=Math.floor(Number(S.amt));if(!(v>0))return;
+ if(sign<0){S.hp=Math.max(0,S.hp-v);S.cum+=v}else S.hp=Math.min(B.hp,S.hp+v);draw()}
+const DEF={'易傷':['當你受到傷害時，傷害增加 n 點。不同來源的易傷效果可以累計。','和減傷抵銷。'],'重創':['你接受回復效果時無法回復耐久值。','接受過一次治療效果後解除。'],'目盲':['你只能攻擊距離 1 區域以內的敵人，或是使用範圍攻擊，你的命中判定有劣勢 1。','下次回合結束時解除。'],'減傷':['當你受到傷害時，傷害減少 n 點。不同來源的減傷效果可以累計。','和易傷抵銷。']};
+function lk(id,t){const used=[];
+ const h=t.replace(/易傷|重創|目盲|減傷/g,m=>{if(!used.includes(m))used.push(m);return `<a class="term" onclick="tg('${id}|${m}')">${m}</a>`});
+ return h+used.filter(m=>S.open[id+'|'+m]).map(m=>`<div class="def"><a class="x" onclick="tg('${id}|${m}')">摺疊 ▲</a><b>${m}</b><div>${DEF[m][0]}</div><div class="mu">解除條件：${DEF[m][1]}</div></div>`).join('')}
+function tg(k){S.open[k]=!S.open[k];draw()}
+function hpReset(){S.hp=B.hp;S.cum=0;S.done=0;draw()}
+function fz(){return Math.floor(S.cum/100)}
+function fzDone(d){S.done=Math.max(0,Math.min(fz(),S.done+d));draw()}
+const PW1=[['微小造物','0','在一瞬間創造或修復相當於一台巴士大小的任意實體物，修復效果為永久，被創造的東西則會在一天後消失。此效果可以治療傷害，但無法讓死亡的生物復活。'],
+['癒合的祝福','0','戰鬥中有騎士觸發強擊時，該騎士回復 5 點耐久值，或是解除身上的一個負面狀態。'],
+['創造的奇蹟','1~3','在瞬間創造或修復大規模的事物，累積的喪失度根據規模而不同：<div>・一棟大廈規模：喪失度 1</div><div>・一個街區規模：喪失度 2</div><div>・一座城市規模：喪失度 3</div><div>修復效果為永久，被創造的東西則會在一天後消失。可以治療傷害，但無法讓死亡的生物復活。</div><div><b>戰鬥中使用：</b>所有騎士耐久值完全回復，並給予每個騎士 10 點額外的暫時耐久值。此效果喪失度 1，一場戰鬥只能使用一次。</div>']];
+const PW2=[['戰鬥空間','0','開啟不會波及外界的戰鬥空間。','決戰階段開始'],
+['空間維持','1','讓戰鬥空間持續存在。','第三輪起，每輪結束時'],
+['淨化','1','解除一名騎士身上所有的負面狀態。','無'],
+['回復','1','讓一名騎士耐久值回到最大值。','每輪結束時，任何騎士耐久值為 0'],
+['絕對防禦','1','讓一名騎士即將受到的傷害變成 0。','無'],
+['攻擊極化','1','讓一名騎士下一次攻擊造成 2 倍傷害。','無'],
+['全體治癒','2','讓所有騎士耐久值回到最大值。','每輪結束時，兩名以上騎士耐久值為 0'],
+['復活','2','讓一名死亡的騎士復活，耐久值回到最大值。並且，全體騎士本次戰鬥期間所有戰鬥能力值 +1，攻擊傷害 +1D6，此加值在此戰鬥期間可累計。','每輪結束時，有騎士在死亡狀態']];
+function mv(k,d){S[k]=Math.max(0,(Number(S[k])||0)+d);draw()}
+function setN(k,v){const n=Math.floor(Number(v));S[k]=n>0?n:0}
+function fixN(k,el){el.value=S[k]}
+function ctr(k,label,sub,cls){return `<div class="card" style="${cls}"><h2>${label}</h2><div class="mu">${sub}</div>
+ <div class="ctr"><button onclick="mv('${k}',-1)">−</button><input class="num" type="number" min="0" inputmode="numeric" value="${S[k]}" oninput="setN('${k}',this.value)" onchange="setN('${k}',this.value);this.value=S['${k}']"><button onclick="mv('${k}',1)">＋</button></div></div>`}
+function drawLord(){
+ v3.innerHTML=`<div class="big">${ctr('glory','激昂點','君主專屬資源・無上限','border-top:4px solid var(--ac2)')}${ctr('loss','喪失度','使用權能時累積','border-top:4px solid var(--ac)')}</div>
+ <div class="card" style="margin-top:14px"><h2>激昂點　速查</h2>
+  <p class="mu" style="margin:0">君主對騎士使用權能時，<b class="warn">可用激昂點代替喪失度</b>。無論君主當時在不在現場都可能獲得。</p>
+  <ul class="ul"><li><b>感情支援</b>：玩家角色在一個有感情支援的判定擲骰結果出現<b>任何一個 6</b>，君主獲得 <b>1 點</b>激昂點。</li>
+  <li>一次判定不管出現多少個 6，都只得 1 點。</li>
+  <li>若是<b>擲骰後</b>才進行的感情支援，則只有<b>支援者</b>丟出 6 時才得到激昂點。</li>
+  <li>此方式取得的激昂點<b>沒有上限</b>。</li></ul>
+  <details style="margin-top:8px"><summary class="mu" style="cursor:pointer">原文說明</summary><p class="mu">激昂點是專屬於君主的資源。由於君主與騎士之間無形的精神聯繫，不管是騎士與騎士間的感情、或是騎士與君主間的感情都會成為君主的力量。每當玩家角色之間的演出讓人感覺到角色間的羈絆或默契的時候，君主就有機會取得激昂點，無論君主當時在不在現場。每當君主對騎士使用權能時，可以用激昂點代替喪失度。激昂點越多，君主就越可以無負擔的支援騎士們。</p></details></div>
+ <div class="card"><h2>權能：創造</h2><div class="mu">權能傾向為創造的君主，擅長修復被破壞的事物、或是無中生有創造本來不存在的東西，她們也有強大的治癒能力。</div>
+  <div style="overflow-x:auto"><table class="pw"><tr><th>權能名稱</th><th>喪失度</th><th>效果</th></tr>${PW1.map(r=>`<tr><td><b>${r[0]}</b></td><td class="c">${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</table></div></div>
+ <div class="card"><h2>戰鬥權能</h2><div class="mu">含自動發動條件。</div>
+  <div style="overflow-x:auto"><table class="pw"><tr><th>權能名稱</th><th>喪失度</th><th>效果</th><th>自動發動條件</th></tr>${PW2.map(r=>`<tr><td><b>${r[0]}</b></td><td class="c">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table></div></div>`}
+function draw(){
+ drawLord();
+ clampN();
+ const lo=S.low?1:0,hit=B.hit+lo,dod=B.dod+lo;
+ let h=`<div class="card"><h2>貝西摩斯・亞瑟王　<span class="mu">階級 ${R}・部位數 5・玩家 4 人</span></h2>
+ <div class="stats">
+  <div class="stat ${lo?'up':''}"><small>命中</small><b>${hit}</b></div>
+  <div class="stat ${lo?'up':''}"><small>迴避</small><b>${dod}</b></div>
+  <div class="stat"><small>先制</small><b>${B.ini}</b></div>
+  <div class="stat"><small>耐久值</small><b>${S.hp}<span class="mu" style="font-size:13px"> / ${B.hp}</span></b></div></div>
+  <div class="bar"><i style="width:${S.hp/B.hp*100}%"></i></div>
+  <div class="row" style="margin-top:8px"><input type="number" min="0" inputmode="numeric" placeholder="輸入數值" value="${S.amt}" oninput="S.amt=this.value" style="width:110px;height:40px;font-size:16px;padding:0 8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx)">
+   <div class="ctr"><button class="btn" style="background:var(--ac);color:#fff;border-color:var(--ac)" onclick="hp(-1)">受到傷害</button><button class="btn pri" onclick="hp(1)">回復耐久</button><button class="btn" onclick="hpReset()">重設</button></div></div>
+  <div class="mu">數值會保留，可連續點擊重複扣除／回復（回復不會超過 ${B.hp}）。</div>
+  ${S.hp<100&&!S.low?'<p class="warn">耐久已低於 100，記得勾選下方「第二型態」。</p>':''}
+  ${S.low?'<div class="warn">'+lk('top','第二型態啟動：命中迴避各+1、減傷 2、攻擊傷害+3')+'</div>':''}
+ </div>
+ <div class="card"><h2>狂亂攻擊　觸發條件</h2>
+  <p class="mu">每當 BOSS 巨獸累積受到 100 點傷害，就會在現在的行動者回合結束、下一個行動者回合開始前插入的特殊攻擊，通常是大範圍、高傷害的強力攻擊（本巨獸為【毀滅噴吐】）。</p>
+  ${fz()>S.done?`<p class="warn">⚠ 觸發狂亂攻擊！待執行 ${fz()-S.done} 次：在現在行動者回合結束後、下一位開始前插入。</p>`:''}
+  <div class="row"><div>累積受傷 <b>${S.cum}</b>　已觸發 ${fz()} 次　已執行 ${S.done} 次
+   <div class="mu">下一次觸發：累積 ${(fz()+1)*100}（還差 ${(fz()+1)*100-S.cum}）</div>
+   <div class="bar" style="width:200px"><i style="width:${S.cum%100}%"></i></div></div>
+   <div class="ctr"><button class="btn pri" onclick="fzDone(1)">已執行狂亂攻擊</button><button class="btn" onclick="fzDone(-1)">還原</button></div></div>
+ </div>
+ <div class="card"><h2>戰鬥追蹤</h2>
+  <div class="row"><label class="sw"><input type="checkbox" ${S.low?'checked':''} onchange="S.low=this.checked;draw()">現在 HP 低於 100（第二型態）</label></div>
+  <div class="row"><div><b>剩餘行動力</b> <span class="mu">已消耗 ${S.apMax-S.ap} / ${S.apMax}</span>
+   <div class="bar" style="width:180px"><i style="width:${S.ap/S.apMax*100}%"></i></div></div>
+   <div class="ctr"><button onclick="adj('ap',-1)">−</button><span>${S.ap}</span><button onclick="S.ap=Math.min(S.apMax,S.ap+1);draw()">＋</button></div></div>
+  <div class="row"><div><b>當次攻擊：能力強化</b><div class="mu">每 1 行動力：命中+1、傷害+1</div></div>
+   <div class="ctr"><button onclick="adj('n',-1)">−</button><span>${S.n}</span><button onclick="adj('n',1)">＋</button></div></div>
+  <div class="row"><div><b>當次攻擊：蓄力</b><div class="mu">僅限刀劍：每 1 行動力，傷害+階級(${R})，本回合已用 ${S.round蓄}/3</div></div>
+   <div class="ctr"><button onclick="adj('m',-1)">−</button><span>${S.m}</span><button onclick="adj('m',1)">＋</button></div></div>
+  <div class="row"><span>本次攻擊共消耗 <b>${S.n+S.m}</b> 行動力</span>
+   <div class="ctr"><button class="btn pri" onclick="commit()">確認攻擊（扣除行動力）</button><button class="btn" onclick="newRound()">新回合</button></div></div>
+  <div class="row"><div><b>騎士：命中重骰</b><div class="mu">每場戰鬥 3 次</div></div>
+   <div class="ctr"><button onclick="rr(-1)">−</button><span>${S.rr}</span><button onclick="rr(1)">＋</button></div></div>
+ </div>`;
+ ATK.forEach(a=>{
+  h+=`<div class="card atk"><h2>${a.name}</h2><span class="tag">${a.tag}</span><span class="mu">射程 ${a.rng}</span>
+  <div class="res"><div><small>命中</small><b>${hit+a.mod+S.n}</b></div><div><small>傷害</small><b>${dmgStr(a)}</b></div></div>
+  <div class="fm">命中：${B.hit}（面板）＋${a.mod}（部位）${S.n?'＋'+S.n+'（強化）':''}${lo?'＋1（第二型態）':''}　｜　傷害：${a.fl}${S.n?'＋'+S.n+'（強化）':''}${S.m&&a.chg?'＋'+S.m*R+'（蓄力）':''}${S.low?'＋3（第二型態）':''}${S.polNow&&!S.emb[0]?'　｜　攻擊極化：整體傷害×2':''}${S.m&&!a.chg?' <span class="warn">（蓄力只對刀劍有效，此部位不加）</span>':''}</div>
+  <div class="mu" style="margin:8px 0">${lk('a'+a.name,a.fx)}</div></div>`});
+ h+='<div class="card"><h2>紋章（每場戰鬥各限用一次）</h2>'+EMB.map((e,i)=>`<div class="row" style="display:block"><label class="sw"><input type="checkbox" ${S.emb[i]?'checked':''} onchange="S.emb[${i}]=this.checked;if(${i}==0)S.polNow=false;draw()"><span>已使用</span><b ${S.emb[i]?'style="text-decoration:line-through;opacity:.6"':''}>${e[0]}</b> <span class="tag">${e[1]}</span></label><div class="mu">${e[2]}</div>${i==0&&!S.emb[0]?`<label class="sw" style="margin-top:6px"><input type="checkbox" ${S.polNow?'checked':''} onchange="S.polNow=this.checked;draw()">套用於當次攻擊（傷害×2，按「確認攻擊」後自動標記已使用）</label>`:''}</div>`).join('')+'</div><div class="card"><h2>常駐・非攻擊部位</h2>'+PASS.map(p=>`<div class="row"><div><b>${p.name}</b> <span class="tag">${p.tag}</span><div class="mu">${lk('p'+p.name,p.fx)}</div></div></div>`).join('')+'</div>';
+ h+='<div class="card"><h2>內建效果與特性</h2>'+FEAT.map(f=>`<div class="row"><div><b>${f[0]}</b><div class="mu">${f[1]}</div></div></div>`).join('')+'</div>';
+ v1.innerHTML=h;
+ let g='';
+ SOLD.forEach((s,i)=>{
+  const q=S.beast[i]||(S.beast[i]={n:0});
+  g+=`<div class="card"><h2>${s.k}・${s.nm} <span class="mu">階級 ${s.r}・行動力 2</span></h2><p class="mu">${s.note}</p>
+  <div class="stats"><div class="stat"><small>命中</small><b>${s.hit}</b></div><div class="stat"><small>迴避</small><b>${s.dod}</b></div><div class="stat"><small>先制</small><b>${s.ini}</b></div><div class="stat"><small>耐久值</small><b>${s.hp}</b></div></div>
+  <h2 style="margin-top:12px">內建效果</h2>`+s.eff.map(e=>`<div class="mu"><b>${e[0]}</b>：${e[1]}</div>`).join('');
+  s.parts.forEach(p=>{
+   g+=`<div class="row" style="display:block"><b>${p[0]}</b> <span class="tag">${p[1]}</span><div class="mu">${lk('b'+i+p[0],p[2])}</div>`;
+   if(p[3]){const a=p[3],ex=s.k=='士兵'?q.n:0;
+    g+=`<span class="mu">射程 ${a[3]||a.rng}</span>
+    ${s.k=='士兵'?`<div class="row"><span>猛擊（行動力 +1D6）</span><div class="ctr"><button onclick="S.beast[${i}].n=Math.max(0,S.beast[${i}].n-1);draw()">−</button><span>${q.n}</span><button onclick="S.beast[${i}].n=Math.min(2,S.beast[${i}].n+1);draw()">＋</button></div></div>`:''}
+    <div class="res"><div><small>命中</small><b>${s.hit+a.mod}</b></div><div><small>傷害</small><b>${a.dice+ex}D6＋${a.flat}</b></div></div>
+    <div class="fm">傷害含階級 ${s.r}${ex?'；猛擊 '+ex+' 次＝+'+ex+'D6':''}。命中＝從獸命中 ${s.hit}＋部位修正 ${a.mod}</div>`}
+   g+='</div>'});
+  g+='</div>'});
+ v2.innerHTML=g;
+}
+draw();
+</script></main></body></html>
