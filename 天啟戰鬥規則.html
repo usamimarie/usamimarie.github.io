@@ -167,6 +167,9 @@ mark{background:#e7bd7833;color:#ffe2ae;border-radius:3px;padding:0 1px}
 .acc-tools{display:flex;justify-content:flex-end;margin:6px 0 10px}
 .detail-body .acc{display:grid;gap:8px}
 @media(prefers-reduced-motion:reduce){.acc-chev{transition:none}}
+.fmt{font-style:normal;color:var(--gold);font-size:.76rem;margin-left:6px}
+.cond{margin:6px 0 !important;color:#cfc2ad}.cond b{display:inline-block;margin-right:8px;padding:0 8px;border-radius:99px;background:#30271d;color:var(--gold);font-size:.72rem}
+.cat-note{margin:4px 6px 8px;color:#9c9182;font-size:.78rem}
 </style>
 </head>
 <body>
@@ -243,7 +246,7 @@ const rules = {
  7:{en:"ACTION PHASE",summary:"角色每回合可攻擊、移動各一次，並依使用時機啟動紋章或消耗 AP。",html:`<h3>基本行動</h3><p>角色在自己的回合中，可進行<strong>攻擊一次、移動一次</strong>。兩者順序可以調換，但不能把移動拆開，在移動途中先攻擊、再繼續移動。</p><h3>攻擊與命中</h3><ul><li>使用自己的武裝，攻擊射程內的一個目標。</li><li>命中判定：擲 <strong>2D6＋命中值</strong>；結果必須<strong>超過</strong>目標迴避值才算命中（不是大於或等於）。</li><li>命中後依武裝傷害值擲傷害骰，決定目標受到的傷害。</li></ul><h3>強擊與爆擊</h3><ul><li><strong>強擊：</strong>命中判定中任一顆骰子擲出 6，即觸發強擊，可發動角色的戰鬥特技效果。一個判定不論出現幾個 6，都只觸發一次。</li><li><strong>爆擊：</strong>命中判定擲出 6、6 時觸發。該次攻擊傷害直接取可能的最大值，不需擲傷害骰；同時也會觸發強擊。</li></ul><div class="callout">例：傷害值為 2D6＋5，爆擊時直接造成 17 點傷害。</div><h3>多次攻擊與範圍攻擊</h3><ul><li><strong>多次攻擊：</strong>每次攻擊可分別選擇目標，並分別進行命中判定。</li><li><strong>範圍攻擊：</strong>一次攻擊只進行一次命中判定，再分別對照範圍內各目標的迴避值，判斷命中對象。</li><li>若範圍攻擊對不同目標具有不同程度的優勢、劣勢，取所有目標中最高的優勢與最高的劣勢合計後，套用於該次命中判定。</li></ul><h3>移動</h3><ul><li>每回合可免費移動 <strong>1 個區域</strong>。</li><li>每額外移動 1 個區域，消耗 <strong>1 AP</strong>。</li></ul><h3>主動移動與被動移動</h3><p>角色自行移動，或因自己使用的效果而移動，稱為<strong>主動移動</strong>；角色因他人的效果而非自主移動，稱為<strong>被動移動</strong>。部分效果會特別區分這兩種移動。</p><h3>使用紋章</h3><p>紋章效果各自標示使用時機；符合時機時，即可消耗該紋章的使用次數發動。使用次數依紋章本身的記載，不可一概視為每場戰鬥限用一次。</p><h3>行動力的其他用途</h3><ul><li><strong>額外移動：</strong>移動時每消耗 1 AP，額外移動 1 區域。</li><li><strong>專注迴避：</strong>角色回合中，每消耗 1 AP，直到該角色下回合開始前迴避 +2；可重複使用，效果累加。</li><li><strong>攻擊強化：</strong>攻擊時每消耗 2 AP，下次攻擊傷害 +1D6。</li><li><strong>支援命中：</strong>同區域隊友完成命中判定後，角色可消耗 1 AP，將自己的支援值加到隊友的命中判定。</li><li><strong>支援傷害：</strong>同區域隊友完成傷害擲骰後，角色可消耗 1 AP，將支援值加到隊友傷害上；此加值屬於<strong>終極傷害</strong>。</li></ul><p>支援對同一判定只能使用一次，但可分別支援同一目標的命中判定與傷害擲骰。角色不能支援自己的攻擊。</p><div class="callout">支援只能由同區域隊友提供；命中與傷害是兩個不同判定，可各接受一次支援。</div>`},
  8:{en:"CHARACTER TURN END",summary:"角色完成移動與攻擊等行動後結束回合，換下一名角色行動。",html:`<h3>回合結束</h3><p>角色完成本回合的移動、攻擊及其他行動後，宣告回合結束，接著輪到行動順序中的下一名角色。</p><h3>狂亂攻擊檢查</h3><p>若 BOSS 巨獸在累積傷害上達到狂亂攻擊條件，則在目前行動者回合結束後、下一名行動者回合開始前，先插入狂亂攻擊。</p><div class="callout">若仍有參戰角色尚未行動，回到「確認行動順位」；所有角色都行動過後，才進入戰鬥輪結束。</div>`},
  9:{en:"ROUND END & SUPPORT UNITS",summary:"所有角色完成回合後，處理君主自動權能及戰場上一般人、君主的移動。",html:`<h3>君主權能的自動使用</h3><p>每個戰鬥輪結束時，GM 檢查場上所有騎士的狀態。若符合君主權能列表上的自動使用條件，君主會將<strong>所有符合條件的權能全部啟動</strong>，並累積相應喪失度。當 PC 的命中判定觸發強擊時，也會同時觸發君主權能中的強擊效果。</p><h3>君主在戰場上</h3><ul><li>君主不直接參與戰鬥，沒有自己的行動、先制值或行動順位，只以權能支援 PC。</li><li>君主不會成為敵人攻擊目標，也不會受到傷害，除非敵人具有能攻擊君主的特殊能力。</li><li>若敵人以特殊能力攻擊君主且命中，君主必須累積 1 點喪失度使該次傷害無效；君主不能選擇不累積喪失度而承受傷害。</li><li>君主迴避為<strong>反應或心智 +7</strong>。</li><li>PC 可在任何時候向 GM 提出請求，讓君主支付相應消耗主動使用權能。</li><li>與君主同區域的 PC 移動時，可選擇帶君主一起移動；否則君主每個戰鬥輪結束時可自行移動 1 區域。</li></ul><h3>一般人</h3><ul><li>一般人沒有耐久值，受到傷害時直接扣減基本能力值；其迴避為<strong>反應或心智 +7</strong>。</li><li>一般人沒有自己的行動、先制值或行動順位，通常無法進行有意義的戰鬥行動，也無法對巨獸或騎士造成傷害。</li><li>與一般人同區域的 PC 移動時，可選擇帶一般人一起移動；此外，一般人每個戰鬥輪結束時可移動 1 區域，通常試圖遠離戰場。</li></ul><h3>從獸</h3><p>從獸在自己的回合中，行動選項與流程均與玩家角色相同；通常只擁有 <strong>2 點行動力</strong>。</p><div class="callout">輪末檢查完成後，若戰鬥仍持續，開始下一戰鬥輪。</div>`},
- 10:{en:"DAMAGE & COMBAT END",summary:"處理傷害、失去行為能力與回復；任一方全員失去行為能力時戰鬥結束。",html:`<h3>傷害與減傷</h3><ul><li>角色受到傷害時，扣減等同傷害值的耐久值。</li><li><strong>減傷：</strong>實際傷害減少等同減傷值的點數。</li><li><strong>格檔：</strong>實際傷害減少等同格檔值的點數，之後格檔狀態消失。</li><li><strong>易傷：</strong>受到的實際傷害增加等同易傷值的點數。</li><li>扣除減傷與格檔後，實際加諸角色身上的傷害稱為<strong>實際傷害</strong>；部分效果只有受到實際傷害時才會生效。</li></ul><h3>終極傷害</h3><p>終極傷害是在其他傷害計算（包含攻擊者特殊效果、紋章及君主權能等）全部結算後，才額外加上的傷害。它無視減傷與格檔，無法被任何手段防止；也不能被加成或增倍。</p><h3>耐久值歸 0</h3><ul><li>若一次傷害超過角色剩餘耐久，耐久降至 0 後的剩餘傷害不會繼續作用。</li><li>騎士耐久值歸 0 時仍可行動並繼續作戰。</li><li>巨獸耐久值歸 0 時會被打倒並失去行為能力；失去行為能力的巨獸無法恢復，並會在戰鬥結束後死亡。</li></ul><h3>耐久值為 0 後再次受傷</h3><p>耐久值為 0 的角色再次受到傷害時，每 1 點傷害扣減 1 點基本能力值，扣減哪些能力值由該角色自行決定。只要任何一項能力值降至 0，角色便昏迷並失去行為能力；若所有能力值都降至 0，角色當場死亡。</p><h3>受傷與失能的回復</h3><ul><li>角色回復耐久值時，將回復值加到目前耐久值上。</li><li>若基本能力值曾因受傷而扣減，每回復 1 點耐久值，也可回復 1 點被扣減的基本能力值。</li><li>失去行為能力的角色只要所有基本能力值都恢復至 1 以上，即解除失能並立刻重返戰線。</li><li>巨獸無法從失去行為能力中回復。</li></ul><h3>死亡與復活</h3><p>騎士角色死亡時，可由君主權能使其復活；非騎士角色死亡後無法回復。</p><h3>戰鬥結束條件</h3><p>當戰鬥雙方其中一方的全體成員都失去行為能力時，戰鬥結束。騎士耐久值歸 0 並不代表失去行為能力；巨獸耐久值歸 0 則會失去行為能力。</p><div class="callout">所有敵人被打倒時戰鬥結束</div>`}
+ 10:{en:"DAMAGE & COMBAT END",summary:"處理傷害、失去行為能力與回復；任一方全員失去行為能力時戰鬥結束。",html:`<h3>傷害與減傷</h3><ul><li>角色受到傷害時，扣減等同傷害值的耐久值。</li><li><strong>減傷：</strong>實際傷害減少等同減傷值的點數。</li><li><strong>格檔：</strong>實際傷害減少等同格檔值的點數，之後格檔狀態消失。</li><li><strong>易傷：</strong>受到的實際傷害增加等同易傷值的點數。</li><li>扣除減傷與格檔後，實際加諸角色身上的傷害稱為<strong>實際傷害</strong>；部分效果只有受到實際傷害時才會生效。</li></ul><h3>終極傷害</h3><p>終極傷害是在其他傷害計算（包含攻擊者特殊效果、紋章及君主權能等）全部結算後，才額外加上的傷害。它無視減傷與格檔，無法被任何手段防止；也不能被加成或增倍。</p><h3>耐久值歸 0</h3><ul><li>若一次傷害超過角色剩餘耐久，耐久降至 0 後的剩餘傷害不會繼續作用。</li><li>騎士耐久值歸 0 時仍可行動並繼續作戰。</li><li>巨獸耐久值歸 0 時會被打倒並失去行為能力；失去行為能力的巨獸無法恢復，並會在戰鬥結束後死亡。</li></ul><h3>耐久值為 0 後再次受傷</h3><p>耐久值為 0 的角色再次受到傷害時，每 1 點傷害扣減 1 點基本能力值，扣減哪些能力值由該角色自行決定。只要任何一項能力值降至 0，角色便昏迷並失去行為能力；若所有能力值都降至 0，角色當場死亡。</p><h3>受傷與失能的回復</h3><ul><li>角色回復耐久值時，將回復值加到目前耐久值上。</li><li>若基本能力值曾因受傷而扣減，每回復 1 點耐久值，也可回復 1 點被扣減的基本能力值。</li><li>失去行為能力的角色只要所有基本能力值都恢復至 1 以上，即解除失能並立刻重返戰線。</li><li>巨獸無法從失去行為能力中回復。</li></ul><h3>死亡與復活</h3><p>騎士角色死亡時，可由君主權能使其復活；非騎士角色死亡後無法回復。</p><h3>戰鬥結束條件</h3><p>當戰鬥雙方其中一方的全體成員都失去行為能力時，戰鬥結束。騎士耐久值歸 0 並不代表失去行為能力；巨獸耐久值歸 0 則會失去行為能力。</p><div class="callout">修正：戰鬥結束條件依規則為「其中一方全員失去行為能力」，不應額外將「BOSS 耐久值歸 0」列為獨立的第二種條件；BOSS 歸 0 是巨獸失去行為能力的方式。</div>`}
 };
 const buttons=[...document.querySelectorAll(".node")];
 function showStep(n){
@@ -285,14 +288,29 @@ const glossaryEntries = [
  {term:"君主",keys:"權能 喪失度 迴避 移動",step:9,desc:"君主不直接參與戰鬥，沒有自己的行動、先制值或行動順位，主要以權能支援 PC；在戰場上時須配置於戰鬥地圖。"},
  {term:"權能",keys:"君主 主動使用 自動使用 強擊",step:9,desc:"君主可主動依 PC 請求支付相應消耗使用權能；每個戰鬥輪結束時，GM 也須檢查並啟動所有符合自動使用條件的權能。"},
  {term:"喪失度",keys:"君主 權能 傷害無效化",step:9,desc:"君主使用權能時會付出相應消耗並累積喪失度；敵人以特殊能力攻擊君主且命中時，君主須累積 1 點喪失度使傷害無效化。"},
- {term:"減傷",keys:"實際傷害 傷害值",step:10,desc:"角色受到的實際傷害減少等同減傷值的點數。"},
- {term:"格檔",keys:"實際傷害 狀態 消失",step:10,desc:"角色受到的實際傷害減少等同格檔值的點數，之後格檔狀態消失。"},
- {term:"易傷",keys:"實際傷害 增加傷害",step:10,desc:"角色受到的實際傷害增加等同易傷值的點數。"},
  {term:"實際傷害",keys:"減傷 格檔 易傷",step:10,desc:"扣除減傷與格檔後，實際加諸於角色身上的傷害。部分效果只有角色受到實際傷害時才會生效。"},
  {term:"終極傷害",keys:"無視減傷 格檔 無法防止 加成 增倍",step:10,desc:"在其他傷害計算全部結算後才加諸的額外傷害。無視減傷與格檔，無法防止；也不能被加成或增倍。"},
  {term:"耐久值歸 0",keys:"騎士 巨獸 剩餘傷害",step:10,desc:"一次傷害使耐久值降至 0 後，超過剩餘耐久值的傷害不再作用。騎士仍可繼續作戰；巨獸則會被打倒並失去行為能力。"},
  {term:"失去行為能力",keys:"昏迷 基本能力值 0 回復",step:10,desc:"角色任一基本能力值扣減至 0 時，會昏迷並失去行為能力。當所有能力值都回復到 1 以上，即解除失能並可立刻重返戰線。"},
- {term:"死亡與復活",keys:"騎士 君主權能 非騎士",step:10,desc:"騎士角色死亡時，君主權能可以使其復活；非騎士角色死亡無法回復。"}
+ {term:"死亡與復活",keys:"騎士 君主權能 非騎士",step:10,desc:"騎士角色死亡時，君主權能可以使其復活；非騎士角色死亡無法回復。"},
+ {"term": "優勢", "cat": "優勢與劣勢", "keys": "狀態 骰子 判定 累計 抵銷", "desc": "你的行動得心應手。具有優勢 n 時，判定多擲 n 顆骰子，取最高的兩顆作為擲骰結果。來自不同來源的優勢可累計（優勢 1＋優勢 2＝優勢 3），同來源的優勢即使多次獲得也無法累計。與劣勢同時存在時數字互相抵銷（優勢 2 與劣勢 1，剩下優勢 1）。優勢與劣勢嚴格來說並非狀態，但許多狀態會造成優勢與劣勢。", "fmt": "n"},
+ {"term": "劣勢", "cat": "優勢與劣勢", "keys": "狀態 骰子 判定 累計 抵銷", "desc": "你的行動陷入不利。具有劣勢 n 時，判定多擲 n 顆骰子，取最低的兩顆作為擲骰結果。來自不同來源的劣勢可累計（劣勢 1＋劣勢 2＝劣勢 3）。與優勢同時存在時數字互相抵銷（劣勢 2 與優勢 1，剩下劣勢 1）。", "fmt": "n"},
+ {"term": "無敵", "cat": "正面狀態", "keys": "狀態 正面 取消傷害 實際傷害 終極傷害", "desc": "當你受到實際傷害時，將該傷害取消。此效果對終極傷害無效。", "cond": "取消過一次傷害後解除。"},
+ {"term": "減傷", "cat": "正面狀態", "keys": "狀態 正面 傷害減少 易傷 抵銷", "desc": "當你受到傷害時，傷害減少 n 點。不同來源的減傷效果可以累計。", "cond": "和易傷抵銷。", "fmt": "n", "step": 10},
+ {"term": "格檔", "cat": "正面狀態", "keys": "狀態 正面 傷害減少 破綻", "desc": "當你受到傷害時，傷害減少 n 點。不同來源的格檔效果可以累計。", "cond": "格檔過任意傷害後解除。", "fmt": "n", "step": 10},
+ {"term": "飛行", "cat": "正面狀態", "keys": "狀態 正面 地形 優勢", "desc": "你不受地形效果影響，你攻擊非飛行目標時有優勢 1。", "cond": "受到傷害後解除。"},
+ {"term": "再生", "cat": "正面狀態", "keys": "狀態 正面 回復 耐久值 每回合", "desc": "每回合開始時，你回復 nD6 耐久值。不同來源的再生效果可以累計。", "cond": "只能被特殊效果解除。", "fmt": "nD6"},
+ {"term": "易傷", "cat": "負面狀態", "keys": "狀態 負面 傷害增加 減傷 抵銷", "desc": "當你受到傷害時，傷害增加 n 點。不同來源的易傷效果可以累計。", "cond": "和減傷抵銷。", "fmt": "n", "step": 10},
+ {"term": "重創", "cat": "負面狀態", "keys": "狀態 負面 回復 治療 耐久值", "desc": "你接受回復效果時無法回復耐久值。", "cond": "接受過一次治療效果後解除。"},
+ {"term": "倒地", "cat": "負面狀態", "keys": "狀態 負面 移動 優勢", "desc": "你無法主動移動，受到攻擊時攻擊者對你有優勢 1。", "cond": "在你的回合可以花費 1 行動力解除。"},
+ {"term": "遲滯", "cat": "負面狀態", "keys": "狀態 負面 移動 行動力 AP", "desc": "下次主動移動時，每移動一區域需消耗額外 1 點行動力。", "cond": "下次主動移動結束後解除。"},
+ {"term": "破綻", "cat": "負面狀態", "keys": "狀態 負面 必中 命中 減傷 格檔", "desc": "你下次受到攻擊時必定被命中，且該次傷害無視你的減傷與格檔。", "cond": "受到一次攻擊後解除。"},
+ {"term": "暈眩", "cat": "負面狀態", "keys": "狀態 負面 命中 劣勢", "desc": "你的命中判定受到劣勢 1。", "cond": "下次回合結束時解除。"},
+ {"term": "盲目", "cat": "負面狀態", "keys": "狀態 負面 命中 劣勢 範圍攻擊 距離", "desc": "你只能攻擊距離 1 區域以內的敵人，或是使用範圍攻擊，你的命中判定有劣勢 1。", "cond": "下次回合結束時解除。"},
+ {"term": "混亂", "cat": "負面狀態", "keys": "狀態 負面 隨機 攻擊目標 攻擊手段", "desc": "你的攻擊目標只能隨機選擇；如果你有多種可用的攻擊手段，只能隨機使用其中一種。", "cond": "下次回合結束時解除。"},
+ {"term": "毒", "cat": "負面狀態", "keys": "狀態 負面 持續傷害 D6 累計", "desc": "你的回合開始時受到 nD6 點傷害。如果傷害值的 D6 有出現任何 1，則解除毒效果，否則效果繼續。不同來源的毒效果可以累計。", "cond": "如果傷害值的 D6 有出現任何 1 則解除。", "fmt": "nD6"},
+ {"term": "燃燒", "cat": "負面狀態", "keys": "狀態 負面 持續傷害 D6 累計 優勢", "desc": "你的回合開始時受到 nD6 點傷害。如果傷害值的 D6 有出現任何 1，則解除燃燒效果，否則效果繼續。你受到攻擊時攻擊者對你有優勢 1。不同來源的燃燒效果可以累計。", "cond": "如果傷害值的 D6 有出現任何 1 則解除。", "fmt": "nD6"},
+ {"term": "吞食", "cat": "負面狀態", "keys": "狀態 負面 持續傷害 移動 Boss 特性 BOSS", "desc": "你得到此狀態時，給予你狀態的角色立即將你移動到他所在區域。你的回合開始時受到 nD6 傷害。你無法主動或被動移動，且你只能攻擊給予你吞食狀態者。吞食對擁有【Boss 特性】的目標無效。", "cond": "在你的回合可以花費 1 行動力解除。", "fmt": "nD6"}
 ];
 
 const actionGroups=[
@@ -326,7 +344,11 @@ const mark=(t,q)=>{const i=t.toLowerCase().indexOf(q);return i<0?esc(t):esc(t.sl
 const cats={"回合流程":["戰鬥輪","先制判定","先制值","待機","起始行動力"],
  "行動與判定":["行動力","攻擊","強擊","爆擊","多次攻擊","範圍攻擊","移動","主動移動","被動移動","使用紋章","專注迴避","支援","攻擊強化"],
  "BOSS 與單位":["開幕攻擊","狂亂攻擊","BOSS 巨獸","從獸","一般人","君主","權能","喪失度"],
- "傷害與失能":["減傷","格檔","易傷","實際傷害","終極傷害","耐久值歸 0","失去行為能力","死亡與復活"]};
+ "傷害與失能":["實際傷害","終極傷害","耐久值歸 0","失去行為能力","死亡與復活"],
+ "正面狀態":["無敵","減傷","格檔","飛行","再生"],
+ "負面狀態":["易傷","重創","倒地","遲滯","破綻","暈眩","盲目","混亂","毒","燃燒","吞食"],
+ "優勢與劣勢":["優勢","劣勢"]};
+const catNotes={"正面狀態":"狀態通常都有解除條件，在被解除前會持續存在。","負面狀態":"狀態通常都有解除條件，在被解除前會持續存在。","優勢與劣勢":"優勢與劣勢嚴格來說並非狀態，但許多狀態都會造成優勢和劣勢。"};
 glossaryEntries.forEach(e=>{e.cat=Object.keys(cats).find(c=>cats[c].includes(e.term))||"其他";});
 $("termCount").textContent=glossaryEntries.length;
 
@@ -377,7 +399,7 @@ function collect(q){
    out.push({type:"規則",title:r.title,step:r.step,snippet:m.length?m[0].text:r.summary,rank:m.length?2:1});
  });
  glossaryEntries.forEach(e=>{
-  if((e.term+" "+e.keys+" "+e.desc).toLowerCase().includes(q))
+  if((e.term+" "+e.keys+" "+e.desc+" "+(e.cond||"")).toLowerCase().includes(q))
    out.push({type:"詞條",title:e.term,entry:e,snippet:e.desc,rank:3});
  });
  return out.sort((a,b)=>b.rank-a.rank);
@@ -425,7 +447,7 @@ document.addEventListener("keydown",e=>{
 const drawer=$("glossaryDrawer"), gList=$("glossaryList"), gBtn=$("glossaryToggle"), scrim=$("scrim");
 let cat="全部", openTerm=null;
 function renderCats(){$("catTabs").innerHTML=["全部",...Object.keys(cats)].map(c=>`<button type="button" class="cat-tab" data-cat="${c}" aria-pressed="${c===cat}">${c}<span>${c==="全部"?glossaryEntries.length:glossaryEntries.filter(e=>e.cat===c).length}</span></button>`).join("");}
-function renderTerms(){gList.innerHTML=glossaryEntries.filter(e=>cat==="全部"||e.cat===cat).map(e=>{const o=e.term===openTerm;return `<div class="term${o?" open":""}"><button type="button" class="term-row" data-term="${e.term}" aria-expanded="${o}"><span>${e.term}</span><small>${e.cat}</small><i>›</i></button><div class="term-body"><p>${e.desc}</p><button type="button" class="goto" data-goto="${e.term}">前往「${stepTitle(e.step)}」→</button></div></div>`;}).join("");gList.scrollTop=0;}
+function renderTerms(){gList.innerHTML=(catNotes[cat]?`<p class="cat-note">${catNotes[cat]}</p>`:"")+glossaryEntries.filter(e=>cat==="全部"||e.cat===cat).map(e=>{const o=e.term===openTerm;return `<div class="term${o?" open":""}"><button type="button" class="term-row" data-term="${e.term}" aria-expanded="${o}"><span>${e.term}${e.fmt?`<em class="fmt">${e.fmt}</em>`:""}</span><small>${e.cat}</small><i>›</i></button><div class="term-body"><p>${e.desc}</p>${e.cond?`<p class="cond"><b>解除條件</b>${e.cond}</p>`:""}${e.step?`<button type="button" class="goto" data-goto="${e.term}">前往「${stepTitle(e.step)}」→</button>`:""}</div></div>`;}).join("");gList.scrollTop=0;}
 function openDrawer(entry){
  if(entry){cat=entry.cat;openTerm=entry.term;}
  renderCats();renderTerms();
